@@ -40,6 +40,16 @@ TOOLCHAIN_TARGET_TASK += "libstdc++-staticdev"
 # memory issue.
 TOOLCHAIN_TARGET_TASK += "gcc-sanitizers"
 
-# Add azure-iot-sdk-c to support building agl-service-cloudproxy and
-# other users of Azure sdk.
+# Add azure-iot-sdk-c to support building agl-service-cloudproxy
+# and other users of Azure sdk.
 TOOLCHAIN_TARGET_TASK += "azure-iot-sdk-c umock-c"
+
+# Add mbedTLS to support building aws-iot-device-sdk-embedded-c
+TOOLCHAIN_TARGET_TASK += "mbedtls"
+
+# Add aws-iot-device-embedded-c sdk to support building agl-service-cloudproxy
+# and other users of AWS sdk.
+# These packages are required to add static library and headers:
+TOOLCHAIN_TARGET_TASK += "aws-iot-device-sdk-embedded-c-staticdev"
+TOOLCHAIN_TARGET_TASK += "aws-iot-device-sdk-embedded-c-dev"
+
