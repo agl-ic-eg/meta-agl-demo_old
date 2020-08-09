@@ -16,12 +16,13 @@ DEPENDS += "qtbase \
             qlibhomescreen \
             qtlocation \
             libqtappfw \
+            wayland-native \
+            qtwayland-native \
 "
 
 PV = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/tbtnavi;protocol=https;branch=${AGL_BRANCH}"
-#SRCREV  = "4a8b7a6301e4b093c99329d0a16fbee6c535f312"
 SRCREV = "${AGL_APP_REVISION}"
 
 S = "${WORKDIR}/git"
