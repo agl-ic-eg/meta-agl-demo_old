@@ -35,6 +35,7 @@ AGL_APPS = " \
     messaging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'taskmanager' , '', d)} \
     virtual/mixer \
+    virtual/qtwayland-config \
     "
 
 QTAGLEXTRAS = " libqtappfw"
