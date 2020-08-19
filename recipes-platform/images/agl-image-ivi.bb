@@ -11,7 +11,3 @@ IMAGE_INSTALL_append = "\
     "
 
 DISTRO_FEATURES_append = " agl-core-image-profile"
-
-IMAGE_INSTALL += "\
-    agl-desktop-config \
-    "
