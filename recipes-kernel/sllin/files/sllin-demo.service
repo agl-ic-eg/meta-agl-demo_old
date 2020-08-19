@@ -2,10 +2,11 @@
 Description=LIN demo configuration
 ConditionPathExists=/dev/ttyUSB0
 After=afm-system-daemon.service
+Before=can-dev-mapping-helper.service
  
 [Service]
 Type=forking
-PIDFile=/var/run/lin_config.pid
+PIDFile=/run/lin_config/lin_config.pid
 ExecStart=/usr/bin/start_lin_demo.sh
 RemainAfterExit=yes
  

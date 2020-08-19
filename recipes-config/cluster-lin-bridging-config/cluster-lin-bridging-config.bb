@@ -25,5 +25,4 @@ FILES_${PN} += "${systemd_system_unitdir}"
 RDEPENDS_${PN} = " \
 	can-utils \
 	sllin \
-	sllin-virtual \
 "

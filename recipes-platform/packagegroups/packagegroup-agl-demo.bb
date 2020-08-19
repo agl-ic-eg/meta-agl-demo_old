@@ -23,10 +23,10 @@ MOST_DRIVERS_cyclone5 ?= ""
 
 # HVAC dependencies
 ###################
-LIN_DRIVERS ??= " sllin sllin-virtual"
+LIN_DRIVERS ??= " sllin"
 # These boards use different kernels - needs to be checked
-LIN_DRIVERS_dra7xx-evm ?= "sllin-virtual"
-LIN_DRIVERS_dragonboard-410c ?= "sllin-virtual"
+LIN_DRIVERS_dra7xx-evm ?= ""
+LIN_DRIVERS_dragonboard-410c ?= ""
 
 # UNICENS service
 UNICENS ?= " \
