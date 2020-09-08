@@ -8,6 +8,9 @@ PV      = "1.0+git${SRCPV}"
 S       = "${WORKDIR}/git/"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/html5-homescreen;protocol=https;branch=${AGL_BRANCH}"
+
+SRC_URI_append_qemuall = " file://0001-Disable-autostart-of-launcher-webapp.patch"
+
 SRCREV = "${AGL_APP_REVISION}"
 
 DEPENDS = "nodejs-native"
