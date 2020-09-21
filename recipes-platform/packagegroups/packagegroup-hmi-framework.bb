@@ -23,6 +23,9 @@ RDEPENDS_${PN} = " \
   hmi-debug \
   launcher \
 "
+
+RDEPENDS_append_${PN} = " ${@bb.utils.contains('DISTRO_FEATURES', 'AGLCI', 'homescreen-demo-ci', '', d)}"
+
 # NOTE: Currently no coverage versions of these widgets, they should
 #       be added here when available.
 RDEPENDS_${PN}-devel = " \
