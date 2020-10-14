@@ -6,8 +6,3 @@ require agl-image-ivi.inc
 
 LICENSE = "MIT"
 
-IMAGE_INSTALL_append = "\
-    packagegroup-agl-image-ivi \
-    "
-
-DISTRO_FEATURES_append = " agl-core-image-profile"
