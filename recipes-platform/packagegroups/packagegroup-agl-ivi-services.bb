@@ -26,5 +26,5 @@ RDEPENDS_${PN} += "\
     agl-service-unicens \
     agl-service-unicens-controller \
     agl-service-weather \
-    ${@bb.utils.contains('AGL_CLOUDPROXY_WANTED','1', 'agl-service-cloudproxy', '', d)} \
+    ${@bb.utils.contains('AGL_CLOUDPROXY_WANTED','1', 'agl-service-cloudproxy libcloudproxy', '', d)} \
     "
