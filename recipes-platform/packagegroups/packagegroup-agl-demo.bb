@@ -56,6 +56,7 @@ TTF_FONTS = " \
     source-han-sans-cn-fonts \
     source-han-sans-jp-fonts \
     source-han-sans-tw-fonts \
+    source-han-sans-kr-fonts \
     "
 
 
