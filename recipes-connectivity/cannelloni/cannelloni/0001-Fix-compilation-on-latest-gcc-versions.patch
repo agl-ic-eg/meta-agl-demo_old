@@ -1,0 +1,24 @@
+From f3b356b1ecd6c5401537f593ce373a5b76eb8a9d Mon Sep 17 00:00:00 2001
+From: Jan-Simon Moeller <jsmoeller@linuxfoundation.org>
+Date: Tue, 17 Nov 2020 16:06:20 +0100
+Subject: [PATCH] Fix compilation on latest gcc versions
+
+Signed-off-by: Jan-Simon Moeller <jsmoeller@linuxfoundation.org>
+---
+ CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 51fa256..7e977d1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -6,7 +6,8 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+ # Options
+ option(SCTP_SUPPORT "SCTP_SUPPORT" ON)
+ 
+-set(CMAKE_CXX_FLAGS -Wall)
++#set(CMAKE_CXX_FLAGS -Wall)
++set(CMAKE_CXX_STANDARD 11)
+ 
+ if(SCTP_SUPPORT)
+   include(FindSCTP)
