@@ -53,3 +53,4 @@ TOOLCHAIN_TARGET_TASK += "mbedtls"
 TOOLCHAIN_TARGET_TASK += "aws-iot-device-sdk-embedded-c-staticdev"
 TOOLCHAIN_TARGET_TASK += "aws-iot-device-sdk-embedded-c-dev"
 
+TOOLCHAIN_TARGET_TASK += "waltham-dev"
