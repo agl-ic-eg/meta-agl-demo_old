@@ -64,6 +64,7 @@ RDEPENDS_${PN} += " \
     linux-firmware-ath9k \
     linux-firmware-ralink \
     can-utils \
+    cannelloni \
     iproute2 \
     dhcp-client \
     ${UNICENS} \
