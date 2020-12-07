@@ -4,7 +4,7 @@ HOMEPAGE    = "https://github.com/AGLExport/genivi-navi-yelp-client"
 SECTION     = "apps"
 
 LICENSE          = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=947b2d60ca3872e172034438e9801200"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4ee23c52855c222cba72583d301d2338"
 
 DEPENDS += "qtbase json-c \
             libhomescreen \
