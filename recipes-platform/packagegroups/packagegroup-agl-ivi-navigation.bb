@@ -12,6 +12,6 @@ PACKAGES = "\
 
 RDEPENDS_${PN} += "\
     gpsd \
-    virtual/gpsd-conf \
     geoclue \
+    ${@bb.utils.contains('AGL_FEATURES', 'agldemo', 'virtual/gpsd-conf', '', d)} \
     "

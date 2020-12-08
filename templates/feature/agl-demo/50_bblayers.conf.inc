@@ -8,4 +8,7 @@ BBLAYERS =+ " \
 #---------------------------------------------------
 BBLAYERS =+ " \
    ${METADIR}/external/meta-iot-cloud \
+   ${METADIR}/external/meta-qt5 \
+   ${METADIR}/external/meta-openembedded/meta-filesystems \
+   ${METADIR}/external/meta-python2 \
 "

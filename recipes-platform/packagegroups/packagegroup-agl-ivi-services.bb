@@ -27,4 +27,7 @@ RDEPENDS_${PN} += "\
     agl-service-unicens-controller \
     agl-service-weather \
     ${@bb.utils.contains('AGL_CLOUDPROXY_WANTED','1', 'agl-service-cloudproxy libcloudproxy', '', d)} \
+    agl-service-data-persistence \
+    agl-service-network \
+    agl-service-platform-info \
     "

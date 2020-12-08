@@ -8,7 +8,7 @@ require agl-demo-platform.bb
 
 LICENSE = "MIT"
 
-require recipes-platform/images/agl-image-graphical-qt5-crosssdk.inc
+require agl-image-graphical-qt5-crosssdk.inc
 
 inherit populate_sdk populate_sdk_qt5
 

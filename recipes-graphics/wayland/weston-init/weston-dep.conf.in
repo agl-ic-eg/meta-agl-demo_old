@@ -1,0 +1,3 @@
+[Unit]
+Requires=@WESTON_DRM_DEVICE@
+After=@WESTON_DRM_DEVICE@
