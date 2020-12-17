@@ -11,3 +11,8 @@ FEATURE_PACKAGES_agl-voiceagent-alexa_append = " alexa-viewer"
 
 # enable the layer
 AGL_FEATURES_append = " agldemo"
+
+# voice api inclusion
+PREFERRED_RPROVIDER_virtual/voice-high-config = "default-voice-high-config"
+FEATURE_PACKAGES_agl-speech-framework = "packagegroup-agl-speech-services"
+IMAGE_FEATURES += "agl-speech-framework"
