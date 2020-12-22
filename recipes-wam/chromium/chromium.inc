@@ -18,12 +18,6 @@ DEPENDS = "virtual/gettext wayland wayland-native pixman freetype glib-2.0 fontc
 
 PROVIDES = "${BROWSER_APPLICATION}"
 
-SRC_URI = "\
-    git://github.com/igalia/${BPN};branch=WIP@39.agl.compositor;protocol=https;rev=${SRCREV_chromium68};name=chromium68 \
-    git://github.com/webosose/v8;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8 \
-    file://v8-qemu-wrapper.patch \
-"
-SRCREV_chromium68 = "61e96d1ee5dfc2461697457d287bf922d8a03d9a"
 SRCREV_v8 = "1e3af71f1ff3735e8a5b639c48dfca63a7b8a647"
 
 # we don't include SRCPV in PV, so we have to manually include SRCREVs in do_fetch vardeps
@@ -43,18 +37,13 @@ BROWSER_APP_BUILD_TARGET = "chrome"
 BROWSER_APPLICATION = "chromium68-browser"
 BROWSER_APPLICATION_DIR = "/opt/chromium68"
 
-TARGET = "${WEBRUNTIME_BUILD_TARGET} ${BROWSER_APP_BUILD_TARGET}"
+TARGET = "${WEBRUNTIME_BUILD_TARGET}"
 
 # Skip do_install_append of webos_system_bus. It is not compatible with this component.
 WEBOS_SYSTEM_BUS_FILES_LOCATION = "${S}/files/sysbus"
 
 PACKAGECONFIG ?= "jumbo use-upstream-wayland"
 
-# Options to enable debug-webcore build.
-# Add the following line to local.conf (or local.dev.inc) to enable them:
-#   PACKAGECONFIG_append_pn-chromium68 = " debug-webcore"
-# Other debug options are controlled by sections later in this file
-PACKAGECONFIG[debug-webcore] = "remove_webcore_debug_symbols=false,remove_webcore_debug_symbols=true"
 
 # Set a default value for jumbo file merge of 8. This should be good for build
 # servers and workstations with a big number of cores. In case build is
@@ -86,16 +75,16 @@ GN_ARGS = "\
     treat_warnings_as_errors=false\
     is_agl=true\
     use_cbe=true\
-    is_chrome_cbe=true\
+    is_chrome_cbe=false\
     use_cups=false\
     use_custom_libcxx=false\
     use_kerberos=false\
     use_neva_media=false\
     use_ozone=true\
     use_xkbcommon=true\
+    use_wayland_gbm=false\
     use_pmlog=false\
     use_system_debugger_abort=true\
-    use_webos_gpu_info_collector=false\
     ${PACKAGECONFIG_CONFARGS}\
 "
 
@@ -139,21 +128,6 @@ GN_ARGS += "symbol_level=0"
 # just let Chromium's build system assume we are not using a sysroot at all and
 # let Yocto handle everything.
 GN_ARGS += "use_sysroot=false"
-
-# Toolchains we will use for the build. We need to point to the toolchain file
-# we've created, set the right target architecture and make sure we are not
-# using Chromium's toolchain (bundled clang, bundled binutils etc).
-GN_ARGS += "\
-        custom_toolchain=\"//build/toolchain/yocto:yocto_target\" \
-        gold_path=\"\" \
-        host_toolchain=\"//build/toolchain/yocto:yocto_native\" \
-        is_clang=${@is_default_cc_clang(d)} \
-        clang_base_path=\"${@clang_install_path(d)}\" \
-        clang_use_chrome_plugins=false \
-        linux_use_bundled_binutils=false \
-        target_cpu=\"${@gn_target_arch_name(d)}\" \
-        v8_snapshot_toolchain=\"//build/toolchain/yocto:yocto_target\" \
-"
 
 # ARM builds need special additional flags (see ${S}/build/config/arm.gni).
 # If we do not pass |arm_arch| and friends to GN, it will deduce a value that
@@ -200,43 +174,6 @@ GN_ARGS_append_armv6 += 'arm_use_neon=false'
 # https://github.com/gperftools/gperftools/issues/693
 GN_ARGS_append_libc-musl = ' use_allocator_shim=false'
 
-# V8's JIT infrastructure requires binaries such as mksnapshot and
-# mkpeephole to be run in the host during the build. However, these
-# binaries must have the same bit-width as the target (e.g. a x86_64
-# host targeting ARMv6 needs to produce a 32-bit binary). Instead of
-# depending on a third Yocto toolchain, we just build those binaries
-# for the target and run them on the host with QEMU.
-python do_create_v8_qemu_wrapper () {
-    """Creates a small wrapper that invokes QEMU to run some target V8 binaries
-    on the host."""
-    qemu_libdirs = [d.expand('${STAGING_DIR_HOST}${libdir}'),
-                    d.expand('${STAGING_DIR_HOST}${base_libdir}')]
-    qemu_cmd = qemu_wrapper_cmdline(d, d.getVar('STAGING_DIR_HOST', True),
-                                    qemu_libdirs)
-    wrapper_path = d.expand('${B}/v8-qemu-wrapper.sh')
-    with open(wrapper_path, 'w') as wrapper_file:
-        wrapper_file.write("""#!/bin/sh
-
-# This file has been generated automatically.
-# It invokes QEMU to run binaries built for the target in the host during the
-# build process.
-
-%s "$@"
-""" % qemu_cmd)
-    os.chmod(wrapper_path, 0o755)
-}
-do_create_v8_qemu_wrapper[dirs] = "${B}"
-addtask create_v8_qemu_wrapper after do_patch before do_configure
-
-python do_write_toolchain_file () {
-    """Writes a BUILD.gn file for Yocto detailing its toolchains."""
-    toolchain_dir = d.expand("${S}/src/build/toolchain/yocto")
-    bb.utils.mkdirhier(toolchain_dir)
-    toolchain_file = os.path.join(toolchain_dir, "BUILD.gn")
-    write_toolchain_file(d, toolchain_file)
-}
-addtask write_toolchain_file after do_patch before do_configure
-
 # More options to speed up the build
 GN_ARGS += "\
     enable_nacl=false\
@@ -247,12 +184,6 @@ GN_ARGS += "\
     use_gnome_keyring=false\
     use_pulseaudio=false\
 "
-
-# Respect ld-is-gold in DISTRO_FEATURES when enabling gold
-# Similar patch applied in meta-browser
-# http://patchwork.openembedded.org/patch/77755/
-EXTRA_OEGN_GOLD = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'use_gold=true', 'use_gold=false', d)}"
-GN_ARGS += "${EXTRA_OEGN_GOLD}"
 
 # Doesn't build for armv[45]*
 COMPATIBLE_MACHINE = "(-)"
@@ -279,7 +210,7 @@ do_compile() {
     fi
 
     export PATH="${S}/depot_tools:$PATH"
-    ${S}/depot_tools/ninja -v -C ${OUT_DIR}/${BUILD_TYPE} ${TARGET}
+    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -v -C ${OUT_DIR}/${BUILD_TYPE} ${TARGET}
 }
 
 do_configure() {
@@ -331,35 +262,38 @@ install_chromium_browser() {
 }
 
 install_webruntime() {
+
+    # # Generate install webos webview files
+    # ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/weboswebruntime
+
+    # # Move installation files to D directory
+    # mv ${OUT_DIR}/${BUILD_TYPE}/image/* ${D}
+    # # Rename include and locale directories
+    # mv ${D}${includedir}/webruntime ${D}${includedir}/${BPN}
+    # mv ${D}${CBE_DATA_PATH}/neva_locales ${D}${CBE_DATA_LOCALES_PATH}
+
+    # # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
+    # install -d ${D}${bindir_cross}
+    # gzip -c ${OUT_DIR}/${BUILD_TYPE}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${bindir_cross}/${HOST_SYS}-mksnapshot.gz
+
     install -d ${D}${libdir}
     install -d ${D}${includedir}/${BPN}
     install -d ${D}${CBE_DATA_PATH}
     install -d ${D}${CBE_DATA_LOCALES_PATH}
 
     # Install webos webview files
-    if [ -e "${SRC_DIR}/webos/install" ]; then
-        cd ${SRC_DIR}
-        xargs --arg-file=${SRC_DIR}/webos/install/weboswebruntime/staging_inc.list cp --parents --target-directory=${D}${includedir}/${BPN}
-
-        cd ${OUT_DIR}/${BUILD_TYPE}
-
-        cp libcbe.so ${D}${libdir}/
-        if [ "${WEBOS_LTTNG_ENABLED}" = "1" ]; then
-          # use bindir if building non-cbe
-          cp libchromium_lttng_provider.so ${D}${libdir}/
-        fi
-        xargs --arg-file=${SRC_DIR}/webos/install/weboswebruntime/binary.list cp --parents --target-directory=${D}${CBE_DATA_PATH}
-        cat ${SRC_DIR}/webos/install/weboswebruntime/data_locales.list | xargs -I{} install -m 755 -p {} ${D}${CBE_DATA_LOCALES_PATH}
-    fi
+    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/weboswebruntime
+    chown root:root -R ${D}${libdir}
+    chown root:root -R ${D}${includedir}
 
     # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
-    install -d ${D}${bindir_cross}
-    gzip -c ${OUT_DIR}/${BUILD_TYPE}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${bindir_cross}/${HOST_SYS}-mksnapshot.gz
+    install -d ${D}${base_bindir}
+    gzip -c ${OUT_DIR}/${BUILD_TYPE}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${base_bindir}/${HOST_SYS}-mksnapshot.gz
+
 }
 
 do_install() {
     install_webruntime
-    install_chromium_browser
 }
 
 WEBOS_SYSTEM_BUS_DIRS_LEGACY_BROWSER_APPLICATION = " \

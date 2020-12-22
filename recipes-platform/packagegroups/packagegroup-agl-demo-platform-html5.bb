@@ -13,7 +13,6 @@ ALLOW_EMPTY_${PN} = "1"
 
 RDEPENDS_${PN} += "\
     packagegroup-agl-image-ivi \
-    packagegroup-agl-profile-graphical-html5 \
     packagegroup-agl-demo \
     "
 
