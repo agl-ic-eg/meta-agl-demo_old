@@ -72,6 +72,7 @@ DEMO_PRELOAD_MAPS = "${@bb.utils.contains("PREFERRED_RPROVIDER_virtual/navigatio
 DEMO_PRELOAD = "${@bb.utils.contains("DISTRO_FEATURES", "agl-demo-preload", " ${DEMO_PRELOAD_MAPS} ${DEMO_UNIT_CONF} poiapp-api-key", "",d)}"
 
 RDEPENDS_${PN}_append = " \
+    weston-ini-conf \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
     ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip' , '', d)} \

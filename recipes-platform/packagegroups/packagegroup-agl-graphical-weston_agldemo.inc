@@ -1,5 +1,4 @@
 RDEPENDS_${PN} += " \
-                  weston-ini-conf \
                   agl-compositor \
                   "
 # appfw 

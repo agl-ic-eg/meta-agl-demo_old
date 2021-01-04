@@ -28,5 +28,6 @@ AGL_APPS = " \
     "
 
 RDEPENDS_${PN}_append = " \
+    weston-ini-conf-landscape \
     ${AGL_APPS} \
     "
