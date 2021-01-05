@@ -20,3 +20,7 @@ RDEPENDS_${PN} += "\
     packagegroup-agl-ivi-multimedia \
     packagegroup-agl-ivi-navigation \
     "
+
+RDEPENDS_${PN} += "\
+    agl-login-manager \
+    "
