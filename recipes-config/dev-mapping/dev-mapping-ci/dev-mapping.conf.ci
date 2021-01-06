@@ -2,6 +2,6 @@
 ; Format has to follow ini rules key="value", notice " around value.
 
 [CANbus-mapping]
-hs="can0"
-ls="can0"
-j1939="can0"
+hs="vcan0"
+ls="vcan0"
+j1939="vcan0"

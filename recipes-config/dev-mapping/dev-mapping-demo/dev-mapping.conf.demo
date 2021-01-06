@@ -4,3 +4,4 @@
 [CANbus-mapping]
 hs="can0"
 ls="sllin0"
+j1939="can0"
