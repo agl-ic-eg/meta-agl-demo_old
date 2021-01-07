@@ -54,3 +54,17 @@ TOOLCHAIN_TARGET_TASK += "aws-iot-device-sdk-embedded-c-staticdev"
 TOOLCHAIN_TARGET_TASK += "aws-iot-device-sdk-embedded-c-dev"
 
 TOOLCHAIN_TARGET_TASK += "waltham-dev"
+
+
+# Required dependencies for app and test builds
+TOOLCHAIN_HOST_TASK += " \
+    nativesdk-lua \
+    "
+
+# Required dependencies for app and test builds
+TOOLCHAIN_TARGET_TASK += " \
+    lua-dev \
+    lua-staticdev \
+    libafb-helpers-staticdev \
+    libappcontroller-staticdev \
+    "
