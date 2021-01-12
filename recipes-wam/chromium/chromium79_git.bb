@@ -9,7 +9,7 @@ SRC_URI = "\
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium79 = "c568380f34a275ed5430f3927b1bdee0e14220e0"
+SRCREV_chromium79 = "3499e08c510310e7dd99c9eb7830b90713a8f8e1"
 SRCREV_v8 = "e876fd0e28bd3bda5815394874183b7e6079d440"
 
 BROWSER_APPLICATION = "chromium79-browser"
@@ -24,7 +24,7 @@ GN_ARGS += "closure_compile=false"
 
 # When using meta-clang, one can switch to using the lld linker
 # by using the ld-is-lld distro feature otherwise use gold linker
-GN_ARGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', 'use_lld=true use_gold=false', 'use_lld=false use_gold=true', d)}"
+GN_ARGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-lld', 'use_lld=true use_gold=false', bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'use_lld=false use_gold=true', 'use_lld=false use_gold=false', d), d)}"
 
 # Toolchains we will use for the build. We need to point to the toolchain file
 # we've created, set the right target architecture and make sure we are not
@@ -34,8 +34,8 @@ GN_ARGS += "\
     cros_host_is_clang=false \
     use_custom_libcxx_for_host=false \
     cros_host_ar=\"${BUILD_AR}\" \
-    cros_host_cc=\"${BUILD_CC}\" \
-    cros_host_cxx=\"${BUILD_CXX}\" \
+    cros_host_cc=\"${BUILD_CC} ${BUILD_CFLAGS}\" \
+    cros_host_cxx=\"${BUILD_CXX} ${BUILD_CXXFLAGS}\" \
     cros_host_extra_ldflags=\"${BUILD_LDFLAGS}\" \
     custom_toolchain=\"//build/toolchain/cros:target\" \
     is_clang=false \
