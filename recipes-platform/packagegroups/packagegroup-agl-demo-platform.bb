@@ -54,7 +54,7 @@ CLUSTER_SUPPORT_PACKAGES = " \
 	cluster-lin-bridging-config \
 	cluster-demo-simulator \
 "
-CLUSTER_SUPPORT = "${@bb.utils.contains("DISTRO_FEATURES", "agl-cluster-demo-support", "${CLUSTER_SUPPORT_PACKAGES}", "",d)}"
+CLUSTER_SUPPORT = "${@bb.utils.contains("AGL_FEATURES", "agl-cluster-demo-support", "${CLUSTER_SUPPORT_PACKAGES}", "",d)}"
 
 DEMO_UNIT_CONF ?= ""
 # Hook for demo platform configuration
