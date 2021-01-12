@@ -4,11 +4,11 @@ require agl-cluster-demo-platform.inc
 
 LICENSE = "MIT"
 
-IMAGE_FEATURES_append = " \
-    "
+IMAGE_FEATURES_append = ""
 
 # add packages for cluster demo platform (include demo apps) here
 IMAGE_INSTALL_append = " \
     packagegroup-agl-cluster-demo-platform \
+    ${@bb.utils.contains("AGL_FEATURES", "agl-demo-preload", "cluster-dashboard-demo-config", "", d)} \
     "
 

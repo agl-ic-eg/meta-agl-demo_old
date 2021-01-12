@@ -31,8 +31,6 @@ AGL_APIS = " \
     agl-service-signal-composer \
     "
 
-DEMO_PRELOAD = "${@bb.utils.contains("DISTRO_FEATURES", "agl-cluster-demo-preload", "cluster-dashboard-demo-config", "",d)}"
-
 RDEPENDS_${PN}_append = " \
     weston-ini-conf-landscape \
     hmi-debug \
@@ -40,5 +38,4 @@ RDEPENDS_${PN}_append = " \
     linux-firmware-ralink \
     ${AGL_APPS} \
     ${AGL_APIS} \
-    ${DEMO_PRELOAD} \
 "
