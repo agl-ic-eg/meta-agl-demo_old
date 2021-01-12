@@ -6,6 +6,7 @@ AGL_DEFAULT_WESTONSTART ??= "/usr/bin/agl-compositor --config ${sysconfdir}/xdg/
 
 WESTONSTART ??= "${AGL_DEFAULT_WESTONSTART} ${WESTONARGS}"
 WESTONSTART_append = " ${@bb.utils.contains("IMAGE_FEATURES", "debug-tweaks", " --log=${DISPLAY_XDG_RUNTIME_DIR}/compositor.log", "",d)}"
+WESTONSTART_append = " ${@bb.utils.contains("DISTRO_FEATURES", "agl-devel", " --debug", "",d)}"
 
 # Systemd name of DRM device to have weston/agl-compositor startup depend
 # upon, if required.  Currently only x86-64 seems to need a dependency to
