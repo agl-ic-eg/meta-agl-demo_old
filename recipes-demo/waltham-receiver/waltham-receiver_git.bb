@@ -6,7 +6,7 @@ SECTION     = "apps"
 LICENSE     = "Apache-2.0 & MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=374fee6a7817f1e1a5a7bfb7b7989553"
 
-SRC_URI = "gitsm://gerrit.automotivelinux.org/gerrit/apps/waltham-receiver.git;protocol=https;branch=${AGL_BRANCH}"
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/waltham-receiver.git;protocol=https;branch=${AGL_BRANCH}"
 SRCREV  = "${AGL_APP_REVISION}"
 
 PV = "1.0+git${SRCPV}"
