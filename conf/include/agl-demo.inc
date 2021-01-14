@@ -18,3 +18,6 @@ PREFERRED_RPROVIDER_virtual/low-can-dev-mapping ?= "${@bb.utils.contains('DISTRO
 # voice api inclusion
 PREFERRED_RPROVIDER_virtual/voice-high-config = "default-voice-high-config"
 FEATURE_PACKAGES_agl-speech-framework = "packagegroup-agl-speech-services"
+
+# install virtualbox drivers for vmdk
+IMAGE_INSTALL_append = "${@bb.utils.contains_any('IMAGE_FSTYPES', 'wic.vmdk wic.vmdk.xz', ' open-vm-tools vboxguestdrivers', '', d)}"
