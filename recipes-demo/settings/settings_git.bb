@@ -10,7 +10,6 @@ DEPENDS = " \
     libqtappfw \
     qtquickcontrols2 \
     qt-qrcode \
-    libhomescreen \
     qtvirtualkeyboard \
 "
 
