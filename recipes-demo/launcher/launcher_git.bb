@@ -17,12 +17,13 @@ DEPENDS = "\
         qtwayland-native \
 "
 
-inherit qmake5 systemd pkgconfig aglwgt
+PV      = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/launcher;protocol=https;branch=${AGL_BRANCH}"
 SRCREV  = "${AGL_APP_REVISION}"
 
-PV      = "1.0+git${SRCPV}"
 S       = "${WORKDIR}/git/"
+
+inherit qmake5 systemd pkgconfig aglwgt
 
 PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"

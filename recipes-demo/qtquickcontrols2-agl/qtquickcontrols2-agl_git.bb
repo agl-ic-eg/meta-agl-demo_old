@@ -17,7 +17,7 @@ inherit qmake5
 FILES_${PN} += "${OE_QMAKE_PATH_QML}/AGL/Demo/Controls/*"
 
 RDEPENDS_${PN} += " \
-	qtquickcontrols-qmlplugins \
-	qtquickcontrols2-qmlplugins \
-	qtsvg-plugins \
+    qtquickcontrols-qmlplugins \
+    qtquickcontrols2-qmlplugins \
+    qtsvg-plugins \
 "

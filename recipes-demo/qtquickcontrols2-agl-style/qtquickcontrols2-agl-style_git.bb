@@ -14,15 +14,15 @@ S = "${WORKDIR}/git/"
 
 inherit qmake5
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}/QtQuick/Controls.2/AGL/*"
-
-RDEPENDS_${PN} += " \
-	qtquickcontrols-qmlplugins \
-	qtquickcontrols2-qmlplugins \
-	qtsvg-plugins \
-"
-
 do_install_append_class-target() {
     install -d ${D}/${sysconfdir}/afm/unit.env.d
     echo "QT_QUICK_CONTROLS_STYLE=AGL" > ${D}${sysconfdir}/afm/unit.env.d/qtquickcontrols2-style
 }
+
+FILES_${PN} += "${OE_QMAKE_PATH_QML}/QtQuick/Controls.2/AGL/*"
+
+RDEPENDS_${PN} += " \
+    qtquickcontrols-qmlplugins \
+    qtquickcontrols2-qmlplugins \
+    qtsvg-plugins \
+"

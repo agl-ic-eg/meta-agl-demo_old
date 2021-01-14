@@ -6,10 +6,12 @@ SECTION     = "apps"
 LICENSE          = "GPLv2"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4ee23c52855c222cba72583d301d2338"
 
-DEPENDS += "qtbase json-c \
-            libhomescreen \
-            libqtappfw \
-           "
+DEPENDS = " \
+    qtbase \
+    json-c \
+    libhomescreen \
+    libqtappfw \
+"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/poi-yelp;protocol=https;branch=${AGL_BRANCH}"
 SRCREV = "${AGL_APP_REVISION}"
@@ -18,4 +20,4 @@ S = "${WORKDIR}/git"
 
 inherit cmake_qt5 pkgconfig aglwgt
 
-RDEPENDS_${PN} =  "qtbase libqtappfw"
+RDEPENDS_${PN} = "qtbase libqtappfw"

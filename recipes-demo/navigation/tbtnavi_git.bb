@@ -11,13 +11,14 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ae6497158920d9524cf208c09cc4c984 \
                     file://include/mapbox/recursive_wrapper.hpp;beginline=4;endline=13;md5=cd3341aae76c0cf8345935abd20f0051 \
 "
 
-DEPENDS += "qtbase \
-            qtquickcontrols2 \
-            qlibhomescreen \
-            qtlocation \
-            libqtappfw \
-            wayland-native \
-            qtwayland-native \
+DEPENDS = " \
+    qtbase \
+    qtquickcontrols2 \
+    qlibhomescreen \
+    qtlocation \
+    libqtappfw \
+    wayland-native \
+    qtwayland-native \
 "
 
 PV = "1.0+git${SRCPV}"
@@ -29,8 +30,9 @@ S = "${WORKDIR}/git"
 
 inherit qmake5 aglwgt pkgconfig
 
-RDEPENDS_${PN} += "qtlocation \
-                   ondemandnavi-config \
-                   agl-service-navigation \
-                   libqtappfw \
+RDEPENDS_${PN} += " \
+    qtlocation \
+    ondemandnavi-config \
+    agl-service-navigation \
+    libqtappfw \
 "
