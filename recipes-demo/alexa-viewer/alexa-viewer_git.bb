@@ -32,5 +32,6 @@ RDEPENDS_${PN} = " \
     libqtappfw \
     libafbwsc \
     qlibhomescreen \
+    agl-service-homescreen \
     agl-service-voice-high-capabilities \
 "

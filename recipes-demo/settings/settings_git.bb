@@ -26,5 +26,6 @@ RDEPENDS_${PN} += " \
     qt-qrcode \
     agl-service-bluetooth \
     agl-service-network \
+    agl-service-voice-high \
     libqtappfw \
 "

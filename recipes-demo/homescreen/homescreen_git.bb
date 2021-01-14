@@ -9,8 +9,6 @@ DEPENDS = " \
     qtbase \
     qtdeclarative \
     qtquickcontrols2 \
-    agl-service-homescreen \
-    agl-service-weather \
     libqtappfw \
     libhomescreen \
     libafb-helpers-qt \
@@ -35,4 +33,10 @@ OE_QMAKE_CXXFLAGS_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel'
 
 RDEPENDS_${PN} += " \
     libqtappfw \
+    agl-service-audiomixer \
+    agl-service-bluetooth \
+    agl-service-homescreen \
+    agl-service-network \
+    agl-service-weather \
+    agl-service-voice-high \
 "

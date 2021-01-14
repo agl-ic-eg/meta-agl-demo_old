@@ -33,5 +33,6 @@ RDEPENDS_${PN} += " \
     qtlocation \
     ondemandnavi-config \
     agl-service-navigation \
+    agl-service-signal-composer \
     libqtappfw \
 "

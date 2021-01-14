@@ -24,6 +24,7 @@ RDEPENDS_${PN} += " \
     openjtalk \
     gstreamer1.0 \
     ondemandnavi-config \
+    agl-service-navigation \
 "
 
 RPROVIDES_${PN} = "virtual/navigation"
