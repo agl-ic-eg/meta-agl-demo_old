@@ -1,5 +1,5 @@
-SUMMARY     = "Media Player for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating Media Player on AGL Distribution"
+SUMMARY     = "Media Player application"
+DESCRIPTION = "AGL demonstration Media Player application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/mediaplayer"
 SECTION     = "apps"
 

@@ -1,5 +1,5 @@
-SUMMARY     = "Waltham-receiver"
-DESCRIPTION = "Waltham-receiver is a demo application for testing out Waltham"
+SUMMARY     = "Waltham Receiver application"
+DESCRIPTION = "AGL demonstration Waltham receiver interactive remote display application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/apps/waltham-receiver.git"
 SECTION     = "apps"
 

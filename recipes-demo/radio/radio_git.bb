@@ -1,5 +1,5 @@
-SUMMARY     = "Radio for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating Radio on AGL Distribution"
+SUMMARY     = "Radio application"
+DESCRIPTION = "AGL demonstration Radio application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/radio"
 SECTION     = "apps"
 

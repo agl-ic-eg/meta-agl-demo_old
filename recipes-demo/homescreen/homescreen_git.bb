@@ -1,5 +1,5 @@
-SUMMARY     = "AGL Home Screen Application"
-DESCRIPTION = "AGL Home Screen Application build with recipe method"
+SUMMARY     = "Home Screen application"
+DESCRIPTION = "AGL demonstration Home Screen application"
 HOMEPAGE    = "http://docs.automotivelinux.org"
 LICENSE     = "Apache-2.0"
 SECTION     = "apps"

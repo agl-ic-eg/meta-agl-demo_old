@@ -1,5 +1,5 @@
-SUMMARY     = "Instrument Cluster Receiver AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating instrument cluster remote display"
+SUMMARY     = "Instrument Cluster Receiver application"
+DESCRIPTION = "AGL demonstration instrument cluster remote display application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/agl-cluster-demo-receiver"
 SECTION     = "apps"
 

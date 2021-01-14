@@ -1,5 +1,5 @@
-SUMMARY     = "Task Manager for AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating task visualisation and management on AGL Distribution"
+SUMMARY     = "Task Manager application"
+DESCRIPTION = "AGL demonstration task visualization and management application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/taskmanager"
 SECTION     = "apps"
 

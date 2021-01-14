@@ -1,5 +1,5 @@
-SUMMARY     = "Telematics Recorder AGL Demonstration"
-DESCRIPTION = "AGL Application for demonstrating telematics recorder functionality"
+SUMMARY     = "Telematics Recorder application"
+DESCRIPTION = "AGL demonstration telematics recorder application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/agl-telematics-demo-recorder"
 SECTION     = "apps"
 

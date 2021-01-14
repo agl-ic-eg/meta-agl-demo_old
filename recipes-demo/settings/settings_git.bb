@@ -1,5 +1,5 @@
-SUMMARY     = "Settings for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating Settings on AGL Distribution"
+SUMMARY     = "Settings application"
+DESCRIPTION = "AGL demonstration Settings application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/settings"
 SECTION     = "apps"
 

@@ -1,5 +1,5 @@
-SUMMARY     = "Instrument Cluster Dashboard AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating instrument cluster dashboard"
+SUMMARY     = "Instrument Cluster Dashboard application"
+DESCRIPTION = "AGL demonstration instrument cluster dashboard application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/agl-cluster-demo-dashboard"
 SECTION     = "apps"
 

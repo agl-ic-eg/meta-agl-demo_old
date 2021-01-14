@@ -1,5 +1,5 @@
-SUMMARY     = "Phone for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating phone on AGL Distribution"
+SUMMARY     = "Phone application"
+DESCRIPTION = "AGL demonstration Phone application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/phone"
 SECTION     = "apps"
 

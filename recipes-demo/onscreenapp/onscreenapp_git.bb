@@ -1,5 +1,5 @@
-SUMMARY     = "onscreenapp for displaying onscreen"
-DESCRIPTION = "AGL HMI Application for displaying onscreen"
+SUMMARY     = "onscreenapp for displaying popup windows"
+DESCRIPTION = "AGL demonstration HMI Application for displaying popup windows"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/onscreenapp"
 SECTION     = "apps"
 

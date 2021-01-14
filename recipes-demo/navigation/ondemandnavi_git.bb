@@ -1,5 +1,5 @@
-SUMMARY     = "AGL Reference On Demand Navigation application."
-DESCRIPTION = "Demo AGL navigation application based on QtLocation widget."
+SUMMARY     = "Navigation application."
+DESCRIPTION = "AGL demonstration Navigation application based on QtLocation widget."
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/ondemandnavi"
 SECTION     = "apps"
 

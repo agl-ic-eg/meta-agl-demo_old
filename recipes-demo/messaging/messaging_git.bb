@@ -1,5 +1,5 @@
-SUMMARY     = "Messaging application for AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating messaging on AGL Distribution"
+SUMMARY     = "Messaging application"
+DESCRIPTION = "AGL demonstration Messaging application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/messaging"
 SECTION     = "apps"
 

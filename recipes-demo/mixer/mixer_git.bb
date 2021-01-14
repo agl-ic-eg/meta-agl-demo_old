@@ -1,5 +1,5 @@
-SUMMARY     = "Mixer for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI application for control of PipeWire mixer elements"
+SUMMARY     = "Mixer application"
+DESCRIPTION = "AGL demonstration Mixer application for control of PipeWire mixer elements"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/mixer"
 SECTION     = "apps"
 

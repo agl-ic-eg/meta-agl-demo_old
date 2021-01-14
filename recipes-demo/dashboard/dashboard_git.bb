@@ -1,5 +1,5 @@
-SUMMARY     = "Dashboard for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating dashboard on AGL Distribution"
+SUMMARY     = "Dashboard application"
+DESCRIPTION = "AGL demonstration Dashboard application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/dashboard"
 SECTION     = "apps"
 

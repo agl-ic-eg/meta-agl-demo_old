@@ -1,5 +1,5 @@
-SUMMARY     = "HVAC for CES2017 AGL Demonstration"
-DESCRIPTION = "AGL HMI Application for demonstrating HVAC on AGL Distribution"
+SUMMARY     = "HVAC application"
+DESCRIPTION = "AGL demonstration HVAC application"
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/hvac"
 SECTION     = "apps"
 
