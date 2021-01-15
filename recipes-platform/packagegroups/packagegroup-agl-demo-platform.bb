@@ -34,7 +34,7 @@ AGL_APPS = " \
     settings \
     messaging \
     ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'taskmanager' , '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'agl-weston-waltham-remoting', 'waltham-receiver' , '', d)} \
+    ${@bb.utils.contains('AGL_FEATURES', 'waltham-remoting', 'waltham waltham-transmitter-plugin' , '', d)} \
     virtual/mixer \
     virtual/qtwayland-config \
     "
