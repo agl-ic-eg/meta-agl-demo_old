@@ -3,10 +3,12 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/weston-init:"
 inherit agl-graphical
 
 AGL_DEFAULT_WESTONSTART ??= "/usr/bin/agl-compositor --config ${sysconfdir}/xdg/weston/weston.ini"
+WESTON_USE_PIXMAN ??= "0"
 
 WESTONSTART ??= "${AGL_DEFAULT_WESTONSTART} ${WESTONARGS}"
 WESTONSTART_append = " ${@bb.utils.contains("IMAGE_FEATURES", "debug-tweaks", " --log=${DISPLAY_XDG_RUNTIME_DIR}/compositor.log", "",d)}"
 WESTONSTART_append = " ${@bb.utils.contains("DISTRO_FEATURES", "agl-devel", " --debug", "",d)}"
+WESTONSTART_append = " ${@bb.utils.contains("WESTON_USE_PIXMAN", "1", " --use-pixman", "",d)}"
 
 # Systemd name of DRM device to have weston/agl-compositor startup depend
 # upon, if required.  Currently only x86-64 seems to need a dependency to
