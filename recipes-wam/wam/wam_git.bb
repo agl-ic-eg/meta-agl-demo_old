@@ -28,6 +28,8 @@ SRC_URI = "\
     git://github.com/igalia/${BPN}.git;branch=@43.agl.jellyfish;protocol=https \
     file://WebAppMgr@.service \
     file://WebAppMgr.env \
+    file://wam-user-setup.sh \
+    file://wam-user-setup@.service \
     file://trunc-webapp-roles.patch \
 "
 S = "${WORKDIR}/git"
@@ -43,6 +45,11 @@ do_install_append() {
     ln -snf WebAppMgr ${D}${bindir}/web-runtime
     install -d ${D}${systemd_system_unitdir}/afm-user-session@.target.wants
     ln -sf ../WebAppMgr@.service ${D}${systemd_system_unitdir}/afm-user-session@.target.wants/
+    install -d ${D}${libexecdir}/wam/
+    install -v -m 755 ${WORKDIR}/wam-user-setup.sh ${D}${libexecdir}/wam/wam-user-setup.sh
+    install -v -m 644 ${WORKDIR}/wam-user-setup@.service ${D}${systemd_system_unitdir}/wam-user-setup@.service
+    install -d ${D}${systemd_system_unitdir}/user-runtime-dir@.service.wants/
+    ln -sf ../wam-user-setup@.service ${D}${systemd_system_unitdir}/user-runtime-dir@.service.wants/
 }
 
 FILES_${PN} += "${sysconfdir}/init ${sysconfdir}/wam ${libdir}/webappmanager/plugins/*.so ${systemd_system_unitdir}"

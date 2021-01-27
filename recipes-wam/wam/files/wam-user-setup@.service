@@ -1,0 +1,10 @@
+[Unit]
+Description=Set up WAM for user %i
+Requires=afm-user-setup@i.service
+After=user-runtime-dir@%i.service afm-user-setup@i.service
+Before=user@%i.service
+
+[Service]
+Type=oneshot
+StartLimitInterval=0
+ExecStart=-/usr/libexec/wam/wam-user-setup.sh %i
