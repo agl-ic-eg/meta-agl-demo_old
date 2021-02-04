@@ -15,3 +15,7 @@ RDEPENDS_${PN} += "\
     geoclue \
     ${@bb.utils.contains('AGL_FEATURES', 'agldemo', 'virtual/gpsd-conf', '', d)} \
     "
+
+RDEPENDS_${PN}_append_agl-refhw-h3 = " \
+    ${@bb.utils.contains('AGL_FEATURES', 'agldemo', 'gpsd-conf-refhw', '', d)} \
+    "
