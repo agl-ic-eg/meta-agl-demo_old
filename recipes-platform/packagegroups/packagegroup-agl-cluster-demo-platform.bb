@@ -32,7 +32,6 @@ AGL_APIS = " \
     "
 
 RDEPENDS_${PN}_append = " \
-    weston-ini-conf-landscape \
     hmi-debug \
     can-utils \
     linux-firmware-ralink \
