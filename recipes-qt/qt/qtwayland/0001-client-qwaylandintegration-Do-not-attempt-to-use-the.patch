@@ -1,0 +1,37 @@
+From 0c8212273ac0fcd8cd954bd43075901a80ab3476 Mon Sep 17 00:00:00 2001
+From: Marius Vlad <marius.vlad@collabora.com>
+Date: Fri, 29 Jan 2021 12:31:19 +0200
+Subject: [PATCH] client/qwaylandintegration: Do not attempt to use the
+ inputContext()
+
+We assume loading the platforminputcompose library no matter what, but
+in case that doesn't happen (the library effectively not found), no necessary
+checks are made in order to make sure that indeed succeed.
+
+This patch mitigates that, and with it, it allows to use the QT_LOGGING_RULES,
+which is used to trigger the issue.
+
+Bug-AGL: SPEC-3359
+
+Signed-off-by: Marius Vlad <marius.vlad@collabora.com>
+---
+ src/client/qwaylandintegration.cpp | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/client/qwaylandintegration.cpp b/src/client/qwaylandintegration.cpp
+index f6a80e18..5568485c 100644
+--- a/src/client/qwaylandintegration.cpp
++++ b/src/client/qwaylandintegration.cpp
+@@ -503,7 +503,8 @@ void QWaylandIntegration::reconfigureInputContext()
+     // is why we need to check here which input context actually is being used.
+     mDisplay->mUsingInputContextFromCompositor = qobject_cast<QWaylandInputContext *>(mInputContext.data());
+ 
+-    qCDebug(lcQpaWayland) << "using input method:" << inputContext()->metaObject()->className();
++    if (mDisplay->mUsingInputContextFromCompositor)
++	    qCDebug(lcQpaWayland) << "using input method:" << inputContext()->metaObject()->className();
+ }
+ 
+ QWaylandShellIntegration *QWaylandIntegration::createShellIntegration(const QString &integrationName)
+-- 
+2.28.0
+

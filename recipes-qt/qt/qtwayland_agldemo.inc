@@ -14,5 +14,6 @@ FILESEXTRAPATHS_append := ":${THISDIR}/qtwayland"
 
 SRC_URI_append = "\
     file://0010-Added-manifest-file-according-to-smack-3-domain-mode.patch \
+    file://0001-client-qwaylandintegration-Do-not-attempt-to-use-the.patch \
     "
 
