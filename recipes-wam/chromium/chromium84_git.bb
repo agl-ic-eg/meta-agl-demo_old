@@ -1,20 +1,23 @@
 require chromium.inc
 
 SRC_URI = "\
-    git://github.com/igalia/${PN};branch=@45.agl.jellyfish;protocol=https;rev=${SRCREV_chromium79};name=chromium79 \
-    git://github.com/webosose/chromium-v8;branch=@chromium79;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8 \
-    file://0001-GCC-fix-includes-for-gcc-10.patch \
+    git://github.com/igalia/${PN};branch=koi;protocol=https;rev=${SRCREV_chromium84};name=chromium84 \
+    git://github.com/webosose/chromium-v8;branch=@chromium84;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8 \
+    file://chromium-quiche-invalid-offsetof.patch \
+    file://chromium-skia-no_sanitize.patch \
 "
 
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium79 = "3499e08c510310e7dd99c9eb7830b90713a8f8e1"
-SRCREV_v8 = "e876fd0e28bd3bda5815394874183b7e6079d440"
+SRCREV_chromium84 = "20b9dd7995c70950e45d66c7c8cc2b2487c90eb6"
+SRCREV_v8 = "5c1d89dd2945a10cf7a6a3458050b3177a870b09"
 
-BROWSER_APPLICATION = "chromium79-browser"
-BROWSER_APPLICATION_DIR = "/opt/chromium79"
+BROWSER_APPLICATION = "chromium84-browser"
+BROWSER_APPLICATION_DIR = "/opt/chromium84"
 MKSNAPSHOT_PATH = "v8_snapshot/"
+
+PACKAGECONFIG_remove="jumbo"
 
 GN_ARGS += "use_gtk=false"
 
@@ -55,6 +58,26 @@ GN_ARGS += "\
     v8_enable_embedded_builtins=false \
     use_v8_context_snapshot=false \
 "
+
+GN_ARGS_append = " \
+  use_system_minigbm=false \
+  use_wayland_gbm=false \
+"
+
+GN_ARGS_append = " \
+  is_webos=false \
+  is_agl=true \
+"
+
+# TODO: drop this after we migrate to ubuntu 16.04 or above
+GN_ARGS += "\
+    fatal_linker_warnings=false\
+"
+
+# TODO(rzanoni) copied from original recipe to fix qemux86 build.
+# check if it can be removed in the future.
+PACKAGECONFIG_remove_qemux86 = "gstreamer umediaserver neva-media gav neva-webrtc"
+#END TODO
 
 D = "${OUT_DIR}/${BUILD_TYPE}/image"
 

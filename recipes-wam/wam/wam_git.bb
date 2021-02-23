@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 inherit cmake
 
-DEPENDS = "glib-2.0 jsoncpp boost chromium79 libhomescreen"
+DEPENDS = "glib-2.0 jsoncpp boost chromium84 libhomescreen"
 
 EXTRA_OECMAKE = "\
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=${prefix} \
     -DPLATFORM_NAME=${@'${DISTRO}'.upper().replace('-', '_')} \
-    -DCHROMIUM_SRC_DIR=${STAGING_INCDIR}/chromium79"
+    -DCHROMIUM_SRC_DIR=${STAGING_INCDIR}/chromium84"
 
 PR="r0"
 
@@ -25,7 +25,7 @@ lcl_maybe_fortify = ""
 SECURITY_STACK_PROTECTOR = ""
 
 SRC_URI = "\
-    git://github.com/igalia/${BPN}.git;branch=@43.agl.jellyfish;protocol=https \
+    git://github.com/igalia/${BPN}.git;branch=koi;protocol=https \
     file://WebAppMgr@.service \
     file://WebAppMgr.env \
     file://wam-user-setup.sh \
@@ -33,7 +33,7 @@ SRC_URI = "\
     file://trunc-webapp-roles.patch \
 "
 S = "${WORKDIR}/git"
-SRCREV = "8a1ec2f3e474199a689ae71a12ba70a230770c0d"
+SRCREV = "2a246d2ea79bd335b86942a5579d6de0c9ddce40"
 
 do_install_append() {
     install -d ${D}${sysconfdir}/wam

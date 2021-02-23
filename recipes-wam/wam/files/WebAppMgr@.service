@@ -29,7 +29,7 @@ EnvironmentFile=-/etc/default/WebAppMgr.env
 Environment=XDG_RUNTIME_DIR=/run/user/%i
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%i/bus
 Environment=WAM_DATA_PATH="/home/%i/wamdata"
-ExecStart=/usr/bin/WebAppMgr --no-sandbox --use-viz-fmp-with-timeout=0 --in-process-gpu --remote-debugging-port=9998 --user-data-dir="/home/%i/wamdata" --webos-wam
+ExecStart=/usr/bin/WebAppMgr --enable-features=UseOzonePlatform --ozone-platform=wayland --no-sandbox --use-viz-fmp-with-timeout=0 --in-process-gpu --remote-debugging-port=9998 --user-data-dir="/home/%i/wamdata" --webos-wam
 Restart=on-failure
 RestartSec=50
 

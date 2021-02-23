@@ -14,7 +14,7 @@ require gn-utils.inc
 
 inherit gettext qemu pythonnative
 
-DEPENDS = "virtual/gettext wayland wayland-native pixman freetype glib-2.0 fontconfig openssl pango cairo icu libxkbcommon libexif dbus pciutils udev libcap alsa-lib virtual/egl elfutils-native libdrm atk gperf-native gconf nss nss-native nspr nspr-native bison-native qemu-native"
+DEPENDS = "virtual/gettext wayland wayland-native pixman freetype glib-2.0 fontconfig openssl pango cairo icu libxkbcommon libexif dbus pciutils udev libcap alsa-lib virtual/egl elfutils-native libdrm atk at-spi2-atk gperf-native gconf nss nss-native nspr nspr-native bison-native qemu-native"
 
 PROVIDES = "${BROWSER_APPLICATION}"
 
@@ -34,8 +34,8 @@ B = "${OUT_DIR}/${BUILD_TYPE}"
 
 WEBRUNTIME_BUILD_TARGET = "webos:weboswebruntime"
 BROWSER_APP_BUILD_TARGET = "chrome"
-BROWSER_APPLICATION = "chromium68-browser"
-BROWSER_APPLICATION_DIR = "/opt/chromium68"
+BROWSER_APPLICATION = "chromium84-browser"
+BROWSER_APPLICATION_DIR = "/opt/chromium84"
 
 TARGET = "${WEBRUNTIME_BUILD_TARGET}"
 
@@ -60,9 +60,8 @@ PACKAGECONFIG[lttng] = "use_lttng=true,use_lttng=false,lttng-ust,lttng-tools ltt
 PACKAGECONFIG[use-linux-v4l2] = "use_v4l2_codec=true use_v4lplugin=true use_linux_v4l2_only=true"
 
 PACKAGECONFIG[use-upstream-wayland] = " \
-        ozone_platform_wayland_external=false ozone_platform_wayland=true \
-        use_system_minigbm=true, \
-        ozone_platform_wayland_external=true ozone_platform_wayland=false \
+    ozone_platform_wayland_external=false ozone_platform_wayland=true, \
+    ozone_platform_wayland_external=true ozone_platform_wayland=false \
 "
 
 GN_ARGS = "\
@@ -277,12 +276,16 @@ install_webruntime() {
     # gzip -c ${OUT_DIR}/${BUILD_TYPE}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${bindir_cross}/${HOST_SYS}-mksnapshot.gz
 
     install -d ${D}${libdir}
+    install -d ${D}${libdir}/swiftshader
     install -d ${D}${includedir}/${BPN}
     install -d ${D}${CBE_DATA_PATH}
     install -d ${D}${CBE_DATA_LOCALES_PATH}
 
     # Install webos webview files
     ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/weboswebruntime
+
+    install -v -m 0644 ${OUT_DIR}/${BUILD_TYPE}/swiftshader/*.so ${D}${libdir}/swiftshader
+
     chown root:root -R ${D}${libdir}
     chown root:root -R ${D}${includedir}
 
@@ -326,6 +329,7 @@ INSANE_SKIP_${BROWSER_APPLICATION} += "libdir ldflags textrel"
 
 FILES_${PN} = " \
     ${libdir}/*.so \
+    ${libdir}/swiftshader/*.so \
     ${CBE_DATA_PATH}/* \
     ${libdir}/${BPN}/*.so \
     ${WEBOS_SYSTEM_BUS_DIRS} \
