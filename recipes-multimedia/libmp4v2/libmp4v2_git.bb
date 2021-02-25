@@ -8,6 +8,7 @@ inherit autotools-brokensep pkgconfig
 SRC_URI = " \
     git://github.com/sergiomb2/${BPN}.git \
     file://0001-add-a-configure-option-to-disable-build-of-man-pages.patch \
+    file://gcc10.patch \
 "
 SRCREV = "855e9674232808ff3be7191b697dfb56917db21f"
 S = "${WORKDIR}/git"
