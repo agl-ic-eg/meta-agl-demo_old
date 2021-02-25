@@ -10,7 +10,7 @@ PV = "1.0+git${SRCPV}"
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/qtquickcontrols2-agl;protocol=https;branch=${AGL_BRANCH}"
 SRCREV = "22b538aae1f69de5273f1e42a854cfab23a32b60"
 
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 inherit qmake5
 

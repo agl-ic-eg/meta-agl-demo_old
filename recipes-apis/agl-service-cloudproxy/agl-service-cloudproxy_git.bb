@@ -9,7 +9,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-service-cloudproxy;p
 SRCREV = "${AGL_APP_REVISION}"
 
 PV      = "1.0+git${SRCPV}"
-S       = "${WORKDIR}/git/"
+S       = "${WORKDIR}/git"
 
 DEPENDS = "azure-iot-sdk-c aws-iot-device-sdk-embedded-c glib-2.0 nlohmann-json"
 

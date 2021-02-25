@@ -3,7 +3,7 @@ DESCRIPTION = "InputEventManager"
 HOMEPAGE    = "http://docs.automotivelinux.org"
 LICENSE     = "Apache-2.0"
 SECTION     = "apps"
-S           = "${WORKDIR}/git/"
+S           = "${WORKDIR}/git"
 
 inherit qmake5 systemd
 DEPENDS = " qtbase "

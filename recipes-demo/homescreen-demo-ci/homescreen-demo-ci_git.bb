@@ -26,7 +26,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/homescreen-demo-ci;proto
 SRCREV  = "${AGL_APP_REVISION}"
 
 PV      = "1.0+git${SRCPV}"
-S       = "${WORKDIR}/git/"
+S       = "${WORKDIR}/git"
 
 PATH_prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
 

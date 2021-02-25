@@ -14,6 +14,6 @@ SRC_URI = "git://github.com/danielsanfr/qt-qrcode.git;protocol=https \
 SRCREV = "2d57d9c6e2341689d10f9360a16a08831a4a820b"
 
 PV = "git${SRCPV}"
-S = "${WORKDIR}/git/"
+S = "${WORKDIR}/git"
 
 inherit qmake5

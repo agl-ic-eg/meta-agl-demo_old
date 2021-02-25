@@ -22,7 +22,7 @@ PV      = "1.0+git${SRCPV}"
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/launcher;protocol=https;branch=${AGL_BRANCH}"
 SRCREV  = "${AGL_APP_REVISION}"
 
-S       = "${WORKDIR}/git/"
+S       = "${WORKDIR}/git"
 
 inherit qmake5 systemd pkgconfig aglwgt
 
