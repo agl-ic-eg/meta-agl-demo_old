@@ -66,7 +66,6 @@ RDEPENDS_${PN} += " \
     can-utils \
     cannelloni \
     iproute2 \
-    dhcp-client \
     ${UNICENS} \
     ${MOST_DRIVERS} \
     ${LIN_DRIVERS} \

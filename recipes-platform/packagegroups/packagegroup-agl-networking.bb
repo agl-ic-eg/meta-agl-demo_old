@@ -19,5 +19,4 @@ RDEPENDS_${PN}_append = " \
     connman-tools \
     cluster-connman-conf \
     iproute2 \
-    dhcp-client \
 "
