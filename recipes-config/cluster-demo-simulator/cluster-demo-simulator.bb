@@ -1,11 +1,8 @@
-DESCRIPTION = "Simulate can messages of a driving car"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+DESCRIPTION = "Systemd unit to start simple CAN simulator"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 
-SRC_URI = "\
-    file://cluster-demo-simulator.service \
-    file://simple_can_simulator.py \
-"
+SRC_URI = "file://cluster-demo-simulator.service"
 
 inherit systemd
 
@@ -19,13 +16,8 @@ do_compile[noexec] = "1"
 do_install() {
     install -d ${D}${systemd_system_unitdir}
     install -m 0644 ${WORKDIR}/cluster-demo-simulator.service ${D}${systemd_system_unitdir}
-    install -d ${D}${sbindir}
-    install -m 0755 ${WORKDIR}/simple_can_simulator.py ${D}${sbindir}
 }
 
 FILES_${PN} += "${systemd_system_unitdir}"
 
-RDEPENDS_${PN} = " \
-	can-utils \
-	python3 \
-"
+RDEPENDS_${PN} = "simple-can-simulator"
