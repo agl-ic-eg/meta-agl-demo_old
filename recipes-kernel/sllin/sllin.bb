@@ -1,6 +1,6 @@
 DESCRIPTION = "slLIN driver module"
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+LIC_FILES_CHKSUM = "file://sllin.c;beginline=7;endline=37;md5=6408e14dba951f8cbe3c2a003a0d89d2"
 
 inherit module systemd
 
