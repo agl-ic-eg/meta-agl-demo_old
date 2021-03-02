@@ -24,6 +24,7 @@ WIFILES = " \
     file://zz-dri.rules.in \
     file://zz-input.rules.in \
     file://zz-tty.rules.in \
+    file://zz-video.rules.in \
 "
 
 WIFILES_append_imx = " \
