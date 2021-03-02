@@ -1,6 +1,6 @@
 DESCRIPTION = "Simulator that generates CAN messages of a driving car"
-LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${WORKDIR}/simple_can_simulator.py;beginline=2;endline=22;md5=9bb9c582301261d21460d2bc5bb8c225"
 
 SRC_URI = "file://simple_can_simulator.py"
 
