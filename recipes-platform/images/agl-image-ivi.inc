@@ -5,7 +5,7 @@ IMAGE_INSTALL_append = "\
     packagegroup-agl-ivi-services \
     agl-service-homescreen \
     agl-service-weather \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'pipewire', 'pipewire', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pipewire', 'packagegroup-pipewire', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pipewire', 'agl-service-mediaplayer', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pipewire', 'agl-service-radio', '', d)} \
     can-utils \
