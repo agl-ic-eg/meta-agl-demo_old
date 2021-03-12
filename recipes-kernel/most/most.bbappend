@@ -13,4 +13,5 @@ SRC_URI_append = " \
         file://0011-handle-snd_pcm_lib_mmap_vmalloc-removal.patch \
         file://0012-Fix-build-with-5.4-kernel.patch \
         file://0013-Fix-build-with-5.7-kernel.patch \
+        file://0014-Fix-build-with-5.9-kernel.patch \
 "
