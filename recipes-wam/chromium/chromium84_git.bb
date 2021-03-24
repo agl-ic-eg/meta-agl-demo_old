@@ -78,6 +78,3 @@ GN_ARGS += "\
 # check if it can be removed in the future.
 PACKAGECONFIG_remove_qemux86 = "gstreamer umediaserver neva-media gav neva-webrtc"
 #END TODO
-
-D = "${OUT_DIR}/${BUILD_TYPE}/image"
-
