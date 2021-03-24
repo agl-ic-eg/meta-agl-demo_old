@@ -32,6 +32,8 @@ BUILD_TYPE = "Release"
 
 B = "${OUT_DIR}/${BUILD_TYPE}"
 
+OUT_IMAGE_DIR = "${B}/image"
+
 WEBRUNTIME_BUILD_TARGET = "webos:weboswebruntime"
 BROWSER_APP_BUILD_TARGET = "chrome"
 BROWSER_APPLICATION = "chromium84-browser"
@@ -286,8 +288,19 @@ install_webruntime() {
 
     install -v -m 0644 ${OUT_DIR}/${BUILD_TYPE}/swiftshader/*.so ${D}${libdir}/swiftshader
 
+    cp -R --no-dereference --preserve=mode,links -v ${OUT_IMAGE_DIR}/${includedir}/${BPN}/* ${D}${includedir}/${BPN}/
+    install -v -m 0644 ${OUT_IMAGE_DIR}/${libdir}/*.so ${D}${libdir}
+
+    install -v -m 0644 ${OUT_IMAGE_DIR}/${CBE_DATA_PATH}/icudtl.dat ${D}${CBE_DATA_PATH}
+    install -v -m 0644 ${OUT_IMAGE_DIR}/${CBE_DATA_PATH}/snapshot_blob.bin ${D}${CBE_DATA_PATH}
+    # app_runtime_content.pak, webos_content.pak, extensions_shell_and_test.pak
+    install -v -m 0644 ${OUT_IMAGE_DIR}/${CBE_DATA_PATH}/*.pak ${D}${CBE_DATA_PATH}
+
+    cp -R --no-dereference --preserve=mode,links -v ${OUT_IMAGE_DIR}/${CBE_DATA_LOCALES_PATH}/*.pak ${D}${CBE_DATA_LOCALES_PATH}
+
     chown root:root -R ${D}${libdir}
     chown root:root -R ${D}${includedir}
+    chown root:root -R ${D}${CBE_DATA_LOCALES_PATH}
 
     # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
     install -d ${D}${base_bindir}
