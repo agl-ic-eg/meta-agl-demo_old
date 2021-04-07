@@ -39,7 +39,7 @@ BROWSER_APP_BUILD_TARGET = "chrome"
 BROWSER_APPLICATION = "chromium84-browser"
 BROWSER_APPLICATION_DIR = "/opt/chromium84"
 
-TARGET = "${WEBRUNTIME_BUILD_TARGET}"
+TARGET = "${WEBRUNTIME_BUILD_TARGET} ${BROWSER_APP_BUILD_TARGET}"
 
 # Skip do_install_append of webos_system_bus. It is not compatible with this component.
 WEBOS_SYSTEM_BUS_FILES_LOCATION = "${S}/files/sysbus"
@@ -76,7 +76,8 @@ GN_ARGS = "\
     treat_warnings_as_errors=false\
     is_agl=true\
     use_cbe=true\
-    is_chrome_cbe=false\
+    is_chrome_cbe=true\
+    is_component_build=false\
     use_cups=false\
     use_custom_libcxx=false\
     use_kerberos=false\
@@ -239,16 +240,15 @@ configure_browser_settings() {
 }
 
 install_chromium_browser() {
-    D_DIR=${D}${BROWSER_APPLICATION_DIR}
-    install -d ${D_DIR}
-
     # Install browser files
-     if [ -e "${SRC_DIR}/webos/install" ]; then
-         cd ${OUT_DIR}/${BUILD_TYPE}
-         xargs --arg-file=${SRC_DIR}/webos/install/default_browser/binary.list cp -R --no-dereference --preserve=mode,links -v --target-directory=${D_DIR}
-         cd ${SRC_DIR}
-         xargs --arg-file=${SRC_DIR}/webos/install/default_browser/runtime.list cp -R --no-dereference --preserve=mode,links -v --target-directory=${D_DIR}
-     fi
+    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/default_browser
+
+    D_DIR=${D}${BROWSER_APPLICATION_DIR}
+    L_DIR=${D}${CBE_DATA_PATH}
+    install -d ${D_DIR}
+    install -d ${L_DIR}
+
+    cp -R --no-dereference --preserve=mode,links -v ${OUT_IMAGE_DIR}/${BROWSER_APPLICATION_DIR}/* ${D_DIR}
 
     # AGL does not have PMLOG
     sed -i.bak s/PmLogCtl.*// ${D_DIR}/run_webbrowser
@@ -310,6 +310,7 @@ install_webruntime() {
 
 do_install() {
     install_webruntime
+    install_chromium_browser
 }
 
 WEBOS_SYSTEM_BUS_DIRS_LEGACY_BROWSER_APPLICATION = " \
