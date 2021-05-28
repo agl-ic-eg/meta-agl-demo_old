@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ae6497158920d9524cf208c09cc4c984"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/pyagl;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "5a7414cbc1b371f4b83f94eaaf7501765b6bec26"
+SRCREV = "734bbb31408bc9068194707c16cf2aa54d0cadca"
 PV = "${AGL_BRANCH}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
