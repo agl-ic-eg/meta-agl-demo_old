@@ -5,6 +5,13 @@ DISTRO_FEATURES_append = " automount "
 # convenience
 IMAGE_INSTALL_append = " screen mc "
 
+# Include all kernel modules here for ease-of-use during development.
+# Note that this is conditional on virtual/kernel not being linux-dummy
+# in order to allow building the demo images as containers.
+# Comment this out to switch to selecting the kernel modules
+# individually.
+IMAGE_INSTALL_append = " ${@'kernel-modules' if d.getVar('PREFERRED_PROVIDER_virtual/kernel') != 'linux-dummy' else ''}"
+
 # Extend agl-voiceagent-alexa image feature with local alexa-viewer
 # package.
 FEATURE_PACKAGES_agl-voiceagent-alexa_append = " alexa-viewer"
