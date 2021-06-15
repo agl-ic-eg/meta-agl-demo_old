@@ -27,12 +27,10 @@ SRCREV_FORMAT = "main_v8"
 S = "${WORKDIR}/git"
 
 SRC_DIR = "${S}/src"
-OUT_DIR = "${WORKDIR}/build"
 BUILD_TYPE = "Release"
 
-B = "${OUT_DIR}/${BUILD_TYPE}"
-
-OUT_IMAGE_DIR = "${B}/image"
+B = "${WORKDIR}/build"
+OUT_DIR = "${B}/${BUILD_TYPE}"
 
 WEBRUNTIME_BUILD_TARGET = "webos:weboswebruntime"
 BROWSER_APP_BUILD_TARGET = "chrome"
@@ -207,12 +205,12 @@ INSANE_SKIP_${PN} = "textrel ldflags"
 
 do_compile[progress] = "outof:^\[(\d+)/(\d+)\]\s+"
 do_compile() {
-    if [ ! -f ${OUT_DIR}/${BUILD_TYPE}/build.ninja ]; then
+    if [ ! -f ${OUT_DIR}/build.ninja ]; then
          do_configure
     fi
 
     export PATH="${S}/depot_tools:$PATH"
-    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -v -C ${OUT_DIR}/${BUILD_TYPE} ${TARGET}
+    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -v -C ${OUT_DIR} ${TARGET}
 }
 
 do_configure() {
@@ -227,7 +225,7 @@ configure_env() {
     echo GN_ARGS is ${GN_ARGS}
     echo BUILD_TARGETS are ${TARGET}
     cd ${SRC_DIR}
-    gn gen ${OUT_DIR}/${BUILD_TYPE} --args="${GN_ARGS}"
+    gn gen ${OUT_DIR} --args="${GN_ARGS}"
 }
 
 WINDOW_SIZE ?= "1920,1080"
@@ -241,14 +239,14 @@ configure_browser_settings() {
 
 install_chromium_browser() {
     # Install browser files
-    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/default_browser
+    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR} webos/install/default_browser
 
     D_DIR=${D}${BROWSER_APPLICATION_DIR}
     L_DIR=${D}${CBE_DATA_PATH}
     install -d ${D_DIR}
     install -d ${L_DIR}
 
-    cp -R --no-dereference --preserve=mode,links -v ${OUT_IMAGE_DIR}/${BROWSER_APPLICATION_DIR}/* ${D_DIR}
+    cp -R --no-dereference --preserve=mode,links -v ${OUT_DIR}/image/${BROWSER_APPLICATION_DIR}/* ${D_DIR}
 
     # AGL does not have PMLOG
     sed -i.bak s/PmLogCtl.*// ${D_DIR}/run_webbrowser
@@ -265,17 +263,17 @@ install_chromium_browser() {
 install_webruntime() {
 
     # # Generate install webos webview files
-    # ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/weboswebruntime
+    # ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR} webos/install/weboswebruntime
 
     # # Move installation files to D directory
-    # mv ${OUT_DIR}/${BUILD_TYPE}/image/* ${D}
+    # mv ${OUT_DIR}/image/* ${D}
     # # Rename include and locale directories
     # mv ${D}${includedir}/webruntime ${D}${includedir}/${BPN}
     # mv ${D}${CBE_DATA_PATH}/neva_locales ${D}${CBE_DATA_LOCALES_PATH}
 
     # # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
     # install -d ${D}${bindir_cross}
-    # gzip -c ${OUT_DIR}/${BUILD_TYPE}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${bindir_cross}/${HOST_SYS}-mksnapshot.gz
+    # gzip -c ${OUT_DIR}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${bindir_cross}/${HOST_SYS}-mksnapshot.gz
 
     install -d ${D}${libdir}
     install -d ${D}${libdir}/swiftshader
@@ -284,19 +282,19 @@ install_webruntime() {
     install -d ${D}${CBE_DATA_LOCALES_PATH}
 
     # Install webos webview files
-    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/weboswebruntime
+    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR} webos/install/weboswebruntime
 
-    install -v -m 0644 ${OUT_DIR}/${BUILD_TYPE}/swiftshader/*.so ${D}${libdir}/swiftshader
+    install -v -m 0644 ${OUT_DIR}/swiftshader/*.so ${D}${libdir}/swiftshader
 
-    cp -R --no-dereference --preserve=mode,links -v ${OUT_IMAGE_DIR}/${includedir}/${BPN}/* ${D}${includedir}/${BPN}/
-    install -v -m 0644 ${OUT_IMAGE_DIR}/${libdir}/*.so ${D}${libdir}
+    cp -R --no-dereference --preserve=mode,links -v ${OUT_DIR}/image/${includedir}/${BPN}/* ${D}${includedir}/${BPN}/
+    install -v -m 0644 ${OUT_DIR}/image/${libdir}/*.so ${D}${libdir}
 
-    install -v -m 0644 ${OUT_IMAGE_DIR}/${CBE_DATA_PATH}/icudtl.dat ${D}${CBE_DATA_PATH}
-    install -v -m 0644 ${OUT_IMAGE_DIR}/${CBE_DATA_PATH}/snapshot_blob.bin ${D}${CBE_DATA_PATH}
+    install -v -m 0644 ${OUT_DIR}/image/${CBE_DATA_PATH}/icudtl.dat ${D}${CBE_DATA_PATH}
+    install -v -m 0644 ${OUT_DIR}/image/${CBE_DATA_PATH}/snapshot_blob.bin ${D}${CBE_DATA_PATH}
     # app_runtime_content.pak, webos_content.pak, extensions_shell_and_test.pak
-    install -v -m 0644 ${OUT_IMAGE_DIR}/${CBE_DATA_PATH}/*.pak ${D}${CBE_DATA_PATH}
+    install -v -m 0644 ${OUT_DIR}/image/${CBE_DATA_PATH}/*.pak ${D}${CBE_DATA_PATH}
 
-    cp -R --no-dereference --preserve=mode,links -v ${OUT_IMAGE_DIR}/${CBE_DATA_LOCALES_PATH}/*.pak ${D}${CBE_DATA_LOCALES_PATH}
+    cp -R --no-dereference --preserve=mode,links -v ${OUT_DIR}/image/${CBE_DATA_LOCALES_PATH}/*.pak ${D}${CBE_DATA_LOCALES_PATH}
 
     chown root:root -R ${D}${libdir}
     chown root:root -R ${D}${includedir}
@@ -304,7 +302,7 @@ install_webruntime() {
 
     # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
     install -d ${D}${base_bindir}
-    gzip -c ${OUT_DIR}/${BUILD_TYPE}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${base_bindir}/${HOST_SYS}-mksnapshot.gz
+    gzip -c ${OUT_DIR}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${base_bindir}/${HOST_SYS}-mksnapshot.gz
 
 }
 
