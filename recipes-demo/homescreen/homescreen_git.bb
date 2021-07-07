@@ -18,6 +18,9 @@ DEPENDS = " \
     qtwayland-native \
 "
 
+# FIXME: homescreen needs agl-shell-desktop, part of agl-compositor(-protocols) package
+DEPENDS_append = " agl-compositor"
+
 PV      = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/homescreen;protocol=https;branch=${AGL_BRANCH}"

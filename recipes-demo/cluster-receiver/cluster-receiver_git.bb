@@ -11,6 +11,9 @@ DEPENDS = " \
     gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad \
 "
 
+# FIXME: cluster-receiver needs agl-shell-desktop, part of agl-compositor(-protocols) package
+DEPENDS_append = " agl-compositor"
+
 PV = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-cluster-demo-receiver;protocol=https;branch=${AGL_BRANCH}"

@@ -17,6 +17,9 @@ DEPENDS = " \
     qtwayland-native \
 "
 
+# FIXME: alexa-viewer needs agl-shell-desktop, part of agl-compositor(-protocols) package
+DEPENDS_append = " agl-compositor"
+
 PV = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/alexa-viewer;protocol=https;branch=${AGL_BRANCH}"
