@@ -15,10 +15,8 @@ DEPENDS = " \
     wayland \
     qtwayland \
     qtwayland-native \
+    agl-compositor \
 "
-
-# FIXME: alexa-viewer needs agl-shell-desktop, part of agl-compositor(-protocols) package
-DEPENDS_append = " agl-compositor"
 
 PV = "1.0+git${SRCPV}"
 

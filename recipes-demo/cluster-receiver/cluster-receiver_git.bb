@@ -8,11 +8,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=374fee6a7817f1e1a5a7bfb7b7989553"
 
 DEPENDS = " \
     wayland wayland-native \
-    gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad \
+    gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad agl-compositor \
 "
-
-# FIXME: cluster-receiver needs agl-shell-desktop, part of agl-compositor(-protocols) package
-DEPENDS_append = " agl-compositor"
 
 PV = "1.0+git${SRCPV}"
 
