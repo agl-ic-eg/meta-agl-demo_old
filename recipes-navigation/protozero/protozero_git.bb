@@ -15,6 +15,6 @@ SRCREV  = "aa8b304cf63831589f52c254b5af2c688bdc2fc4"
 
 S  = "${WORKDIR}/git"
 
-CFLAGS_prepend = " -I${STAGING_DIR_HOST}/include"
+CFLAGS:prepend = " -I${STAGING_DIR_HOST}/include"
 
 inherit cmake pkgconfig

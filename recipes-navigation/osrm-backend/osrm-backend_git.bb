@@ -12,7 +12,7 @@ SRC_URI = "git://github.com/Project-OSRM/osrm-backend.git;protocol=http \
 
 SRCREV  = "5b58445535633eb1d6840ef4e8786ff521622867"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
                ${datadir}/osrm/profiles/*.lua \
                ${datadir}/osrm/profiles/*/*.lua \
                "
