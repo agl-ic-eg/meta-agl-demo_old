@@ -46,7 +46,7 @@ FILES:${PN} += "${datadir}/dbus-1"
 FILES:${PN}-dbg += "${libdir}/${PN}/plugins/.debug"
 
 PACKAGES:prepend = "${PN}-test "
-FILES_${PN}-test_prepend = "${bindir}/test-lms "
+FILES:${PN}-test:prepend = "${bindir}/test-lms "
 
 PACKAGES += "${PN}-meta"
 ALLOW_EMPTY:${PN}-meta = "1"
