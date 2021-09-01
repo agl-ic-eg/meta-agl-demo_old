@@ -18,6 +18,8 @@ SRC_URI:append = " \
 	file://0003-Allow-recent-kernels-newer-4.11.x-to-build.patch;pnum=2 \
 	file://0001-Disable-sllin-driver-debug-log.patch;pnum=2 \
 	file://0004-Fix-build-with-5.9-kernel.patch;pnum=2 \
+	file://0005-Fix-build-with-5.13-kernel.patch;pnum=2 \
+	file://0006-Fix-build-with-5.14-kernel.patch;pnum=2 \
 	file://sllin-demo.service \
 	file://start_lin_demo.sh \
 	file://lin_config.conf \
