@@ -21,6 +21,3 @@ RDEPENDS:${PN} += "\
     packagegroup-agl-ivi-navigation \
     "
 
-RDEPENDS:${PN} += "\
-    agl-login-manager \
-    "

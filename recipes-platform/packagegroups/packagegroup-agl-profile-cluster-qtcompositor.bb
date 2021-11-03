@@ -30,7 +30,6 @@ QT_LITE = " \
 
 RDEPENDS:${PN}:append = " \
     ${QT_LITE} \
-    agl-login-manager \
 "
 
 RDEPENDS:profile-cluster-qt5 = "${PN}"

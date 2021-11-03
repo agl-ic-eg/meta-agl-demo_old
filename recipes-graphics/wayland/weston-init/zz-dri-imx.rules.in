@@ -1,2 +1,0 @@
-SUBSYSTEM=="gpu_class", MODE="0660", GROUP="@WESTONGROUP@", SECLABEL{smack}="*"
-

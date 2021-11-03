@@ -14,7 +14,5 @@ RDEPENDS:${PN} += "\
     bluez5-obex \
     ${@bb.utils.contains("DISTRO_FEATURES", "3g", "libqmi", "", d)} \
     rtl-sdr \
-    neard \
-    neardal-tools \
     ofono \
     "

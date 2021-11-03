@@ -27,8 +27,6 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 #DISTRO_FEATURES:append = " appfw"
 
 # workaround:
-# ERROR: Nothing PROVIDES 'smack' (but /home/dl9pf/AGL/master-newlayout/external/meta-openembedded/meta-oe/recipes-extended/ostree/ostree_2020.3.bb DEPENDS on or otherwise requires it)
-BBMASK += "meta-openembedded/meta-oe/recipes-extended/ostree/ostree_2020.3.bb"
 #ERROR: Nothing RPROVIDES 'qtwebengine-qmlplugins' (but /home/dl9pf/AGL/master-newlayout/external/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb RDEPENDS on or otherwise requires it)
 BBMASK += "meta-qt5/recipes-qt/qt5/qt5-creator_git.bb"
 #ERROR: Nothing RPROVIDES 'python' (but /home/dl9pf/AGL/master-newlayout/external/meta-security/recipes-mac/smack/smack-test_1.0.bb RDEPENDS on or otherwise requires it)
@@ -52,10 +50,8 @@ yocto-check-layer -d \
 	$AGLROOT/external/meta-openembedded/meta-perl \
 	$AGLROOT/meta-agl/meta-agl-core \
 	$AGLROOT/external/meta-qt5 \
-	$AGLROOT/meta-agl/meta-app-framework \
 	--additional-layers \
 	$AGLROOT/external/meta-qt5 \
-	$AGLROOT/meta-agl/meta-app-framework \
 	$AGLROOT/external/meta-python2 \
 	-- \
 	$AGLROOT/meta-agl-demo

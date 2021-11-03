@@ -8,6 +8,4 @@ PACKAGES = "\
     "
 
 RDEPENDS:${PN} += "\
-    agl-service-voice-high \
-    agl-service-voice-high-capabilities \
 "

@@ -5,11 +5,13 @@ BBLAYERS =+ " \
 "
 
 AGL_META_FILESYSTEMS = "${METADIR}/external/meta-openembedded/meta-filesystems"
+AGL_META_PYTHON = "${METADIR}/external/meta-openembedded/meta-python"
 
 # OpenEmbedded layer to add support for multiple cloud service provider solutions
 #---------------------------------------------------
 BBLAYERS =+ " \
-   ${METADIR}/external/meta-iot-cloud \
    ${METADIR}/external/meta-qt5 \
-   ${METADIR}/external/meta-python2 \
 "
+
+#   ${METADIR}/external/meta-python2 \
+#

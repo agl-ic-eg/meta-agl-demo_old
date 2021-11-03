@@ -16,11 +16,9 @@ RDEPENDS:${PN} += "\
     "
 
 AGL_APPS = " \
-    telematics-recorder \
     "
 
 AGL_APIS = " \
-    agl-service-gps \
     "
 
 RDEPENDS:${PN}:append = " \

@@ -1,1 +1,0 @@
-SUBSYSTEM=="video4linux", MODE="0660", KERNEL=="video*", GROUP="display", SECLABEL{smack}="*", TAG+="systemd"

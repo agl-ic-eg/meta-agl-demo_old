@@ -24,9 +24,3 @@ do_configure:append() {
     # See: http://lists.openembedded.org/pipermail/openembedded-devel/2016-May/107456.html
     sed -i -e "s# -fdebug-prefix-map=.*##g;s# -fmacro-prefix-map=.*##g" librtlsdr.pc
 }
-
-do_install:append() {
-    install -D -m 0644 ${S}/rtl-sdr.rules ${D}${sysconfdir}/udev/rules.d/55-rtl-sdr.rules
-    sed -i 's/MODE:="0666"/GROUP="audio", MODE="0660", SECLABEL{smack}="*"/' \
-        ${D}${sysconfdir}/udev/rules.d/55-rtl-sdr.rules
-}

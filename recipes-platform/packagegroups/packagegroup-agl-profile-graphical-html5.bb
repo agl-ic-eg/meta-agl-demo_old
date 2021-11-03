@@ -17,7 +17,6 @@ RDEPENDS:${PN} += "\
 "
 
 RDEPENDS:${PN} += "\
-    agl-login-manager \
     "
 
 RDEPENDS:profile-graphical-html5 = "${PN}"

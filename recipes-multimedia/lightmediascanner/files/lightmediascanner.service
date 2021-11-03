@@ -8,7 +8,6 @@ Type=dbus
 Restart=on-failure
 RestartSec=0
 BusName=org.lightmediascanner
-SmackProcessLabel=User::App::agl-service-mediascanner
 ExecStart=/usr/bin/lightmediascannerd --startup-scan --db-path=/var/volatile/tmp/lightmediascannerd.db --directory=/media
 
 [Install]

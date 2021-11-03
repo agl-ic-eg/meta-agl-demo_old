@@ -11,30 +11,6 @@ PACKAGES = "\
 
 ALLOW_EMPTY:${PN} = "1"
 
-# MOST out-of-tree kernel drivers
-#################################
-MOST_DRIVERS ??= " \
-    most \
-    "
-# These boards use different kernels - needs to be checked
-MOST_DRIVERS_dragonboard-410c ?= ""
-MOST_DRIVERS_cyclone5 ?= ""
-
-
-# HVAC dependencies
-###################
-LIN_DRIVERS ??= " sllin"
-# These boards use different kernels - needs to be checked
-LIN_DRIVERS_dra7xx-evm ?= ""
-LIN_DRIVERS_dragonboard-410c ?= ""
-
-# UNICENS service
-UNICENS ?= " \
-    unicens-config \
-    agl-service-unicens \
-    agl-service-unicens-controller \
-    "
-
 # Hook for demo platform configuration
 # ATM, only used to disable btwilink module on [MH]3ULCB + Kingfisher by default,
 # setting DEMO_ENABLE_BTWILINK to "true" in local.conf / site.conf re-enables.
@@ -66,9 +42,6 @@ RDEPENDS:${PN} += " \
     can-utils \
     cannelloni \
     iproute2 \
-    ${UNICENS} \
-    ${MOST_DRIVERS} \
-    ${LIN_DRIVERS} \
     ${DEMO_PLATFORM_CONF} \
     ${TTF_FONTS} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'webruntime', 'virtual/webruntime', '', d)} \

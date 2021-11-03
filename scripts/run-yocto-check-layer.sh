@@ -24,10 +24,6 @@ DISTRO_FEATURES:append = " systemd smack"
 DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " sysvinit"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 
-# workaround:
-# ERROR: Nothing PROVIDES 'smack' (but /home/dl9pf/AGL/master-newlayout/external/meta-openembedded/meta-oe/recipes-extended/ostree/ostree_2020.3.bb DEPENDS on or otherwise requires it)
-BBMASK += "meta-openembedded/meta-oe/recipes-extended/ostree/ostree_2020.3.bb"
-
 EOF
 
 

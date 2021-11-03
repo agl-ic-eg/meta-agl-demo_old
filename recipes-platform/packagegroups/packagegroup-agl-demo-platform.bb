@@ -23,38 +23,6 @@ RDEPENDS:${PN} += "\
     packagegroup-agl-demo \
     "
 
-AGL_APPS = " \
-    dashboard \
-    hvac \
-    mediaplayer \
-    virtual/navigation \
-    phone \
-    poiapp \
-    radio \
-    settings \
-    messaging \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'taskmanager' , '', d)} \
-    ${@bb.utils.contains('AGL_FEATURES', 'waltham-remoting', 'waltham waltham-transmitter-plugin' , '', d)} \
-    virtual/mixer \
-    virtual/qtwayland-config \
-    "
-
-QTAGLEXTRAS = " libqtappfw"
-
-# add support for websocket in Qt and QML
-QTAGLEXTRAS:append = " qtwebsockets qtwebsockets-qmlplugins"
-#PREFERRED_PROVIDER_virtual/webruntime = "web-runtime"
-
-# Cluster demo support.
-# ATM no cluster map viewer is supported with the older navigation application.
-MAPVIEWER = "${@bb.utils.contains("PREFERRED_RPROVIDER_virtual/navigation", "ondemandnavi", "tbtnavi", "",d)}"
-CLUSTER_SUPPORT_PACKAGES = " \
-	${MAPVIEWER} \
-	cluster-demo-network-config \
-	cluster-lin-bridging-config \
-	cluster-demo-simulator \
-"
-CLUSTER_SUPPORT = "${@bb.utils.contains("AGL_FEATURES", "agl-cluster-demo-support", "${CLUSTER_SUPPORT_PACKAGES}", "",d)}"
 
 DEMO_UNIT_CONF ?= ""
 # Hook for demo platform configuration
@@ -71,9 +39,6 @@ RDEPENDS:${PN}:append = " \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
     ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip' , '', d)} \
-    ${AGL_APPS} \
-    ${QTAGLEXTRAS} \
-    ${CLUSTER_SUPPORT} \
     ${DEMO_PRELOAD} \
     "
 
@@ -84,15 +49,4 @@ RDEPENDS:${PN}:append = " \
 #       names from the virtual/ RPROVIDES at present.
 RDEPENDS:${PN}-devel = " \
     packagegroup-hmi-framework-devel \
-    dashboard-dbg \
-    hvac-dbg \
-    mediaplayer-dbg \
-    mixer-dbg \
-    phone-dbg \
-    ondemandnavi-dbg \
-    poiapp-dbg \
-    radio-dbg \
-    settings-dbg \
-    messaging-dbg \
-    taskmanager-dbg \
     "
