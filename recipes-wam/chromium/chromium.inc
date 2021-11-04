@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = "\
 
 require gn-utils.inc
 
-inherit gettext qemu pythonnative
+inherit gettext qemu
+#fixme after rework: pythonnative
+#ParseError at /w/workspace/ci-platform-meta-agl-verify-CIB-qemux86-64/repoclone/meta-agl-demo/recipes-wam/chromium/chromium.inc:15: Could not inherit file classes/pythonnative.bbclass
 
 DEPENDS = "virtual/gettext wayland wayland-native pixman freetype glib-2.0 fontconfig openssl pango cairo icu libxkbcommon libexif dbus pciutils udev libcap alsa-lib virtual/egl elfutils-native libdrm atk at-spi2-atk gperf-native gconf nss nss-native nspr nspr-native bison-native qemu-native"
 
