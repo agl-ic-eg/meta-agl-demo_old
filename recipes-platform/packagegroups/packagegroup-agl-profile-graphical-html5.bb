@@ -13,10 +13,10 @@ ALLOW_EMPTY:${PN} = "1"
 
 RDEPENDS:${PN} += "\
     packagegroup-agl-profile-graphical \
-    packagegroup-agl-appfw-html5 \
 "
 
 RDEPENDS:${PN} += "\
+    wam \
     "
 
 RDEPENDS:profile-graphical-html5 = "${PN}"

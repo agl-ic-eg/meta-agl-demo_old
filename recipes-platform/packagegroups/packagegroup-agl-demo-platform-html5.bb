@@ -19,6 +19,7 @@ RDEPENDS:${PN} += "\
 
 RDEPENDS:${PN} += "\
     packagegroup-hmi-framework \
+    packagegroup-agl-profile-graphical-html5 \
     "
 
 
