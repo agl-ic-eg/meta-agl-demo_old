@@ -13,5 +13,7 @@ BBLAYERS =+ " \
    ${METADIR}/external/meta-qt5 \
 "
 
-#   ${METADIR}/external/meta-python2 \
-#
+# Chromium recipes do still require python2
+BBLAYERS =+ " \
+   ${METADIR}/external/meta-python2 \
+"
