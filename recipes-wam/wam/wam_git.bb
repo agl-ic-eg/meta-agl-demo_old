@@ -25,7 +25,7 @@ lcl_maybe_fortify = ""
 SECURITY_STACK_PROTECTOR = ""
 
 SRC_URI = "\
-    git://github.com/igalia/${BPN}.git;branch=koi;protocol=https \
+    git://github.com/igalia/${BPN}.git;branch=marlin;protocol=https \
     file://WebAppMgr@.service \
     file://WebAppMgr.env \
     file://wam-user-setup.sh \
@@ -33,7 +33,7 @@ SRC_URI = "\
     file://trunc-webapp-roles.patch \
 "
 S = "${WORKDIR}/git"
-SRCREV = "2a246d2ea79bd335b86942a5579d6de0c9ddce40"
+SRCREV = "916ad4cc233eaec1f1b12f21c548a31f2b090104"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/wam
