@@ -1,0 +1,12 @@
+[Unit]
+Name=AGL Launcher
+Requires=homescreen.service
+After=homescreen.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/launcher
+Restart=on-failure
+
+[Install]
+WantedBy=agl-session.target
