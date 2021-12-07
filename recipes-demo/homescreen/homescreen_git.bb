@@ -14,6 +14,7 @@ DEPENDS = " \
     qtwayland \
     qtwayland-native \
     agl-compositor \
+    applaunchd \
 "
 
 PV = "1.0+git${SRCPV}"
@@ -32,13 +33,15 @@ PATH:prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
 OE_QMAKE_CXXFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', '' , '-DQT_NO_DEBUG_OUTPUT', d)}"
 
 do_install:append() {
-    install -D -p -m0644 ${WORKDIR}/homescreen.service ${D}${systemd_system_unitdir}/homescreen.service
+    install -d ${D}${systemd_user_unitdir}/agl-session.target.wants
+    install -m0644 ${WORKDIR}/homescreen.service ${D}${systemd_user_unitdir}/homescreen.service
+    ln -s ../homescreen.service ${D}${systemd_user_unitdir}/agl-session.target.wants/homescreen.service
 }
 
-SYSTEMD_SERVICE_${PN} = "homescreen.service"
-SYSTEMD_AUTO_ENABLE = "enable"
+FILES:${PN} += " ${systemd_user_unitdir}"
 
 RDEPENDS:${PN} += " \
+    applaunchd \
     qtwayland \
     qtbase-qmlplugins \
     qtgraphicaleffects-qmlplugins \
