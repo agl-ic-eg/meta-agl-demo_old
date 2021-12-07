@@ -1,6 +1,6 @@
 RDEPENDS:${PN}_remove = "weston-init"
 
 RDEPENDS:${PN} += " \
-                  agl-compositor \
+                  agl-compositor-init \
                   weston-terminal-conf \
                   "

@@ -35,7 +35,7 @@ DEMO_UNIT_CONF += " demo-i2c-udev-conf "
 DEMO_PRELOAD = "${@bb.utils.contains("AGL_FEATURES", "agl-demo-preload", " ${DEMO_UNIT_CONF} poiapp-api-key", "",d)}"
 
 RDEPENDS:${PN}:append = " \
-    weston-ini-conf \
+    launcher \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
     ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip' , '', d)} \
