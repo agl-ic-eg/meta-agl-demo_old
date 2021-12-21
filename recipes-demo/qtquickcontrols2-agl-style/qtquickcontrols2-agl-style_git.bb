@@ -14,11 +14,6 @@ S = "${WORKDIR}/git"
 
 inherit qmake5
 
-do_install:append:class-target() {
-    install -d ${D}/${sysconfdir}/afm/unit.env.d
-    echo "QT_QUICK_CONTROLS_STYLE=AGL" > ${D}${sysconfdir}/afm/unit.env.d/qtquickcontrols2-style
-}
-
 FILES:${PN} += "${OE_QMAKE_PATH_QML}/QtQuick/Controls.2/AGL/*"
 
 RDEPENDS:${PN} += " \
