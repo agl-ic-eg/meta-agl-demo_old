@@ -4,6 +4,7 @@ After=agl-compositor.service
 
 [Service]
 Type=simple
+EnvironmentFile=-/etc/default/homescreen
 ExecStart=/usr/bin/homescreen
 Restart=on-failure
 
