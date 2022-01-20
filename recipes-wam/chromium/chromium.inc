@@ -64,6 +64,12 @@ PACKAGECONFIG[use-upstream-wayland] = " \
     ozone_platform_wayland_external=true ozone_platform_wayland=false \
 "
 
+# Options to enable debug build. Add this PACKAGECONFIG to local.conf
+# to enable debug build. By default debug is completely disabled to
+# speed up build
+PACKAGECONFIG[debug] = "symbol_level=2 use_debug_fission=true,symbol_level=1"
+PACKAGECONFIG[debug-blink] = "blink_symbol_level=2 use_debug_fission=true,blink_symbol_level=1"
+
 GN_ARGS = "\
     enable_memorymanager_webapi=false\
     ffmpeg_branding=\"Chrome\"\
@@ -103,26 +109,6 @@ GN_ARGS += "is_debug=false is_official_build=true"
 #   assert(!is_cfi || is_clang,
 #          "is_cfi requires setting is_clang = true in 'gn args'")
 GN_ARGS += "is_cfi=false"
-
-# By default, passing is_official_build=true to GN causes its symbol_level
-# variable to be set to "2". This means the compiler will be passed "-g2" and
-# we will end up with a very large chrome binary (around 5Gb as of M58)
-# regardless of whether DEBUG_BUILD has been set or not. In addition, binutils,
-# file and other utilities are unable to read a 32-bit binary this size, which
-# causes it not to be stripped.
-# The solution is two-fold:
-# 1. Make sure -g is not passed on 32-bit architectures via DEBUG_FLAGS. -g is
-#    the same as -g2. -g1 generates an 800MB binary, which is a lot more
-#    manageable.
-# 2. Explicitly pass symbol_level=0 to GN. This causes -g0 to be passed
-#    instead, so that if DEBUG_BUILD is not set GN will not create a huge debug
-#    binary anyway. Since our compiler flags are passed after GN's, -g0 does
-#    not cause any issues if DEBUG_BUILD is set, as -g1 will be passed later.
-DEBUG_FLAGS:remove:arm = "-g"
-DEBUG_FLAGS:append:arm = "-g1"
-DEBUG_FLAGS:remove:x86 = "-g"
-DEBUG_FLAGS:append:x86 = "-g1"
-GN_ARGS += "symbol_level=0"
 
 # We do not want to use Chromium's own Debian-based sysroots, it is easier to
 # just let Chromium's build system assume we are not using a sysroot at all and
