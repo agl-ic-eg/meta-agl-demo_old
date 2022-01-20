@@ -42,15 +42,7 @@ TARGET = "${WEBRUNTIME_BUILD_TARGET} ${BROWSER_APP_BUILD_TARGET}"
 # Skip do_install:append of webos_system_bus. It is not compatible with this component.
 WEBOS_SYSTEM_BUS_FILES_LOCATION = "${S}/files/sysbus"
 
-PACKAGECONFIG ?= "jumbo use-upstream-wayland"
-
-
-# Set a default value for jumbo file merge of 8. This should be good for build
-# servers and workstations with a big number of cores. In case build is
-# happening in a machine with less cores but still enough RAM a good value could
-# be 50.
-JUMBO_FILE_MERGE_LIMIT="8"
-PACKAGECONFIG[jumbo] = "use_jumbo_build=true jumbo_file_merge_limit=${JUMBO_FILE_MERGE_LIMIT}, use_jumbo_build=false"
+PACKAGECONFIG ?= "use-upstream-wayland"
 
 PACKAGECONFIG[lttng] = "use_lttng=true,use_lttng=false,lttng-ust,lttng-tools lttng-modules babeltrace"
 

@@ -18,8 +18,6 @@ BROWSER_APPLICATION = "chromium84-browser"
 BROWSER_APPLICATION_DIR = "/opt/chromium84"
 MKSNAPSHOT_PATH = "v8_snapshot/"
 
-PACKAGECONFIG:remove="jumbo"
-
 GN_ARGS += "use_gtk=false"
 
 # Disable closure_compile
