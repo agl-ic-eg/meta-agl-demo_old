@@ -3,15 +3,12 @@ require chromium.inc
 SRC_URI = "\
     git://github.com/igalia/${PN};branch=marlin;protocol=https;rev=${SRCREV_chromium84};name=chromium84 \
     git://github.com/webosose/chromium-v8;branch=@chromium84;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8;protocol=https \
-    file://add-a-delay-to-agl-ready-event.patch \
-    file://chromium-quiche-invalid-offsetof.patch \
-    file://chromium-skia-no_sanitize.patch \
 "
 
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium84 = "3d6fd5dd0b836dbda2ea356ee1b25a9149419fef"
+SRCREV_chromium84 = "005a9257d3ba9eb363e19f5a8efc6758924dbf9b"
 SRCREV_v8 = "5c1d89dd2945a10cf7a6a3458050b3177a870b09"
 
 BROWSER_APPLICATION = "chromium84-browser"

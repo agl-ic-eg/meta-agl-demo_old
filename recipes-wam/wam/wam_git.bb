@@ -26,33 +26,25 @@ SECURITY_STACK_PROTECTOR = ""
 
 SRC_URI = "\
     git://github.com/igalia/${BPN}.git;branch=marlin;protocol=https \
-    file://WebAppMgr@.service \
+    file://WebAppMgr.service \
     file://WebAppMgr.env \
-    file://wam-user-setup.sh \
-    file://wam-user-setup@.service \
-    file://trunc-webapp-roles.patch \
 "
 S = "${WORKDIR}/git"
-SRCREV = "916ad4cc233eaec1f1b12f21c548a31f2b090104"
+SRCREV = "478bc7b00d2704d74814c4685c60d62afca50872"
 
 do_install:append() {
-    install -d ${D}${sysconfdir}/wam
+    install -v -d ${D}${sysconfdir}/wam
     install -v -m 644 ${S}/files/launch/security_policy.conf ${D}${sysconfdir}/wam/security_policy.conf
-    install -d ${D}${systemd_system_unitdir}
-    install -v -m 644 ${WORKDIR}/WebAppMgr@.service ${D}${systemd_system_unitdir}/WebAppMgr@.service
-    install -d ${D}${sysconfdir}/default/
+    install -v -d ${D}${systemd_user_unitdir}
+    install -v -m 644 ${WORKDIR}/WebAppMgr.service ${D}${systemd_user_unitdir}/WebAppMgr.service
+    install -v -d ${D}${sysconfdir}/default/
     install -v -m 644 ${WORKDIR}/WebAppMgr.env ${D}${sysconfdir}/default/WebAppMgr.env
     ln -snf WebAppMgr ${D}${bindir}/web-runtime
-    install -d ${D}${systemd_system_unitdir}/afm-user-session@.target.wants
-    ln -sf ../WebAppMgr@.service ${D}${systemd_system_unitdir}/afm-user-session@.target.wants/
-    install -d ${D}${libexecdir}/wam/
-    install -v -m 755 ${WORKDIR}/wam-user-setup.sh ${D}${libexecdir}/wam/wam-user-setup.sh
-    install -v -m 644 ${WORKDIR}/wam-user-setup@.service ${D}${systemd_system_unitdir}/wam-user-setup@.service
-    install -d ${D}${systemd_system_unitdir}/user-runtime-dir@.service.wants/
-    ln -sf ../wam-user-setup@.service ${D}${systemd_system_unitdir}/user-runtime-dir@.service.wants/
+    install -v -d ${D}${systemd_user_unitdir}/agl-session.target.wants
+    ln -sf ../WebAppMgr.service ${D}${systemd_user_unitdir}/agl-session.target.wants/
 }
 
-FILES:${PN} += "${sysconfdir}/init ${sysconfdir}/wam ${libdir}/webappmanager/plugins/*.so ${systemd_system_unitdir}"
+FILES:${PN} += "${sysconfdir}/init ${sysconfdir}/wam ${libdir}/webappmanager/plugins/*.so ${systemd_user_unitdir}"
 
 CXXFLAGS:append:agl-devel = " -DAGL_DEVEL"
 
