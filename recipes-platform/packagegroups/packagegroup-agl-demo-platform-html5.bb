@@ -41,6 +41,7 @@ RDEPENDS:${PN}-devel = " \
 # TODO(jdapena): replace this with HTML5 apps.
 AGL_APPS = " \
     dashboard \
+    html5-hvac \
     hvac \
     ondemandnavi \
     settings \

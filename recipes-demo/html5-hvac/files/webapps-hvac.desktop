@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=HTML5 HVAC
+Comment=HVAC
+GenericName=HVAC
+Exec=env AFM_ID=webapps-hvac AFM_APP_INSTALL_DIR=/usr/lib/wam_apps/html5-hvac/ /usr/bin/WebAppMgr
+Icon=settings
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=true
