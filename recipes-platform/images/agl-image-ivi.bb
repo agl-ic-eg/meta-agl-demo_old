@@ -14,7 +14,7 @@ IMAGE_INSTALL:append = "\
     iproute2 \
     "
 
-IMAGE_FEATURES += "splash package-management ssh-server-dropbear"
+IMAGE_FEATURES += "splash package-management ssh-server-openssh"
 
 # NOTE: In hardknott or later this can be replaced by adding "weston"
 #       to IMAGE_FEATURES.
