@@ -9,6 +9,7 @@ DEPENDS = " \
     qtbase \
     qtdeclarative \
     qtquickcontrols2 \
+    libqtappfw \
     wayland-native \
     wayland \
     qtwayland \
@@ -41,6 +42,7 @@ do_install:append() {
 FILES:${PN} += " ${systemd_user_unitdir}"
 
 RDEPENDS:${PN} += " \
+    libqtappfw \
     applaunchd \
     qtwayland \
     qtbase-qmlplugins \
