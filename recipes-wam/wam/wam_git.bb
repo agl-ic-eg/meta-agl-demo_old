@@ -5,13 +5,13 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 inherit cmake
 
-DEPENDS = "glib-2.0 jsoncpp boost chromium84 protobuf protobuf-native"
+DEPENDS = "glib-2.0 jsoncpp boost chromium protobuf protobuf-native"
 
 EXTRA_OECMAKE = "\
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=${prefix} \
     -DPLATFORM_NAME=${@'${DISTRO}'.upper().replace('-', '_')} \
-    -DCHROMIUM_SRC_DIR=${STAGING_INCDIR}/chromium84"
+    -DCHROMIUM_SRC_DIR=${STAGING_INCDIR}/chromium"
 
 PR="r0"
 
@@ -25,12 +25,12 @@ lcl_maybe_fortify = ""
 SECURITY_STACK_PROTECTOR = ""
 
 SRC_URI = "\
-    git://github.com/igalia/${BPN}.git;branch=marlin;protocol=https \
+    git://github.com/igalia/${BPN}.git;branch=@52.agl.marlin;protocol=https \
     file://WebAppMgr.service \
     file://WebAppMgr.env \
 "
 S = "${WORKDIR}/git"
-SRCREV = "478bc7b00d2704d74814c4685c60d62afca50872"
+SRCREV = "0a0e6c52fa2983f4703ef9fce68b01b631003043"
 
 do_install:append() {
     install -v -d ${D}${sysconfdir}/wam

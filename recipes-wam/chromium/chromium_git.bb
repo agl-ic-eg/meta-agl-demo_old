@@ -1,25 +1,33 @@
 require chromium.inc
 
 SRC_URI = "\
-    git://github.com/igalia/${PN};branch=marlin;protocol=https;rev=${SRCREV_chromium84};name=chromium84 \
-    git://github.com/webosose/chromium-v8;branch=@chromium84;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8;protocol=https \
+    git://github.com/igalia/chromium87;branch=@10.agl.marlin;protocol=https;rev=${SRCREV_chromium87};name=chromium87 \
+    git://github.com/webosose/chromium-v8;branch=@chromium87;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8;protocol=https \
 "
 
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium84 = "005a9257d3ba9eb363e19f5a8efc6758924dbf9b"
-SRCREV_v8 = "5c1d89dd2945a10cf7a6a3458050b3177a870b09"
+SRCREV_chromium87 = "7412ccde56b8054af89d6f515bc7c852287fc3b2"
+SRCREV_v8 = "935065d097cce0090bc858746e6aee0919b222de"
 
-BROWSER_APPLICATION = "chromium84-browser"
-BROWSER_APPLICATION_DIR = "/opt/chromium84"
+CHROMIUM_VERSION = "87.0.4280.88"
+PV_BRANCH_SUFFIX = "ose10.agl.marlin"
+
+PV = "${CHROMIUM_VERSION}.${PV_BRANCH_SUFFIX}+git"
+
+BROWSER_APPLICATION = "chromium-browser"
+BROWSER_APPLICATION_DIR = "/opt/chromium"
 MKSNAPSHOT_PATH = "v8_snapshot/"
 
 GN_ARGS += "use_gtk=false"
 
-# Disable closure_compile
+# Disable closure compile
 # Else we need HOSTTOOLS += "java"
-GN_ARGS += "closure_compile=false"
+GN_ARGS += " \
+  enable_mojom_closure_compile=false\
+  enable_js_type_check=false\
+"
 
 # When using meta-clang, one can switch to using the lld linker
 # by using the ld-is-lld distro feature otherwise use gold linker
@@ -49,7 +57,6 @@ GN_ARGS += "\
     cros_v8_snapshot_ar=\"${BUILD_AR}\" \
     cros_v8_snapshot_cc=\"${BUILD_CC}\" \
     cros_v8_snapshot_cxx=\"${BUILD_CXX}\" \
-    linux_use_bundled_binutils=false \
     gold_path=\"\" \
     v8_enable_embedded_builtins=false \
     use_v8_context_snapshot=false \

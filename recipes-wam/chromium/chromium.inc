@@ -34,8 +34,8 @@ OUT_DIR = "${B}/${BUILD_TYPE}"
 
 WEBRUNTIME_BUILD_TARGET = "webos:weboswebruntime"
 BROWSER_APP_BUILD_TARGET = "chrome"
-BROWSER_APPLICATION = "chromium84-browser"
-BROWSER_APPLICATION_DIR = "/opt/chromium84"
+BROWSER_APPLICATION = "chromium-browser"
+BROWSER_APPLICATION_DIR = "/opt/chromium"
 
 TARGET = "${WEBRUNTIME_BUILD_TARGET} ${BROWSER_APP_BUILD_TARGET}"
 
@@ -70,6 +70,7 @@ GN_ARGS = "\
     proprietary_codecs=true\
     target_os=\"linux\"\
     treat_warnings_as_errors=false\
+    use_x11=false\
     is_agl=true\
     use_cbe=true\
     is_chrome_cbe=true\
