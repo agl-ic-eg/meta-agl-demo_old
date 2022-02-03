@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 inherit cmake
 
-DEPENDS = "glib-2.0 jsoncpp boost chromium protobuf protobuf-native"
+DEPENDS = "glib-2.0 jsoncpp boost chromium protobuf protobuf-native libxml2"
 
 EXTRA_OECMAKE = "\
     -DCMAKE_BUILD_TYPE=Release \
@@ -25,12 +25,14 @@ lcl_maybe_fortify = ""
 SECURITY_STACK_PROTECTOR = ""
 
 SRC_URI = "\
-    git://github.com/igalia/${BPN}.git;branch=@52.agl.marlin;protocol=https \
+    git://github.com/igalia/${BPN}.git;branch=@55.agl.marlin;protocol=https \
     file://WebAppMgr.service \
     file://WebAppMgr.env \
 "
 S = "${WORKDIR}/git"
-SRCREV = "0a0e6c52fa2983f4703ef9fce68b01b631003043"
+SRCREV = "b0c1e4691b68ecb0dd300d918ec218955bf8c713"
+
+PV = "ose55.agl.marlin"
 
 do_install:append() {
     install -v -d ${D}${sysconfdir}/wam
