@@ -4,7 +4,7 @@ DESCRIPTION = "Basic image for baseline of AGL Distribution for IVI profile."
 
 LICENSE = "MIT"
 
-require recipes-platform/images/agl-image-minimal.inc
+require recipes-platform/images/agl-image-weston.inc
 
 IMAGE_INSTALL:append = "\
     packagegroup-agl-image-ivi \

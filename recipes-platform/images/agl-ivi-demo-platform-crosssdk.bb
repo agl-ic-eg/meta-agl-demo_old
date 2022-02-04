@@ -5,6 +5,8 @@ It includes the full meta-toolchain, plus developement headers and libraries \
 to form a standalone cross SDK."
 
 
+require agl-image-ivi.bb
+
 # add packages for demo platform (include demo apps) here
 IMAGE_INSTALL:append = " \
     packagegroup-agl-demo-platform \
@@ -12,8 +14,6 @@ IMAGE_INSTALL:append = " \
 
 LICENSE = "MIT"
 
-#require agl-image-graphical-qt5-crosssdk.inc
-require recipes-platform/images/agl-image-weston.inc
 require recipes-platform/images/agl-image-minimal-crosssdk.inc
 
 # Add wayland-scanner to SDK (SPEC-945)
