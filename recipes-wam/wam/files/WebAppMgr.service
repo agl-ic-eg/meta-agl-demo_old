@@ -12,7 +12,7 @@
 
 [Unit]
 Description="WebAppMgr is responsible for running web apps and manage their lifecycle"
-After=homescreen.service launcher.service agl-compositor.service
+After=agl-compositor.service
 Requires=agl-compositor.service
 Before=agl-session.target
 

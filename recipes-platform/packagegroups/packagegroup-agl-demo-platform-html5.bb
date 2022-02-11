@@ -41,8 +41,8 @@ RDEPENDS:${PN}-devel = " \
 # TODO(jdapena): replace this with HTML5 apps.
 AGL_APPS = " \
     dashboard \
+    html5-launcher \
     html5-hvac \
-    hvac \
     ondemandnavi \
     settings \
     "
@@ -58,13 +58,10 @@ DEMO_UNIT_CONF ?= "demo-i2c-udev-conf"
 # Preload only if agl-demo-preload is set
 DEMO_PRELOAD = "${@bb.utils.contains("AGL_FEATURES", "agl-demo-preload", "${DEMO_UNIT_CONF}", "",d)}"
 
-# TODO(jdapena): eventually qtquickcontrols2 components, and launcher
-# (with an HTML5 replacement)
 RDEPENDS:${PN}:append = " \
-    launcher \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip' , '', d)} \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip' , '', d)} \
     ${AGL_APPS} \
     ${DEMO_PRELOAD} \
     "
