@@ -43,7 +43,7 @@ RDEPENDS:${PN}:append = " \
     launcher \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip' , '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip mpc' , '', d)} \
     ${AGL_APPS} \
     ${DEMO_PRELOAD} \
     "

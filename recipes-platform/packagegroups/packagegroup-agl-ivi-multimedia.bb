@@ -13,7 +13,7 @@ ALLOW_EMPTY:${PN} = "1"
 RDEPENDS:${PN} += "\
     gstreamer1.0-plugins-base-meta \
     gstreamer1.0-plugins-good-meta \
-    lightmediascanner-meta \
+    mpd \
     "
 
 # for now: enable here for the AGL IVI demo (image-ivi and demo-platform)

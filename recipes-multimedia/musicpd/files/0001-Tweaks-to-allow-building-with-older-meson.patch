@@ -1,0 +1,55 @@
+From a01163d061fae0114a508be83c0ac83461fba43d Mon Sep 17 00:00:00 2001
+From: Scott Murray <scott.murray@konsulko.com>
+Date: Wed, 2 Feb 2022 14:39:50 -0500
+Subject: [PATCH] Tweaks to allow building with older meson
+
+The requirements for newer meson in meson.build stem from changes
+for building dependencies as sub-projects.  If we avoid triggering
+those, then older meson works fine.  To enable such, manually edit
+out additions from commits f23ecf00da, aef0535c55, 520028dcfc, and
+6b1d0cb01d (not necessarily an exhaustive list), and set the
+minimum meson version to 0.51, as that's where the build flags
+for native vs target became available, and those are being used.
+
+Upstream-Status: Inappropriate [disable feature]
+
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+---
+ meson.build | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 481270567..6264485c8 100644
+--- a/meson.build
++++ b/meson.build
+@@ -2,7 +2,7 @@ project(
+   'mpd',
+   ['c', 'cpp'],
+   version: '0.23.5',
+-  meson_version: '>= 0.56.0',
++  meson_version: '>= 0.51.0',
+   default_options: [
+     'c_std=c11',
+     'build.c_std=c11',
+@@ -10,21 +10,8 @@ project(
+     'build.cpp_std=c++17',
+     'warning_level=3',
+ 
+-    # If we build those libraries as Meson subproject, they shall be
+-    # linked statically into the MPD executable.
+-    'expat:default_library=static',
+-    'fmt:default_library=static',
+-    'gtest:default_library=static',
+-    'sqlite3:default_library=static',
+-    'vorbis:default_library=static',
+-
+     # Not interested in compiler warnings from subprojects.
+     'expat:werror=false',
+-    'expat:warning_level=0',
+-    'fmt:warning_level=0',
+-    'gtest:warning_level=0',
+-    'sqlite3:warning_level=0',
+-    'vorbis:warning_level=0',
+   ],
+   license: 'GPLv2+',
+ )
