@@ -28,6 +28,10 @@ AGL_APPS = " \
     hvac \
     ondemandnavi \
     settings \
+    mediaplayer \
+    messaging \
+    phone \
+    radio \
     "
 
 # Hook for demo platform configuration
