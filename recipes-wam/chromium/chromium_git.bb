@@ -8,7 +8,7 @@ SRC_URI = "\
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium87 = "7412ccde56b8054af89d6f515bc7c852287fc3b2"
+SRCREV_chromium87 = "bc1410d5ad4eca384fa7350410b0df4d3f2bed10"
 SRCREV_v8 = "935065d097cce0090bc858746e6aee0919b222de"
 
 CHROMIUM_VERSION = "87.0.4280.88"
