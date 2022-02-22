@@ -1,5 +1,5 @@
 DESCRIPTION = "lin-config tool for the sllin driver module"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://lin_config.c;beginline=4;endline=9;md5=196a29df19a30dbc752937bdfc819d7a"
 
 DEPENDS += "libnl libxml2"

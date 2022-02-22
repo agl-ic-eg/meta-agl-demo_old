@@ -1,7 +1,7 @@
 SUMMARY = "hts_engine is software to synthesize speech waveform from HMMs trained by the HMM-based speech synthesis system (HTS)."
 HOMEPAGE = "http://hts-engine.sourceforge.net/"
 SECTION = "libs"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=b3be85b37c90bfd4d34d79a0e3f28700"
 

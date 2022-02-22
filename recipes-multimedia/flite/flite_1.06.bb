@@ -1,7 +1,7 @@
 SUMMARY = "The Flite+hts_engine is an English TTS System."
 HOMEPAGE = "http://hts-engine.sourceforge.net/"
 SECTION = "libs"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=a1ab16abd1c593cab35c2987fd871678"
 

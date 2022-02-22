@@ -1,7 +1,7 @@
 SUMMARY = "Open JTalk is a Japanese text-to-speech system."
 HOMEPAGE = "http://open-jtalk.sourceforge.net/"
 SECTION = "libs"
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=ec9073c0ca40ff7c388b31cfd6a07a9e"
 
