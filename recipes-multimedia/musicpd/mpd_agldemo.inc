@@ -12,7 +12,7 @@ SRC_URI += "file://0001-Tweaks-to-allow-building-with-older-meson.patch \
 # build.{c_std,cpp_std} options even though they work, so we need to
 # flag them to be ignored in the unknown configure option QA test.
 # This can be removed after upgrading to Yocto Project 3.5.
-UNKNOWN_CONFIGURE_WHITELIST = "build.c_std build.cpp_std"
+UNKNOWN_CONFIGURE_OPT_IGNORE = "build.c_std build.cpp_std"
 
 # This also needs to be pushed upstream.
 PACKAGECONFIG[pipewire] = "-Dpipewire=enabled,-Dpipewire=disabled,pipewire"
@@ -20,10 +20,10 @@ PACKAGECONFIG[pipewire] = "-Dpipewire=enabled,-Dpipewire=disabled,pipewire"
 # Prune the default configuration a bit to remove various streaming/server
 # options that are not required.
 PACKAGECONFIG = " \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "aac", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "aac", "", d)} \
     bzip2 \
     daemon \
-    ${@bb.utils.contains("LICENSE_FLAGS_WHITELIST", "commercial", "ffmpeg aac", "", d)} \
+    ${@bb.utils.contains("LICENSE_FLAGS_ACCEPTED", "commercial", "ffmpeg aac", "", d)} \
     flac \
     libsamplerate \
     mpg123 \
