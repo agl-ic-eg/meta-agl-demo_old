@@ -19,7 +19,7 @@ SRCREV  = "${AGL_APP_REVISION}"
 
 S  = "${WORKDIR}/git"
 
-inherit qmake5
+inherit qmake5 pkgconfig
 
 # ALS, CES, FOSDEM available
 AGL_RADIO_PRESETS_LOCALE ?= "CES"

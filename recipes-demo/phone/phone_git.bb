@@ -15,7 +15,7 @@ SRCREV  = "${AGL_APP_REVISION}"
 
 S = "${WORKDIR}/git"
 
-inherit qmake5
+inherit qmake5 pkgconfig
 
 FILES:${PN} += "${datadir}/icons/ ${datadir}/sounds/"
 
