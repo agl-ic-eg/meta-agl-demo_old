@@ -1,12 +1,12 @@
 [Unit]
-Description=AGL Launcher
+Description=AGL Homescreen
 Requires=WebAppMgr.service dbus.service
 After=WebAppMgr.service dbus.service
 
 [Service]
 Type=simple
-Environment=AFM_ID=launcher
-Environment=AFM_APP_INSTALL_DIR=/usr/lib/wam_apps/html5-launcher/
+Environment=AFM_ID=homescreen
+Environment=AFM_APP_INSTALL_DIR=/usr/lib/wam_apps/html5-homescreen/
 ExecStartPre=sleep 1
 ExecStart=/usr/bin/WebAppMgr
 Restart=on-failure
