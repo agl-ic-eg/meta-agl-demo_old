@@ -16,7 +16,7 @@ DEPENDS = " \
 "
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/src/libqtappfw;protocol=https;branch=${AGL_BRANCH}"
-SRCREV  = "0de8ac83e6a190d5fc124587d1f9f0a7f0198ce3"
+SRCREV  = "1332cc7d0a618ee88b4d19813340665332d406ca"
 S       = "${WORKDIR}/git"
 
 # PV needs to be modified with SRCPV to work AUTOREV correctly
