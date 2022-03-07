@@ -30,4 +30,3 @@ RDEPENDS:${PN}:append = " \
     ${AGL_APPS} \
     ${AGL_APIS} \
 "
-# packagegroup-agl-core-navigation? (brings in geoclue...)

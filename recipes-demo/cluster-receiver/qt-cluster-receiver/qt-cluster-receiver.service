@@ -1,0 +1,20 @@
+[Unit]
+Description=qt-cluster-receiver
+
+Requires=agl-compositor.service
+After=agl-compositor.service
+
+# Since we are part of the agl session, make sure we are started before
+# it is complete.
+Before=agl-session.target
+
+[Service]
+ExecStart=/usr/bin/qt-cluster-receiver
+
+Restart=always
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=agl-session.target

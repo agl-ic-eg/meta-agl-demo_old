@@ -15,7 +15,6 @@ RDEPENDS:${PN} += "\
     packagegroup-agl-image-boot \
     packagegroup-agl-core-security \
     packagegroup-agl-graphical-weston \
-    packagegroup-agl-appfw-native-qt5 \
 "
 
 RDEPENDS:profile-cluster-qt5 = "${PN}"

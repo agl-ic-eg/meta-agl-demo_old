@@ -34,6 +34,13 @@ AGL_APPS = " \
     radio \
     "
 
+# Cluster demo support.
+CLUSTER_SUPPORT_PACKAGES = " \
+	tbtnavi \
+	cluster-demo-network-config \
+"
+CLUSTER_SUPPORT = "${@bb.utils.contains("AGL_FEATURES", "agl-cluster-demo-support", "${CLUSTER_SUPPORT_PACKAGES}", "",d)}"
+
 # Hook for demo platform configuration
 # ATM used for:
 # 1) Adding udev configuration and scripts for supporting USB attached
@@ -49,5 +56,6 @@ RDEPENDS:${PN}:append = " \
     qtquickcontrols2-agl-style \
     ${@bb.utils.contains('DISTRO_FEATURES', 'agl-devel', 'unzip mpc' , '', d)} \
     ${AGL_APPS} \
+    ${CLUSTER_SUPPORT} \
     ${DEMO_PRELOAD} \
     "
