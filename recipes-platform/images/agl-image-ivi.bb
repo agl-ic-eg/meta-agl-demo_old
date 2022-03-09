@@ -10,6 +10,7 @@ IMAGE_INSTALL:append = "\
     packagegroup-agl-image-ivi \
     packagegroup-agl-ivi-services \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pipewire', 'packagegroup-pipewire', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pipewire', 'wireplumber-config-agl wireplumber-policy-config-agl', '', d)} \
     can-utils \
     iproute2 \
     "
