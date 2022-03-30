@@ -5,8 +5,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 # in the upstream recipe.
 DEPENDS:remove = "curl"
 
-SRC_URI += "file://0001-Tweaks-to-allow-building-with-older-meson.patch \
-            file://mpd-volatiles.conf"
+SRC_URI += "file://mpd-volatiles.conf"
 
 # The older meson in poky dunfell complains about the use of the
 # build.{c_std,cpp_std} options even though they work, so we need to
