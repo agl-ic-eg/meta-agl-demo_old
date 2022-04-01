@@ -1,4 +1,4 @@
-SUMMARY     = "AGL HTML5 Homescreen"
+SUMMARY     = "AGL HTML5 Background"
 HOMEPAGE    = "https://github.com/AGL-web-applications/background"
 SECTION     = "apps"
 LICENSE     = "Apache-2.0"
