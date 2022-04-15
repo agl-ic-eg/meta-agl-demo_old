@@ -2,6 +2,8 @@ SUMMARY = "The middleware for AGL Qt5 based cluster qtcompositor"
 DESCRIPTION = "The set of packages required for AGL Qt5 based Cluster Demo Qtcompositor Distribution"
 LICENSE = "MIT"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit packagegroup
 
 PACKAGES = "\

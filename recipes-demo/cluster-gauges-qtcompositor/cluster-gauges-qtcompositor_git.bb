@@ -3,7 +3,7 @@ DESCRIPTION = "AGL HMI Application for demonstrating instrument cluster gauges a
 HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/#/admin/projects/apps/agl-cluster-demo-gauges"
 SECTION     = "apps"
 
-LICENSE     = "Apache-2.0 & BSD"
+LICENSE     = "Apache-2.0 & BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=ae6497158920d9524cf208c09cc4c984 \
                     file://app/cluster-gauges.qml;beginline=10;endline=49;md5=54187d50b29429abee6095fe8b7c1a78"
 
