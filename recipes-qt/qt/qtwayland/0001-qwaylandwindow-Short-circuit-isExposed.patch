@@ -1,0 +1,39 @@
+From f7fdce7a47e717107385408de1eae3b723e4d53c Mon Sep 17 00:00:00 2001
+From: Marius Vlad <marius.vlad@collabora.com>
+Date: Mon, 25 Apr 2022 16:34:18 +0300
+Subject: [PATCH] qwaylandwindow: Short-circuit isExposed()
+
+This patch short-circuits isExposed() to allow sending
+xdg_shell:set_window_geometry() when re-sizing the window.
+
+isExposed() depends on mFrameCallbackTimedOut begin set-up, which takes
+precedence on checking isExposed() from mShellSurface.
+
+As such, this patch allows to take into consideration the fact that
+geometry did indeed changed and requires sending a new
+set_window_geometry() request, in order to to avoid a protocol error as
+the compositor already geometry provided by the client instead of
+computing one for itself, so we need to send a new set_window_geometry()
+with newer dimensions.
+
+Signed-off-by: Marius Vlad <marius.vlad@collabora.com>
+---
+ src/client/qwaylandwindow.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
+index e875af3a..7a13e06e 100644
+--- a/src/client/qwaylandwindow.cpp
++++ b/src/client/qwaylandwindow.cpp
+@@ -365,7 +365,7 @@ void QWaylandWindow::setGeometry(const QRect &rect)
+     if (isExposed() && !mInResizeFromApplyConfigure && exposeGeometry != mLastExposeGeometry)
+         sendExposeEvent(exposeGeometry);
+ 
+-    if (mShellSurface && isExposed())
++    if (mShellSurface && (isExposed() || exposeGeometry != mLastExposeGeometry))
+         mShellSurface->setWindowGeometry(windowContentGeometry());
+ 
+     if (isOpaque() && mMask.isEmpty())
+-- 
+2.35.1
+

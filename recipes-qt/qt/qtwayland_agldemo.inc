@@ -14,5 +14,6 @@ FILESEXTRAPATHS:append := ":${THISDIR}/qtwayland"
 
 SRC_URI:append = "\
     file://0001-client-qwaylandintegration-Do-not-attempt-to-use-the.patch \
+    file://0001-qwaylandwindow-Short-circuit-isExposed.patch \
     "
 
