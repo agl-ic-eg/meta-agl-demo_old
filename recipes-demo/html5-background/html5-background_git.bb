@@ -12,7 +12,9 @@ SRC_URI = " \
   git://gerrit.automotivelinux.org/gerrit/apps/html5-background;protocol=https;branch=master \
   file://webapps-html5-background.desktop \
 "
-SRCREV = "7b796408f4ee1ca1b92a02445513d939079af46e"
+SRCREV = "e91be225127ddea6be3ddae5cb35e88c2f0aafb8"
+
+inherit pythonnative
 
 DEPENDS = "nodejs-native"
 
@@ -33,9 +35,9 @@ do_install() {
   install ${WORKDIR}/webapps-html5-background.desktop ${D}${APPLICATIONS_DIR}
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
   ${WAM_APPLICATIONS_DIR}/${PN} \
   ${APPLICATIONS_DIR} \
 "
 
-RCONFLICTS_${PN} = "homescreen"
+RCONFLICTS:${PN} = "homescreen"

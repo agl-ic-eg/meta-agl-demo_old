@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "\
 
 require gn-utils.inc
 
-inherit gettext qemu pythonnative
+inherit gettext qemu pythonnative pkgconfig
 
 DEPENDS = "virtual/gettext wayland wayland-native pixman freetype glib-2.0 fontconfig openssl pango cairo icu libxkbcommon libexif dbus pciutils udev libcap alsa-lib virtual/egl elfutils-native libdrm atk at-spi2-atk gperf-native gconf nss nss-native nspr nspr-native bison-native qemu-native curl"
 
@@ -42,19 +42,12 @@ TARGET = "${WEBRUNTIME_BUILD_TARGET} ${BROWSER_APP_BUILD_TARGET}"
 # Skip do_install:append of webos_system_bus. It is not compatible with this component.
 WEBOS_SYSTEM_BUS_FILES_LOCATION = "${S}/files/sysbus"
 
-PACKAGECONFIG ?= "use-upstream-wayland"
-
 PACKAGECONFIG[lttng] = "use_lttng=true,use_lttng=false,lttng-ust,lttng-tools lttng-modules babeltrace"
 
 # Chromium can use v4l2 device for hardware accelerated video decoding on such boards as Renesas R-car M3, for example.
 # In case of R-car m3, additional patches are required for gstreamer and v4l2apps.
 # See https://github.com/igel-oss/meta-browser-hwdecode/tree/igalia-chromium71.
 PACKAGECONFIG[use-linux-v4l2] = "use_v4l2_codec=true use_v4lplugin=true use_linux_v4l2_only=true"
-
-PACKAGECONFIG[use-upstream-wayland] = " \
-    ozone_platform_wayland_external=false ozone_platform_wayland=true, \
-    ozone_platform_wayland_external=true ozone_platform_wayland=false \
-"
 
 # Options to enable debug build. Add this PACKAGECONFIG to local.conf
 # to enable debug build. By default debug is completely disabled to

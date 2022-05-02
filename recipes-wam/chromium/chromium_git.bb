@@ -8,7 +8,7 @@ SRC_URI = "\
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium91 = "2c7cb6949542f7e16b2ffc64b4300ccc4212392b"
+SRCREV_chromium91 = "d052051b3b8696183322f0d21c911dbbf207a8ab"
 SRCREV_v8 = "b958ec542dcb086f422a1216a959be38a4cc0339"
 
 CHROMIUM_VERSION = "91.0.4472.114"
@@ -63,6 +63,10 @@ GN_ARGS += "\
 "
 
 GN_ARGS:append = " \
+  ozone_platform_wayland_external=false \
+  ozone_platform_wayland=true \
+  use_system_libwayland=true \
+  use_system_wayland_scanner=false \
   use_system_minigbm=false \
   use_wayland_gbm=false \
 "

@@ -12,7 +12,9 @@ SRC_URI = " \
   git://gerrit.automotivelinux.org/gerrit/apps/html5-homescreen;protocol=https;branch=master \
   file://homescreen.service \
 "
-SRCREV = "5c9e060c508ab5ea49241d3a88f86075d6dc39cf"
+SRCREV = "fc0ffa4c45d3a6ec6ad8cc9b939ef6c9dd2e7eaf"
+
+inherit pythonnative
 
 DEPENDS = "nodejs-native"
 
@@ -33,10 +35,10 @@ do_install() {
   ln -s ../homescreen.service ${D}${systemd_user_unitdir}/agl-session.target.wants/homescreen.service
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
   ${WAM_APPLICATIONS_DIR}/${PN} \
   ${systemd_user_unitdir} \
 "
 
-RCONFLICTS_${PN} = "homescreen"
-RDEPENDS_${PN} = "applaunchd html5-background"
+RCONFLICTS:${PN} = "homescreen"
+RDEPENDS:${PN} = "applaunchd html5-background"

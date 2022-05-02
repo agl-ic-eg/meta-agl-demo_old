@@ -3,7 +3,7 @@ AUTHOR = "Jani Hautakangas <jani.hautakangas@lge.com>"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-inherit cmake
+inherit cmake pkgconfig
 
 DEPENDS = "glib-2.0 jsoncpp boost chromium protobuf protobuf-native libxml2"
 
@@ -30,7 +30,7 @@ SRC_URI = "\
     file://WebAppMgr.env \
 "
 S = "${WORKDIR}/git"
-SRCREV = "692f706b8794b093035915bc401576c55a6e03fc"
+SRCREV = "31840bc2867fe7ad8a07bd0a4cbd2dc135a05fb2"
 
 PV = "ose57.agl"
 

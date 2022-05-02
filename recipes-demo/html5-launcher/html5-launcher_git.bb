@@ -12,7 +12,9 @@ SRC_URI = " \
   git://gerrit.automotivelinux.org/gerrit/apps/html5-launcher;protocol=https;branch=master \
   file://launcher.desktop \
 "
-SRCREV = "cb6b66c3bd94a6ab18cad3ad87c827d4f7e623e9"
+SRCREV = "1283e3bddd4655be0d5208fbbcd9535f8f1ff0f6"
+
+inherit pythonnative
 
 DEPENDS = "nodejs-native"
 
@@ -33,10 +35,10 @@ do_install() {
   install ${WORKDIR}/launcher.desktop ${D}${APPLICATIONS_DIR}
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
   ${WAM_APPLICATIONS_DIR}/${PN} \
   ${APPLICATIONS_DIR} \
 "
 
-RCONFLICTS_${PN} = "launcher"
-RDEPENDS_${PN} = "applaunchd"
+RCONFLICTS:${PN} = "launcher"
+RDEPENDS:${PN} = "applaunchd"

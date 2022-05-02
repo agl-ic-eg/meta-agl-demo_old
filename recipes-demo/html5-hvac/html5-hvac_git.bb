@@ -12,7 +12,9 @@ SRC_URI = " \
   git://gerrit.automotivelinux.org/gerrit/apps/html5-hvac;protocol=https;branch=master \
   file://webapps-hvac.desktop \
 "
-SRCREV = "e64d69bdad0bb302900ec631b54ad6b6d6dcbacd"
+SRCREV = "6abbe876aee09b225af9329e28b4fa2cc4d4c220"
+
+inherit pythonnative
 
 DEPENDS = "nodejs-native"
 
@@ -33,7 +35,7 @@ do_install() {
   install ${WORKDIR}/webapps-hvac.desktop ${D}${APPLICATIONS_DIR}
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
   ${WAM_APPLICATIONS_DIR}/${PN} \
   ${APPLICATIONS_DIR} \
 "
