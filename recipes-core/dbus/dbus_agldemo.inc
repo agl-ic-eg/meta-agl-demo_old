@@ -16,8 +16,8 @@ do_install:append() {
 
             # Execute these manually on behalf of systemctl script (from systemd-systemctl-native.bb)
             # because it does not support systemd's user mode.
-            mkdir -p ${D}/etc/systemd/user/default.target.wants/
-            ln -sf ${systemd_user_unitdir}/dbus.socket ${D}/etc/systemd/user/default.target.wants/dbus.socket
+            mkdir -p ${D}${sysconfdir}/systemd/user/default.target.wants/
+            ln -sf ${systemd_user_unitdir}/dbus.socket ${D}${sysconfdir}/systemd/user/default.target.wants/dbus.socket
         fi
     fi
 }

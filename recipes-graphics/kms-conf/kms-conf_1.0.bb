@@ -7,6 +7,6 @@ SRC_URI = " \
 "
 
 do_install:append() {
-    install -d ${D}/etc
-    install -m 644 ${WORKDIR}/kms.conf ${D}/etc
+    install -d ${D}${sysconfdir}
+    install -m 644 ${WORKDIR}/kms.conf ${D}${sysconfdir}
 }
