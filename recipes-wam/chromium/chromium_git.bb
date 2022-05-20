@@ -16,10 +16,6 @@ PV_BRANCH_SUFFIX = "ose11.agl"
 
 PV = "${CHROMIUM_VERSION}.${PV_BRANCH_SUFFIX}+git"
 
-BROWSER_APPLICATION = "chromium-browser"
-BROWSER_APPLICATION_DIR = "/opt/chromium"
-MKSNAPSHOT_PATH = "v8_snapshot/"
-
 GN_ARGS += "use_gtk=false"
 
 # Disable closure compile

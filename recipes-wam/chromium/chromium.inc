@@ -16,8 +16,6 @@ inherit gettext qemu pythonnative pkgconfig
 
 DEPENDS = "virtual/gettext wayland wayland-native pixman freetype glib-2.0 fontconfig openssl pango cairo icu libxkbcommon libexif dbus pciutils udev libcap alsa-lib virtual/egl elfutils-native libdrm atk at-spi2-atk gperf-native gconf nss nss-native nspr nspr-native bison-native qemu-native curl"
 
-PROVIDES = "${BROWSER_APPLICATION}"
-
 SRCREV_v8 = "1e3af71f1ff3735e8a5b639c48dfca63a7b8a647"
 
 # we don't include SRCPV in PV, so we have to manually include SRCREVs in do_fetch vardeps
@@ -33,11 +31,8 @@ B = "${WORKDIR}/build"
 OUT_DIR = "${B}/${BUILD_TYPE}"
 
 WEBRUNTIME_BUILD_TARGET = "webos:weboswebruntime"
-BROWSER_APP_BUILD_TARGET = "chrome"
-BROWSER_APPLICATION = "chromium-browser"
-BROWSER_APPLICATION_DIR = "/opt/chromium"
 
-TARGET = "${WEBRUNTIME_BUILD_TARGET} ${BROWSER_APP_BUILD_TARGET}"
+TARGET = "${WEBRUNTIME_BUILD_TARGET}"
 
 # Skip do_install:append of webos_system_bus. It is not compatible with this component.
 WEBOS_SYSTEM_BUS_FILES_LOCATION = "${S}/files/sysbus"
@@ -66,7 +61,7 @@ GN_ARGS = "\
     use_x11=false\
     is_agl=true\
     use_cbe=true\
-    is_chrome_cbe=true\
+    is_chrome_cbe=false\
     is_component_build=false\
     use_cups=false\
     use_custom_libcxx=false\
@@ -209,36 +204,6 @@ configure_env() {
 
 WINDOW_SIZE ?= "1920,1080"
 
-configure_browser_settings() {
-    USER_AGENT="Mozilla/5.0 (Linux; NetCast; U) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/${CHROMIUM_VERSION} Safari/537.31"
-    echo "${USER_AGENT}" > ${D_DIR}/user_agent_conf
-    #We can replace below WINDOW_SIZE values from build configuration if available
-    #echo "${WINDOW_SIZE}" > ${D_DIR}/window_size_conf
-}
-
-install_chromium_browser() {
-    # Install browser files
-    ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR} webos/install/default_browser
-
-    D_DIR=${D}${BROWSER_APPLICATION_DIR}
-    L_DIR=${D}${CBE_DATA_PATH}
-    install -d ${D_DIR}
-    install -d ${L_DIR}
-
-    cp -R --no-dereference --preserve=mode,links -v ${OUT_DIR}/image/${BROWSER_APPLICATION_DIR}/* ${D_DIR}
-
-    # AGL does not have PMLOG
-    sed -i.bak s/PmLogCtl.*// ${D_DIR}/run_webbrowser
-
-    # To execute chromium in JAILER, Security Part needs permissions change
-    # run_webbrowser: Script file for launching chromium
-    chmod -v 755 ${D_DIR}/chrome
-    chmod -v 755 ${D_DIR}/kill_webbrowser
-    chmod -v 755 ${D_DIR}/run_webbrowser
-
-    configure_browser_settings
-}
-
 install_webruntime() {
 
     # # Generate install webos webview files
@@ -249,10 +214,6 @@ install_webruntime() {
     # # Rename include and locale directories
     # mv ${D}${includedir}/webruntime ${D}${includedir}/${BPN}
     # mv ${D}${CBE_DATA_PATH}/neva_locales ${D}${CBE_DATA_LOCALES_PATH}
-
-    # # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
-    # install -d ${D}${bindir_cross}
-    # gzip -c ${OUT_DIR}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${bindir_cross}/${HOST_SYS}-mksnapshot.gz
 
     install -d ${D}${libdir}
     install -d ${D}${libdir}/swiftshader
@@ -278,56 +239,24 @@ install_webruntime() {
     chown root:root -R ${D}${libdir}
     chown root:root -R ${D}${includedir}
     chown root:root -R ${D}${CBE_DATA_LOCALES_PATH}
-
-    # move this to separate mksnapshot-cross recipe once we figure out how to build just cross mksnapshot from chromium repository
-    install -d ${D}${base_bindir}
-    gzip -c ${OUT_DIR}/${MKSNAPSHOT_PATH}mksnapshot > ${D}${base_bindir}/${HOST_SYS}-mksnapshot.gz
-
 }
 
 do_install() {
     install_webruntime
-    install_chromium_browser
 }
-
-WEBOS_SYSTEM_BUS_DIRS_LEGACY_BROWSER_APPLICATION = " \
-    ${webos_sysbus_prvservicesdir}/${BROWSER_APPLICATION}.service \
-    ${webos_sysbus_pubservicesdir}/${BROWSER_APPLICATION}.service \
-    ${webos_sysbus_prvrolesdir}/${BROWSER_APPLICATION}.json \
-    ${webos_sysbus_pubrolesdir}/${BROWSER_APPLICATION}.json \
-"
 
 SYSROOT_DIRS:append = " ${bindir_cross}"
 
-PACKAGES:prepend = " \
-    ${PN}-cross-mksnapshot \
-    ${BROWSER_APPLICATION} \
-"
-
-FILES:${BROWSER_APPLICATION} += " \
-    ${BROWSER_APPLICATION_DIR} \
-    ${WEBOS_SYSTEM_BUS_DIRS_LEGACY_BROWSER_APPLICATION} \
-"
-
-RDEPENDS:${BROWSER_APPLICATION} += "${PN}"
-
 VIRTUAL-RUNTIME_gpu-libs ?= ""
 RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"
-
-# The text relocations are intentional -- see comments in [GF-52468]
-# TODO: check if we need INSANE_SKIP on ldflags
-INSANE_SKIP:${BROWSER_APPLICATION} += "libdir ldflags textrel"
 
 FILES:${PN} = " \
     ${libdir}/*.so \
     ${libdir}/swiftshader/*.so \
     ${CBE_DATA_PATH}/* \
     ${libdir}/${BPN}/*.so \
-    ${WEBOS_SYSTEM_BUS_DIRS} \
 "
 
 FILES:${PN}-dev = " \
     ${includedir} \
 "
-
-FILES:${PN}-cross-mksnapshot = "${bindir_cross}/${HOST_SYS}-mksnapshot.gz"
