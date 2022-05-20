@@ -1,6 +1,6 @@
 SUMMARY     = "AGL Launcher Application"
 DESCRIPTION = "AGL Launcher Application build with recipe method"
-HOMEPAGE    = "https://gerrit.automotivelinux.org/gerrit/apps/launcher"
+HOMEPAGE    = "https://git.automotivelinux.org/apps/launcher"
 SECTION     = "apps"
 LICENSE     = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
