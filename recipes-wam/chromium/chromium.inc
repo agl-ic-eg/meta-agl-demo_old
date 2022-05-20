@@ -99,6 +99,11 @@ GN_ARGS += "use_thin_lto=false"
 # let Yocto handle everything.
 GN_ARGS += "use_sysroot=false"
 
+# Reduce the size of the build by removing swiftshader and dawn.
+# This will effectively block support for WebGPU.
+# TODO(jdapena): reenable WebGPU support
+GN_ARGS += "use_swiftshader=false enable_swiftshader_vulkan=false use_dawn=false"
+
 # ARM builds need special additional flags (see ${S}/build/config/arm.gni).
 # If we do not pass |arm_arch| and friends to GN, it will deduce a value that
 # will then conflict with TUNE_CCARGS and CC.
@@ -216,7 +221,7 @@ install_webruntime() {
     # mv ${D}${CBE_DATA_PATH}/neva_locales ${D}${CBE_DATA_LOCALES_PATH}
 
     install -d ${D}${libdir}
-    install -d ${D}${libdir}/swiftshader
+    # install -d ${D}${libdir}/swiftshader
     install -d ${D}${includedir}/${BPN}
     install -d ${D}${CBE_DATA_PATH}
     install -d ${D}${CBE_DATA_LOCALES_PATH}
@@ -224,7 +229,7 @@ install_webruntime() {
     # Install webos webview files
     ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR} webos/install/weboswebruntime
 
-    install -v -m 0644 ${OUT_DIR}/swiftshader/*.so ${D}${libdir}/swiftshader
+    # install -v -m 0644 ${OUT_DIR}/swiftshader/*.so ${D}${libdir}/swiftshader
 
     cp -R --no-dereference --preserve=mode,links -v ${OUT_DIR}/image/${includedir}/${BPN}/* ${D}${includedir}/${BPN}/
     install -v -m 0644 ${OUT_DIR}/image/${libdir}/*.so ${D}${libdir}
@@ -252,7 +257,6 @@ RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"
 
 FILES:${PN} = " \
     ${libdir}/*.so \
-    ${libdir}/swiftshader/*.so \
     ${CBE_DATA_PATH}/* \
     ${libdir}/${BPN}/*.so \
 "
