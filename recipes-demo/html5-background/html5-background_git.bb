@@ -18,6 +18,7 @@ inherit pythonnative
 
 DEPENDS = "nodejs-native"
 
+do_compile[network] = "1"
 do_compile() {
   cd ${S}
   rm -rf package node_modules package-lock.json
