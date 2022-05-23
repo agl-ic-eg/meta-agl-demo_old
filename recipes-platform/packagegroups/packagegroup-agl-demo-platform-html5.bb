@@ -30,7 +30,7 @@ RDEPENDS:${PN}:append = " \
 
 # TODO(jdapena): replace this with HTML5 apps.
 AGL_APPS = " \
-    dashboard \
+    html5-dashboard \
     html5-launcher \
     html5-homescreen \
     html5-hvac \
