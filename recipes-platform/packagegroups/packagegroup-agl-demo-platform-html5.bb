@@ -34,6 +34,7 @@ AGL_APPS = " \
     html5-launcher \
     html5-homescreen \
     html5-hvac \
+    html5-mediaplayer \
     ondemandnavi \
     html5-settings \
     "
