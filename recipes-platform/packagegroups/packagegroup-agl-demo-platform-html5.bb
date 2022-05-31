@@ -27,6 +27,7 @@ AGL_APPS = " \
     html5-settings \
     html5-aquarium \
     html5-youtube \
+    html5-jitsi \
     "
 
 RDEPENDS:${PN}:append = " \
