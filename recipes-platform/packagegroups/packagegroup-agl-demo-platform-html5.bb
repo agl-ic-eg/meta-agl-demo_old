@@ -35,7 +35,7 @@ AGL_APPS = " \
     html5-homescreen \
     html5-hvac \
     ondemandnavi \
-    settings \
+    html5-settings \
     "
 
 # TODO(jdapena): review if we still need the demo-i2c stuff.

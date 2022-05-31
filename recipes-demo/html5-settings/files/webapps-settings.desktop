@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=HTML5 Settings
+Comment=Settings
+GenericName=Settings
+Exec=/usr/bin/WebAppMgr --appid=webapps-settings --app-install-dir=/usr/lib/wam_apps/html5-settings/
+Icon=settings
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=true
