@@ -19,8 +19,10 @@ PV = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-cluster-demo-dashboard;protocol=https;branch=${AGL_BRANCH} \
            file://cluster-dashboard.service \
+           file://cluster-dashboard.conf \
+           file://cluster-dashboard.token \
 "
-SRCREV  = "00fa784cdb2570f742511820b885b1c3e18b6d01"
+SRCREV  = "c5115f91d0bf432b3dca32c652bd6fc330b6d7d5"
 
 S  = "${WORKDIR}/git"
 
@@ -30,6 +32,14 @@ do_install:append() {
     install -d ${D}${systemd_user_unitdir}/agl-session.target.wants
     install -m 0644 ${WORKDIR}/${BPN}.service ${D}${systemd_user_unitdir}/${BPN}.service
     ln -s ../${BPN}.service ${D}${systemd_user_unitdir}/agl-session.target.wants/${BPN}.service
+
+    # VIS authorization token file for KUKSA.val should ideally not
+    # be readable by other users, but currently that's not doable
+    # until a packaging/sandboxing/MAC scheme is (re)implemented or
+    # something like OAuth is plumbed in as an alternative.
+    install -d ${D}${sysconfdir}/xdg/AGL/cluster-dashboard
+    install -m 0644 ${WORKDIR}/cluster-dashboard.conf ${D}${sysconfdir}/xdg/AGL/
+    install -m 0644 ${WORKDIR}/cluster-dashboard.token ${D}${sysconfdir}/xdg/AGL/cluster-dashboard/
 }
 
 FILES:${PN} += " ${systemd_user_unitdir}"
@@ -43,4 +53,5 @@ RDEPENDS:${PN} += " \
     qtquickcontrols2-qmlplugins \
     qtgraphicaleffects-qmlplugins \
     qtsvg-plugins \
+    kuksa-val-client-certificates \
 "

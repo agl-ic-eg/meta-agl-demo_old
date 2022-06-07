@@ -9,16 +9,33 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ae6497158920d9524cf208c09cc4c984"
 DEPENDS = " \
     qttools-native \
     qtquickcontrols2 \
+    libqtappfw \
 "
 
 PV = "2.0+git${SRCPV}"
 
-SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/dashboard;protocol=https;branch=${AGL_BRANCH}"
-SRCREV  = "3fc84a0a674fa532f6aded100cf2beb3d0cf1f83"
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/dashboard;protocol=https;branch=${AGL_BRANCH} \
+           file://dashboard.conf \
+           file://dashboard.token \
+"
+SRCREV  = "4efe67714e60e2ab86acf1edee500373f6820954"
 
 S = "${WORKDIR}/git"
 
 inherit qmake5 pkgconfig
+
+do_install:append() {
+    # Currently using default global client and CA certificates
+    # for KUKSA.val SSL, installing app specific ones would go here.
+
+    # VIS authorization token file for KUKSA.val should ideally not
+    # be readable by other users, but currently that's not doable
+    # until a packaging/sandboxing/MAC scheme is (re)implemented or
+    # something like OAuth is plumbed in as an alternative.
+    install -d ${D}${sysconfdir}/xdg/AGL/dashboard
+    install -m 0644 ${WORKDIR}/dashboard.conf ${D}${sysconfdir}/xdg/AGL/
+    install -m 0644 ${WORKDIR}/dashboard.token ${D}${sysconfdir}/xdg/AGL/dashboard/
+}
 
 FILES:${PN} += "${datadir}/icons/"
 
