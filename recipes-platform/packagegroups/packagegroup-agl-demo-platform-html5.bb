@@ -36,7 +36,6 @@ AGL_APPS = " \
     html5-hvac \
     html5-mediaplayer \
     html5-mixer \
-    ondemandnavi \
     html5-settings \
     "
 
