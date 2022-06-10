@@ -8,11 +8,11 @@ SRC_URI = "\
 # Needed by catapult
 DEPENDS += "python-six-native python-beautifulsoup4-native python-lxml-native python-html5lib-native python-webencodings-native"
 
-SRCREV_chromium91 = "d052051b3b8696183322f0d21c911dbbf207a8ab"
+SRCREV_chromium91 = "9d9fbef68a215595ea6f8b18eb9f2a80b0927e88"
 SRCREV_v8 = "b958ec542dcb086f422a1216a959be38a4cc0339"
 
 CHROMIUM_VERSION = "91.0.4472.114"
-PV_BRANCH_SUFFIX = "ose11.agl"
+PV_BRANCH_SUFFIX = "ose17.agl"
 
 PV = "${CHROMIUM_VERSION}.${PV_BRANCH_SUFFIX}+git"
 

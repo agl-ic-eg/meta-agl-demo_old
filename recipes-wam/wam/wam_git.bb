@@ -30,9 +30,9 @@ SRC_URI = "\
     file://WebAppMgr.env \
 "
 S = "${WORKDIR}/git"
-SRCREV = "31840bc2867fe7ad8a07bd0a4cbd2dc135a05fb2"
+SRCREV = "491dcd13a2d57ba57cfcdc333b5d2d8e17cdc65e"
 
-PV = "ose57.agl"
+PV = "ose58.agl"
 
 do_install:append() {
     install -v -d ${D}${sysconfdir}/wam
