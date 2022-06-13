@@ -1,7 +1,7 @@
 require chromium.inc
 
 SRC_URI = "\
-    git://github.com/igalia/chromium91;branch=@11.agl;protocol=https;rev=${SRCREV_chromium91};name=chromium91 \
+    git://github.com/igalia/chromium91;branch=@17.agl;protocol=https;rev=${SRCREV_chromium91};name=chromium91 \
     git://github.com/webosose/chromium-v8;branch=@chromium91;destsuffix=git/src/v8;rev=${SRCREV_v8};name=v8;protocol=https \
 "
 

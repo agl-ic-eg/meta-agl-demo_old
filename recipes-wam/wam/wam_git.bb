@@ -25,7 +25,7 @@ lcl_maybe_fortify = ""
 SECURITY_STACK_PROTECTOR = ""
 
 SRC_URI = "\
-    git://github.com/igalia/${BPN}.git;branch=@57.agl;protocol=https \
+    git://github.com/igalia/${BPN}.git;branch=@58.agl;protocol=https \
     file://WebAppMgr.service \
     file://WebAppMgr.env \
 "
