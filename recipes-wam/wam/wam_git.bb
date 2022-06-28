@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 inherit cmake pkgconfig
 
-DEPENDS = "glib-2.0 jsoncpp boost chromium protobuf protobuf-native libxml2"
+DEPENDS = "glib-2.0 jsoncpp boost chromium protobuf protobuf-native grpc grpc-native"
 
 EXTRA_OECMAKE = "\
     -DCMAKE_BUILD_TYPE=Release \
@@ -30,7 +30,7 @@ SRC_URI = "\
     file://WebAppMgr.env \
 "
 S = "${WORKDIR}/git"
-SRCREV = "491dcd13a2d57ba57cfcdc333b5d2d8e17cdc65e"
+SRCREV = "8ea41f7b59b52ef005f6f932e3335bfd137aa5fa"
 
 PV = "ose58.agl"
 
