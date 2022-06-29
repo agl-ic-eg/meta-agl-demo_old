@@ -15,7 +15,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/radio;protocol=https;bra
            file://presets-CES.conf \
            file://presets-FOSDEM.conf \
 "
-SRCREV  = "${AGL_APP_REVISION}"
+SRCREV  = "f48bb2aab34273bd5b3cc1f9f9d88afbfb231d6b"
 
 S  = "${WORKDIR}/git"
 

@@ -23,7 +23,7 @@ PV = "1.0+git${SRCPV}"
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/homescreen;protocol=https;branch=${AGL_BRANCH} \
            file://homescreen.service \
 "
-SRCREV = "${AGL_APP_REVISION}"
+SRCREV = "c35327b02a28a83536450a664326d183662e89e1"
 
 S = "${WORKDIR}/git"
 

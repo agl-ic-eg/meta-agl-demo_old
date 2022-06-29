@@ -11,7 +11,7 @@ DEPENDS = "qtquickcontrols2 libqtappfw"
 PV = "2.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/mediaplayer;protocol=https;branch=${AGL_BRANCH}"
-SRCREV  = "${AGL_APP_REVISION}"
+SRCREV  = "d53efa6bca224f2c6bec8e7b14b1dff7f12a2d03"
 
 S  = "${WORKDIR}/git"
 

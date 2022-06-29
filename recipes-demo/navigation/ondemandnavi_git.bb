@@ -11,7 +11,7 @@ DEPENDS = "qtquickcontrols2 qtlocation libqtappfw"
 PV = "2.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/ondemandnavi;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "${AGL_APP_REVISION}"
+SRCREV = "1593664d2f17ab563c7ad81215696b1ac6a3bd7b"
 
 S = "${WORKDIR}/git"
 

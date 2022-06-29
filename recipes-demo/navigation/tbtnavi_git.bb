@@ -23,7 +23,7 @@ DEPENDS = " \
 PV = "2.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/tbtnavi;protocol=https;branch=${AGL_BRANCH}"
-SRCREV = "${AGL_APP_REVISION}"
+SRCREV = "70dfe121582cda2c82c794e5af6550b5c1a237c4"
 
 S = "${WORKDIR}/git"
 

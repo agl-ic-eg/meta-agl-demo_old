@@ -11,7 +11,7 @@ DEPENDS = "qtquickcontrols2 libqtappfw gstreamer1.0"
 PV = "1.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/phone;protocol=https;branch=${AGL_BRANCH}"
-SRCREV  = "${AGL_APP_REVISION}"
+SRCREV  = "bfcc2fa194474a7bc317583072b62c977ae0fc14"
 
 S = "${WORKDIR}/git"
 

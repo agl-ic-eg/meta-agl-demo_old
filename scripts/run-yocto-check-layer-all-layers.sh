@@ -20,7 +20,7 @@ AGL_EXTRA_IMAGE_FSTYPES ?= ""
 
 # important settings imported from poky-agl.conf
 # we do not import 
-DISTRO_FEATURES:append = " systemd smack"
+DISTRO_FEATURES:append = " systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " sysvinit"
 VIRTUAL-RUNTIME_init_manager = "systemd"
 #AGL_FEATURES += "aglcore agldemo"
@@ -29,13 +29,6 @@ VIRTUAL-RUNTIME_init_manager = "systemd"
 # workaround:
 #ERROR: Nothing RPROVIDES 'qtwebengine-qmlplugins' (but /home/dl9pf/AGL/master-newlayout/external/meta-qt5/recipes-qt/qt5/qt5-creator_git.bb RDEPENDS on or otherwise requires it)
 BBMASK += "meta-qt5/recipes-qt/qt5/qt5-creator_git.bb"
-#ERROR: Nothing RPROVIDES 'python' (but /home/dl9pf/AGL/master-newlayout/external/meta-security/recipes-mac/smack/smack-test_1.0.bb RDEPENDS on or otherwise requires it)
-BBMASK += "meta-security/recipes-mac/smack/smack-test_1.0.bb"
-
-# missing in upstream recipes ... aka FIXME upstream
-BBCLASSEXTEND:pn-libzip = "native nativesdk"
-BBCLASSEXTEND:pn-xmlsec1 = "native nativesdk"
-AGL_APP_REVISION = "${AUTOREV}"
 
 EOF
 

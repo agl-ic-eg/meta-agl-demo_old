@@ -14,7 +14,7 @@ DEPENDS = " \
 PV = "2.0+git${SRCPV}"
 
 SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/dashboard;protocol=https;branch=${AGL_BRANCH}"
-SRCREV  = "${AGL_APP_REVISION}"
+SRCREV  = "3fc84a0a674fa532f6aded100cf2beb3d0cf1f83"
 
 S = "${WORKDIR}/git"
 
