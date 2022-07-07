@@ -31,6 +31,12 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/presets-${AGL_RADIO_PRESETS_LOCALE}.conf ${D}${sysconfdir}/xdg/AGL/radio-presets.conf
 }
 
+# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
+do_install:append() {
+    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/radio.desktop
+    echo "DBusActivatable=true" >> ${D}${datadir}/applications/radio.desktop
+}
+
 FILES:${PN} += "${sysconfdir}/xdg/AGL/* ${datadir}/icons/"
 
 RDEPENDS:${PN} += "libqtappfw"

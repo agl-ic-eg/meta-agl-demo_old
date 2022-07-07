@@ -39,6 +39,12 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/hvac.token ${D}${sysconfdir}/xdg/AGL/hvac/
 }
 
+# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
+do_install:append() {
+    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/hvac.desktop
+    echo "DBusActivatable=true" >> ${D}${datadir}/applications/hvac.desktop
+}
+
 FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += " \

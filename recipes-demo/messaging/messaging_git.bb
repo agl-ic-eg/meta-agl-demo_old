@@ -17,6 +17,12 @@ S  = "${WORKDIR}/git"
 
 inherit qmake5 pkgconfig
 
+# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
+do_install:append() {
+    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/messaging.desktop
+    echo "DBusActivatable=true" >> ${D}${datadir}/applications/messaging.desktop
+}
+
 FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += "libqtappfw"

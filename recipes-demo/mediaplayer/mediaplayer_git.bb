@@ -33,6 +33,12 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/mediaplayer.token ${D}${sysconfdir}/xdg/AGL/mediaplayer/
 }
 
+# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
+do_install:append() {
+    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/mediaplayer.desktop
+    echo "DBusActivatable=true" >> ${D}${datadir}/applications/mediaplayer.desktop
+}
+
 FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += "libqtappfw mpd"

@@ -37,6 +37,12 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/dashboard.token ${D}${sysconfdir}/xdg/AGL/dashboard/
 }
 
+# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
+do_install:append() {
+    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/dashboard.desktop
+    echo "DBusActivatable=true" >> ${D}${datadir}/applications/dashboard.desktop
+}
+
 FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += " \
