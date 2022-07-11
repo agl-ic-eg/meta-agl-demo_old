@@ -9,6 +9,8 @@ DEPENDS = "python3-setuptools-git-versioning-native"
 
 require kuksa-val.inc
 
+SRC_URI += "file://0001-kuksa_viss_client-fix-SSL-context-creation.patch"
+
 inherit setuptools3
 
 RDEPENDS:${PN} += " \

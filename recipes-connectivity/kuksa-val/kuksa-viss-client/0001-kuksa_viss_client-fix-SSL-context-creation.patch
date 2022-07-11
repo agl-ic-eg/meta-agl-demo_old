@@ -1,0 +1,36 @@
+From ad534490eb71b16dfe53a6fced6267f0ea58b939 Mon Sep 17 00:00:00 2001
+From: Scott Murray <scott.murray@konsulko.com>
+Date: Mon, 11 Jul 2022 16:04:11 -0400
+Subject: [PATCH] kuksa_viss_client: fix SSL context creation
+
+With the newer Python and OpenSSL in Yocto kirkstone, specifying
+ssl.Purpose.CLIENT_AUTH when creating the SSL context for the
+connection results in the error:
+
+  Cannot create a client socket with a PROTOCOL_TLS_SERVER context
+
+when trying to connect to a server with the client library.  The fix
+is to instead use ssl.Purpose.SERVER_AUTH, since the context will be
+used by the client to validate the server certificate.
+
+Signed-off-by: Scott Murray <scott.murray@konsulko.com>
+---
+ kuksa_viss_client/__init__.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kuksa_viss_client/__init__.py b/kuksa_viss_client/__init__.py
+index 69cc996..df7a540 100644
+--- a/kuksa_viss_client/__init__.py
++++ b/kuksa_viss_client/__init__.py
+@@ -227,7 +227,7 @@ class KuksaClientThread(threading.Thread):
+ 
+     async def mainLoop(self):
+         if not self.insecure:
+-            context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
++            context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+             context.load_cert_chain(certfile=self.certificate, keyfile=self.keyfile)
+             context.load_verify_locations(cafile=self.cacertificate)
+             try:
+-- 
+2.35.3
+
