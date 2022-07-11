@@ -18,6 +18,9 @@ SRC_URI += "file://kuksa-val.service \
             file://0002-Fix-gRPC-configuration-for-OE-cross-compiling.patch \
             file://0003-Make-install-locations-configurable.patch \
             file://0004-Disable-default-fetch-and-build-of-googletest.patch \
+            file://0001-genCerts.sh-add-Subject-Alt-Name-extension-to-server.patch \
+            file://Server.key \
+            file://Server.pem \
 "
 
 inherit cmake pkgconfig systemd useradd
@@ -47,6 +50,17 @@ do_install:append() {
         install -d ${D}${systemd_system_unitdir}
         install -m 0644 ${WORKDIR}/kuksa-val.service ${D}${systemd_system_unitdir}
     fi
+
+    # Install replacement server key + certificate
+    # These are AGL specific versions generated using a tweaked
+    # genCerts.sh script from the source tree that adds the now
+    # required subjectAltName extension field to make python3-ssl
+    # happy.  This will be addressed with upstream and can hopefully
+    # be dropped in the future.
+    rm -f ${D}${sysconfdir}/kuksa-val/Server.key
+    install ${WORKDIR}/Server.key ${D}${sysconfdir}/kuksa-val/
+    rm -f ${D}${sysconfdir}/kuksa-val/Server.pem
+    install ${WORKDIR}/Server.pem ${D}${sysconfdir}/kuksa-val/
 
     # Restrict server certificate access
     # NOTE: The client certificates are left alone here for client
