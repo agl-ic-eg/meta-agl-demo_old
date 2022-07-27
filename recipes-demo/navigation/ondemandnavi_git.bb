@@ -18,7 +18,10 @@ SRCREV = "1a014832f3da70e413650e0eeb4f40e598feb257"
 
 S = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
+
+AGL_APP_ID = "navigation"
+AGL_APP_NAME = "Navigation"
 
 do_install:append() {
     # Currently using default global client and CA certificates
@@ -32,14 +35,6 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/navigation.conf ${D}${sysconfdir}/xdg/AGL/
     install -m 0644 ${WORKDIR}/navigation.token ${D}${sysconfdir}/xdg/AGL/navigation/
 }
-
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/navigation.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/navigation.desktop
-}
-
-FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += " \
     qtlocation \

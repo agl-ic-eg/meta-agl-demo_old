@@ -15,14 +15,8 @@ SRCREV  = "e58b0382de8e665d64b8e3486022a6bcb0572823"
 
 S  = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
 
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/messaging.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/messaging.desktop
-}
-
-FILES:${PN} += "${datadir}/icons/"
+AGL_APP_NAME = "Messaging"
 
 RDEPENDS:${PN} += "libqtappfw"

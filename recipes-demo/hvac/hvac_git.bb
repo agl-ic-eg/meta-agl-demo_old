@@ -24,7 +24,9 @@ SRCREV = "d37674bb6dbb5ceb15c650a0344b0caf624963bc"
 
 S = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
+
+AGL_APP_NAME = "HVAC"
 
 do_install:append() {
     # Currently using default global client and CA certificates
@@ -38,14 +40,6 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/hvac.conf ${D}${sysconfdir}/xdg/AGL/
     install -m 0644 ${WORKDIR}/hvac.token ${D}${sysconfdir}/xdg/AGL/hvac/
 }
-
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/hvac.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/hvac.desktop
-}
-
-FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += " \
     qtwayland \

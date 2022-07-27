@@ -10,11 +10,14 @@ B       = "${WORKDIR}/build"
 
 SRC_URI = " \
   git://gerrit.automotivelinux.org/gerrit/apps/html5-background;protocol=https;branch=master \
-  file://webapps-html5-background.desktop \
 "
 SRCREV = "e91be225127ddea6be3ddae5cb35e88c2f0aafb8"
 
-inherit pythonnative
+inherit pythonnative agl-app
+
+AGL_APP_TEMPLATE = "agl-app-web"
+AGL_APP_ID = "webapps-${BPN}"
+AGL_APP_NAME = "HTML5 Background"
 
 DEPENDS = "nodejs-native"
 
@@ -26,19 +29,13 @@ do_compile() {
   npm run build
 }
 
-WAM_APPLICATIONS_DIR="${libdir}/wam_apps"
-APPLICATIONS_DIR="${datadir}/applications"
+WAM_APPLICATIONS_DIR = "${libdir}/wam_apps"
 
 do_install() {
   install -d ${D}${WAM_APPLICATIONS_DIR}/${PN}
   cp -R --no-dereference --preserve=mode,links ${S}/dist/* ${D}${WAM_APPLICATIONS_DIR}/${PN}
-  install -d ${D}${APPLICATIONS_DIR}
-  install ${WORKDIR}/webapps-html5-background.desktop ${D}${APPLICATIONS_DIR}
 }
 
-FILES:${PN} = " \
-  ${WAM_APPLICATIONS_DIR}/${PN} \
-  ${APPLICATIONS_DIR} \
-"
+FILES:${PN} = "${WAM_APPLICATIONS_DIR}/${PN}"
 
 RCONFLICTS:${PN} = "homescreen"

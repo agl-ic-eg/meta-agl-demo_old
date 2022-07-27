@@ -15,14 +15,10 @@ SRCREV  = "bfcc2fa194474a7bc317583072b62c977ae0fc14"
 
 S = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
 
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/phone.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/phone.desktop
-}
+AGL_APP_NAME = "Phone"
 
-FILES:${PN} += "${datadir}/icons/ ${datadir}/sounds/"
+FILES:${PN} += "${datadir}/sounds/"
 
 RDEPENDS:${PN} += "libqtappfw"

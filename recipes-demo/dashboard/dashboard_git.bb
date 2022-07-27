@@ -22,7 +22,9 @@ SRCREV  = "4efe67714e60e2ab86acf1edee500373f6820954"
 
 S = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
+
+AGL_APP_NAME = "Dashboard"
 
 do_install:append() {
     # Currently using default global client and CA certificates
@@ -36,14 +38,6 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/dashboard.conf ${D}${sysconfdir}/xdg/AGL/
     install -m 0644 ${WORKDIR}/dashboard.token ${D}${sysconfdir}/xdg/AGL/dashboard/
 }
-
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/dashboard.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/dashboard.desktop
-}
-
-FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += " \
     qtwayland \

@@ -26,13 +26,13 @@ do_compile() {
   npm run build
 }
 
-WAM_APPLICATIONS_DIR="${libdir}/wam_apps"
+WAM_APPLICATIONS_DIR = "${libdir}/wam_apps"
 
 do_install() {
   install -d ${D}${WAM_APPLICATIONS_DIR}/${PN}
   cp -R --no-dereference --preserve=mode,links ${S}/dist/* ${D}${WAM_APPLICATIONS_DIR}/${PN}
   install -d ${D}${systemd_user_unitdir}/agl-session.target.wants
-  install -m0644 ${WORKDIR}/homescreen.service ${D}${systemd_user_unitdir}/homescreen.service
+  install -m 0644 ${WORKDIR}/homescreen.service ${D}${systemd_user_unitdir}/homescreen.service
   ln -s ../homescreen.service ${D}${systemd_user_unitdir}/agl-session.target.wants/homescreen.service
 }
 

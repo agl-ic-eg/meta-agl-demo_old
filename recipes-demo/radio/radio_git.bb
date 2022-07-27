@@ -19,7 +19,7 @@ SRCREV  = "f48bb2aab34273bd5b3cc1f9f9d88afbfb231d6b"
 
 S  = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
 
 # ALS, CES, FOSDEM available
 AGL_RADIO_PRESETS_LOCALE ?= "CES"
@@ -31,12 +31,6 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/presets-${AGL_RADIO_PRESETS_LOCALE}.conf ${D}${sysconfdir}/xdg/AGL/radio-presets.conf
 }
 
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/radio.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/radio.desktop
-}
-
-FILES:${PN} += "${sysconfdir}/xdg/AGL/* ${datadir}/icons/"
+FILES:${PN} += "${sysconfdir}/xdg/AGL/*"
 
 RDEPENDS:${PN} += "libqtappfw"

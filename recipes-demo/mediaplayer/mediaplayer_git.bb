@@ -18,7 +18,9 @@ SRCREV  = "9c7c1d105faeb57a5b79578318c5731d252c5414"
 
 S  = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
+
+AGL_APP_NAME = "Mediaplayer"
 
 do_install:append() {
     # Currently using default global client and CA certificates
@@ -32,13 +34,5 @@ do_install:append() {
     install -m 0644 ${WORKDIR}/mediaplayer.conf ${D}${sysconfdir}/xdg/AGL/
     install -m 0644 ${WORKDIR}/mediaplayer.token ${D}${sysconfdir}/xdg/AGL/mediaplayer/
 }
-
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/mediaplayer.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/mediaplayer.desktop
-}
-
-FILES:${PN} += "${datadir}/icons/"
 
 RDEPENDS:${PN} += "libqtappfw mpd"

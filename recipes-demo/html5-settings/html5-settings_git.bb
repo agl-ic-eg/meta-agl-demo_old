@@ -10,11 +10,14 @@ B       = "${WORKDIR}/build"
 
 SRC_URI = " \
   git://gerrit.automotivelinux.org/gerrit/apps/html5-settings;protocol=https;branch=master \
-  file://webapps-settings.desktop \
 "
 SRCREV = "69af4d9b9b209fcb33ef9071ddfa8561106044c2"
 
-inherit pythonnative
+inherit pythonnative agl-app
+
+AGL_APP_TEMPLATE = "agl-app-web"
+AGL_APP_ID = "webapps-settings"
+AGL_APP_NAME = "HTML5 Settings"
 
 DEPENDS = "nodejs-native"
 
@@ -26,17 +29,11 @@ do_compile() {
   npm run build
 }
 
-WAM_APPLICATIONS_DIR="${libdir}/wam_apps"
-APPLICATIONS_DIR="${datadir}/applications"
+WAM_APPLICATIONS_DIR = "${libdir}/wam_apps"
 
 do_install() {
   install -d ${D}${WAM_APPLICATIONS_DIR}/${PN}
   cp -R --no-dereference --preserve=mode,links ${S}/dist/* ${D}${WAM_APPLICATIONS_DIR}/${PN}
-  install -d ${D}${APPLICATIONS_DIR}
-  install ${WORKDIR}/webapps-settings.desktop ${D}${APPLICATIONS_DIR}
 }
 
-FILES:${PN} = " \
-  ${WAM_APPLICATIONS_DIR}/${PN} \
-  ${APPLICATIONS_DIR} \
-"
+FILES:${PN} = "${WAM_APPLICATIONS_DIR}/${PN}"

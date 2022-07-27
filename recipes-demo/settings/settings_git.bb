@@ -21,15 +21,9 @@ SRCREV = "26dc6a8c8847248450bf902124b7cd867e027274"
 
 S  = "${WORKDIR}/git"
 
-inherit qmake5 pkgconfig
+inherit qmake5 pkgconfig agl-app
 
-# HACK: new systemd-enabled applaunchd for now relies on .desktop and DBusActivatable
-do_install:append() {
-    sed -n "/^DBusActivatable=/!p" -i ${D}${datadir}/applications/settings.desktop
-    echo "DBusActivatable=true" >> ${D}${datadir}/applications/settings.desktop
-}
-
-FILES:${PN} += "${datadir}/icons/"
+AGL_APP_NAME = "Settings"
 
 RDEPENDS:${PN} += " \
     qtwayland \
