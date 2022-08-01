@@ -18,7 +18,9 @@ SRCREV  = "30c275c5c87b9d4f0bc3b0e0e3175775d3738319"
 
 S  = "${WORKDIR}/git"
 
-inherit cmake pkgconfig
+inherit cmake pkgconfig agl-app
+
+AGL_APP_NAME = "Camera"
 
 RDEPENDS:${PN} += " \
     gstreamer1.0-plugins-base \
