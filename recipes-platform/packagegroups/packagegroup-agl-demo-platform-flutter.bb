@@ -20,11 +20,11 @@ RDEPENDS:${PN} += "\
 AGL_APPS = " \
     hvac \
     dashboard \
-    flutter-gallery-release \
+    flutter-gallery-runtimerelease \
     "
 
 RDEPENDS:${PN}:append = " \
-    flutter-embedder-release \
+    flutter-auto-runtimerelease \
     launcher \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
