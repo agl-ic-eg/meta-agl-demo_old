@@ -10,7 +10,13 @@ IMAGE_INSTALL:append = "\
     agl-compositor \
     agl-compositor-init \
     packagegroup-agl-profile-graphical \
-    packagegroup-agl-ivi-services \
+    \
+    kuksa-val \
+    kuksa-val-agl \
+    kuksa-dbc-feeder \
+    \
+    kuksa-vss-init \
+    simple-can-simulator \
     "
 
 # flutter
@@ -18,7 +24,6 @@ IMAGE_INSTALL:append = "\
     weston-ini-conf-landscape \
     \
     flutter-cluster-dashboard-runtimerelease \
-    flutter-cluster-dashboard-runtimerelease-init \
     flutter-auto-runtimerelease \
     "
 
