@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://License.md;md5=f712ede8d4f845976061925d1416fc40"
 
 
 SRC_URI = "git://github.com/hritik-chouhan/HVAC_dashboard.git;protocol=https;branch=main"
-SRCREV = "0f9b82048e867afde53bd72b4736511dae8d09ff"
+SRCREV = "2f35ad6f85ae5d17fdf18bddfad87c36423e76ac"
 S = "${WORKDIR}/git"
 
 inherit agl-app flutter-app
