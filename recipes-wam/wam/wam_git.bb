@@ -30,7 +30,7 @@ SRC_URI = "\
     file://WebAppMgr.env \
 "
 S = "${WORKDIR}/git"
-SRCREV = "8ea41f7b59b52ef005f6f932e3335bfd137aa5fa"
+SRCREV = "4fbd6e648913bcf0fba63e4460eb44242c11f71b"
 
 PV = "ose58.agl"
 
