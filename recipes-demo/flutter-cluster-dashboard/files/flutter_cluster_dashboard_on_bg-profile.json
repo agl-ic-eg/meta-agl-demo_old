@@ -1,0 +1,18 @@
+{
+        "view": [
+                {
+                        "window_type": "BG",
+                        "bundle_path": "/usr/share/flutter/flutter_cluster_dashboard",
+                        "vm_args": [
+                                "--observatory-host",
+                                "0.0.0.0",
+                                "--observatory-port",
+                                "1234",
+                                "--start-paused"
+                        ],
+                        "width": 1920,
+                        "height": 1080,
+                        "fullscreen": true
+                }
+        ]
+}

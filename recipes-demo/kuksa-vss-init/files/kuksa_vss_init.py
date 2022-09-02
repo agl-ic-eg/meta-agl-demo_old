@@ -50,6 +50,12 @@ class VSS:
         self.cruiseControlSpeedSet = "Vehicle.ADAS.CruiseControl.SpeedSet"
         self.cruiseControlisActive = "Vehicle.ADAS.CruiseControl.IsActive"
         self.batteryChargingStatus = "Vehicle.Powertrain.Battery.Charging.Status"
+        # 
+        self.currLat = "Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude"
+        self.currLng = "Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude"
+        self.desLat = "Vehicle.Cabin.Infotainment.Navigation.DestinationSet.Latitude"
+        self.desLng = "Vehicle.Cabin.Infotainment.Navigation.DestinationSet.Longitude"
+        self.steeringInfo = "Vehicle.Cabin.SteeringWheel.Switches.Info"
 
     def setInitialValues(self):
         print("Setting values")
@@ -74,6 +80,13 @@ class VSS:
         self.client.setValue(self.cruiseControlisActive, "false")
         self.client.setValue(self.cruiseControlSpeedSet, '60')
         self.client.setValue(self.batteryChargingStatus, "true")
+        # 
+        self.client.setValue(self.currLat, "31.708643")
+        self.client.setValue(self.currLng, "76.931882")
+        self.client.setValue(self.desLat, "31.781456")
+        self.client.setValue(self.desLng, "76.997469")
+        # Show the map
+        self.client.setValue(self.steeringInfo, "true")
         print("All value set succesfully")
 
 

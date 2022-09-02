@@ -1,0 +1,11 @@
+{
+        "view": [
+                {
+                        "window_type": "BG",
+                        "bundle_path": "/usr/share/flutter/flutter_cluster_dashboard",
+                        "width": 1920,
+                        "height": 1080,
+                        "fullscreen": true
+                }
+        ]
+}

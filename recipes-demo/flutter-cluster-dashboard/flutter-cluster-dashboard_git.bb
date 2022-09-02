@@ -8,27 +8,27 @@ SECTION = "graphics"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=0c52b0e4b5f0dbf57ea7d44bebb2e29d"
 
-SRC_URI = "git://github.com/aakash-s45/ic;protocol=https;branch=main \
+SRC_URI = "git://github.com/aakash-s45/ic;protocol=https;branch=master \
     file://flutter-cluster-dashboard.service \
-    file://ic_on_bg-debug.json \
-    file://ic_on_bg-profile.json \
-    file://ic_on_bg-release.json \
+    file://flutter_cluster_dashboard_on_bg-debug.json \
+    file://flutter_cluster_dashboard_on_bg-profile.json \
+    file://flutter_cluster_dashboard_on_bg-release.json \
 "
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "32f72bb68142a0dbde9ccf28b27c445598c95112"
+SRCREV = "798851a33bb614fb1e5473a8046e63cd9b9026f4"
 
 S = "${WORKDIR}/git"
 
-PUBSPEC_APPNAME = "ic"
+PUBSPEC_APPNAME = "flutter_cluster_dashboard"
 
 FLUTTER_APPLICATION_INSTALL_PREFIX = "/flutter"
 
 inherit flutter-app
 
-APP_CONFIG = "ic_on_bg-release.json"
-APP_CONFIG:class-runtimedebug = "ic_on_bg-debug.json"
-APP_CONFIG:class-runtimeprofile = "ic_on_bg-profile.json"
+APP_CONFIG = "flutter_cluster_dashboard_on_bg-release.json"
+APP_CONFIG:class-runtimedebug = "flutter_cluster_dashboard_on_bg-debug.json"
+APP_CONFIG:class-runtimeprofile = "flutter_cluster_dashboard_on_bg-profile.json"
 
 
 do_install:append() {
