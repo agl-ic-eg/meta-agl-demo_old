@@ -9,7 +9,7 @@ DEPENDS = "\
         qtbase \
         qtdeclarative \
         qtquickcontrols2 \
-        qtwebsockets \
+        libqtappfw \
         wayland-native \
         wayland \
         qtwayland \
@@ -19,15 +19,14 @@ DEPENDS = "\
         applaunchd \
 "
 
-PV      = "1.0+git${SRCPV}"
+PV = "1.0+git${SRCPV}"
 
-SRC_URI = " \
-        git://gerrit.automotivelinux.org/gerrit/apps/launcher;protocol=https;branch=${AGL_BRANCH} \
-        file://launcher.service \
-        "
-SRCREV  = "fd578508fe8f59a0bf11916ea99561125dcfc4ba"
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/launcher;protocol=https;branch=${AGL_BRANCH} \
+           file://launcher.service \
+"
+SRCREV = "b28d987d3fcf0c1c728d6c3cd18e52d40f6c2ffc"
 
-S       = "${WORKDIR}/git"
+S = "${WORKDIR}/git"
 
 inherit qmake5 systemd pkgconfig
 
@@ -42,6 +41,7 @@ do_install:append() {
 FILES:${PN} += " ${systemd_user_unitdir}"
 
 RDEPENDS:${PN} += " \
+    libqtappfw \
     applaunchd \
     homescreen \
 "
