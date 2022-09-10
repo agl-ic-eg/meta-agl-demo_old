@@ -11,8 +11,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://License.md;md5=f712ede8d4f845976061925d1416fc40"
 
 
-SRC_URI = "git://github.com/hritik-chouhan/HVAC_dashboard.git;protocol=https;branch=main"
-SRCREV = "2f35ad6f85ae5d17fdf18bddfad87c36423e76ac"
+SRC_URI = "git://github.com/hritik-chouhan/HVAC_dashboard.git;protocol=https;branch=main \
+    file://hvac_config.yaml \
+    "
+
+SRCREV = "892f09a82dd852b66416598c9ec47b3230c5d56c"
 S = "${WORKDIR}/git"
 
 inherit agl-app flutter-app
@@ -28,3 +31,10 @@ FLUTTER_BUILD_ARGS = "bundle -v"
 AGL_APP_TEMPLATE = "agl-app-flutter"
 AGL_APP_ID = "flutter_hvac"
 AGL_APP_NAME = "Flutter Hvac"
+
+do_install:append() {
+    install -d ${D}${sysconfdir}/xdg/AGL
+    install -m 0644 ${WORKDIR}/hvac_config.yaml ${D}${sysconfdir}/xdg/AGL/
+}
+
+FILES:${PN} += "${sysconfdir}/xdg/AGL"

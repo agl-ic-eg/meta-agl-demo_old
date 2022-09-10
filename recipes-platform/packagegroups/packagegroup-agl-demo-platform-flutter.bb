@@ -22,6 +22,8 @@ AGL_APPS = " \
     dashboard \
     flutter-app-dashboard \
     flutter-app-hvac \
+    flutter-app-nav \
+    flutter-app-mediaplayer \
     "
 
 RDEPENDS:${PN}:append = " \
