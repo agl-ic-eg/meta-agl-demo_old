@@ -13,16 +13,19 @@ SRC_URI = "git://github.com/aakash-s45/ic;protocol=https;branch=master \
     file://flutter_cluster_dashboard_on_bg-debug.json \
     file://flutter_cluster_dashboard_on_bg-profile.json \
     file://flutter_cluster_dashboard_on_bg-release.json \
+    file://flutter-cluster-dashboard.yaml \
 "
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "798851a33bb614fb1e5473a8046e63cd9b9026f4"
+SRCREV = "e7099bd763ba5612d0613b9ee43679cb2a9f7610"
 
 S = "${WORKDIR}/git"
 
 PUBSPEC_APPNAME = "flutter_cluster_dashboard"
 
 FLUTTER_APPLICATION_INSTALL_PREFIX = "/flutter"
+
+OPENROUTE_API_KEY ??= "YOU_NEED_TO_SET_IT_IN_LOCAL_CONF"
 
 inherit flutter-app
 
@@ -31,13 +34,25 @@ APP_CONFIG:class-runtimedebug = "flutter_cluster_dashboard_on_bg-debug.json"
 APP_CONFIG:class-runtimeprofile = "flutter_cluster_dashboard_on_bg-profile.json"
 
 
+do_configure:prepend() {
+    if [ "${OPENROUTE_API_KEY}" = "YOU_NEED_TO_SET_IT_IN_LOCAL_CONF" ]; then
+		bbwarn "WARNING: You should set openrouteservice API key to OPENROUTE_API_KEY variable in local.conf."
+	fi
+}
+
 do_install:append() {
     install -D -m 0644 ${WORKDIR}/flutter-cluster-dashboard.service ${D}${systemd_user_unitdir}/flutter-cluster-dashboard.service
     install -d ${D}${systemd_user_unitdir}/agl-session.target.wants
     ln -s ../flutter-cluster-dashboard.service ${D}${systemd_user_unitdir}/agl-session.target.wants/flutter-cluster-dashboard.service
 
     install -D -m 0644 ${WORKDIR}/${APP_CONFIG} ${D}${datadir}/flutter/default.json
+
+    install -d ${D}${sysconfdir}/xdg/AGL
+    install -m 0644 ${WORKDIR}/flutter-cluster-dashboard.yaml ${D}${sysconfdir}/xdg/AGL/
+
+    install -m 0755 -d ${D}${sysconfdir}/default/ 
+    echo 'OPENROUTE_API_KEY:${OPENROUTE_API_KEY}' >> ${D}${sysconfdir}/default/openroutekey
 }
 
 
-FILES:${PN} += "${datadir} ${systemd_user_unitdir}"
+FILES:${PN} += "${datadir} ${systemd_user_unitdir} ${sysconfdir}/xdg/AGL ${sysconfdir}/default/"
