@@ -29,6 +29,7 @@ AGL_APPS = " \
     "
 
 RDEPENDS:${PN}:append = " \
+    weston-ini-conf-no-activate \
     launcher \
     qtquickcontrols2-agl \
     qtquickcontrols2-agl-style \
