@@ -9,7 +9,7 @@ DEPENDS = "python3-setuptools-git-versioning-native"
 
 require kuksa-val.inc
 
-SRC_URI += "file://0001-kuksa_viss_client-fix-SSL-context-creation.patch"
+SRC_URI += "file://0001-Update-kuksa-viss-client-to-support-Python-3.10.patch"
 
 inherit setuptools3
 
