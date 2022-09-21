@@ -1,14 +1,14 @@
 SUMMARY = "Flutter Instrument Cluster "
 DESCRIPTION = "An instrument cluster app written in dart for the flutter runtime"
 AUTHOR = "Aakash Solanki"
-HOMEPAGE = "https://github.com/aakash-s45/ic"
+HOMEPAGE = "https://gerrit.automotivelinux.org/gerrit/apps/flutter-instrument-cluster"
 
 SECTION = "graphics"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=0c52b0e4b5f0dbf57ea7d44bebb2e29d"
 
-SRC_URI = "git://github.com/aakash-s45/ic;protocol=https;branch=master \
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/flutter-instrument-cluster;protocol=https;branch=${AGL_BRANCH} \
     file://flutter-cluster-dashboard.service \
     file://flutter_cluster_dashboard_on_bg-debug.json \
     file://flutter_cluster_dashboard_on_bg-profile.json \
@@ -17,7 +17,7 @@ SRC_URI = "git://github.com/aakash-s45/ic;protocol=https;branch=master \
 "
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "e7099bd763ba5612d0613b9ee43679cb2a9f7610"
+SRCREV = "5e0cf02b4e11d67ce8b705479e13e0b9ebbf8ad4"
 
 S = "${WORKDIR}/git"
 
