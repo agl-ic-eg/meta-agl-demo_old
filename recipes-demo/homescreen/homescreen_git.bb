@@ -25,7 +25,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/homescreen;protocol=http
            file://homescreen.conf \
            file://homescreen.token \
 "
-SRCREV = "20f629dd6d8628611d950073c4f7a0446c40365a"
+SRCREV = "52c767388614e2ec6fa26851840bf01d97c5d49e"
 
 S = "${WORKDIR}/git"
 
