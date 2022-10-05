@@ -1,7 +1,7 @@
 SUMMARY = "Flutter Dashboard"
 DESCRIPTION = "A Flutter based IVI Dashboard Application for automotive grade Linux."
 
-HOMEPAGE = "https://github.com/hritik-chouhan/dashboard_for_recipe"
+HOMEPAGE = "https://gerrit.automotivelinux.org/gerrit/apps/flutter-dashboard"
 
 BUGTRACKER = "https://github.com/hritik-chouhan/dashboard_for_recipe/issues"
 
@@ -11,11 +11,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://License.md;md5=f712ede8d4f845976061925d1416fc40"
 
 
-SRC_URI = "git://github.com/hritik-chouhan/dashboard_for_recipe.git;protocol=https;branch=main \
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/flutter-dashboard;protocol=https;branch=${AGL_BRANCH} \
     file://dashboard_config.yaml \
     "
 
-SRCREV = "5b0e5cdc3ba8b00a7e53b46e8b3e656cd09822bb"
+SRCREV = "10945b8056eb2b228c156918a3505882a49a79b8"
 S = "${WORKDIR}/git"
 
 

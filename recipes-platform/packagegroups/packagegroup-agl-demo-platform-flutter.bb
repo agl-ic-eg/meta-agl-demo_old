@@ -20,10 +20,10 @@ RDEPENDS:${PN} += "\
 AGL_APPS = " \
     hvac \
     dashboard \
-    flutter-app-dashboard \
-    flutter-app-hvac \
-    flutter-app-nav \
-    flutter-app-mediaplayer \
+    flutter-dashboard \
+    flutter-hvac \
+    flutter-nav \
+    flutter-mediaplayer \
     "
 
 RDEPENDS:${PN}:append = " \

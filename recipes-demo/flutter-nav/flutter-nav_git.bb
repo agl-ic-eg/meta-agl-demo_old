@@ -1,7 +1,7 @@
 SUMMARY = "Flutter Navigation app"
 DESCRIPTION = "A Flutter based IVI Dashboard Application for automotive grade Linux."
 
-HOMEPAGE = "https://github.com/hritik-chouhan/nav-app"
+HOMEPAGE = "https://gerrit.automotivelinux.org/gerrit/apps/flutter-navigation"
 
 BUGTRACKER = "https://github.com/hritik-chouhan/nav-app/issues"
 
@@ -11,10 +11,10 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://License.md;md5=f712ede8d4f845976061925d1416fc40"
 
 
-SRC_URI = "git://github.com/hritik-chouhan/nav-app.git;protocol=https;branch=main \
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/flutter-navigation;protocol=https;branch=${AGL_BRANCH} \
     file://nav_config.yaml \
     "
-SRCREV = "a6619ac0439f6dec728b9a3a094f1371ee00ce76"
+SRCREV = "53164c0441db946b4293f483a28b524ecdc91e30"
 S = "${WORKDIR}/git"
 
 MAPBOX_API_KEY ??= "YOU_NEED_TO_SET_IT_IN_LOCAL_CONF"

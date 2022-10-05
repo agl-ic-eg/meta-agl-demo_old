@@ -1,7 +1,7 @@
 SUMMARY = "Flutter HVAC"
 DESCRIPTION = "A Flutter based IVI Dashboard Application for automotive grade Linux."
 
-HOMEPAGE = "https://github.com/hritik-chouhan/HVAC_dashboard"
+HOMEPAGE = "https://gerrit.automotivelinux.org/gerrit/apps/flutter-hvac"
 
 BUGTRACKER = "https://github.com/hritik-chouhan/HVAC_dashboard/issues"
 
@@ -11,11 +11,11 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://License.md;md5=f712ede8d4f845976061925d1416fc40"
 
 
-SRC_URI = "git://github.com/hritik-chouhan/HVAC_dashboard.git;protocol=https;branch=main \
-    file://hvac_config.yaml \
+SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/flutter-hvac;protocol=https;branch=${AGL_BRANCH} \
+    file://HVAC_config.yaml \
     "
 
-SRCREV = "892f09a82dd852b66416598c9ec47b3230c5d56c"
+SRCREV = "5559cdb261cfd3e69daa2349906f071dc2491c0d"
 S = "${WORKDIR}/git"
 
 inherit agl-app flutter-app
@@ -34,7 +34,7 @@ AGL_APP_NAME = "Flutter Hvac"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/xdg/AGL
-    install -m 0644 ${WORKDIR}/hvac_config.yaml ${D}${sysconfdir}/xdg/AGL/
+    install -m 0644 ${WORKDIR}/HVAC_config.yaml ${D}${sysconfdir}/xdg/AGL/
 }
 
 FILES:${PN} += "${sysconfdir}/xdg/AGL"
