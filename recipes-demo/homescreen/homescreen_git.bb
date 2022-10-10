@@ -25,11 +25,11 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/homescreen;protocol=http
            file://homescreen.conf \
            file://homescreen.token \
 "
-SRCREV = "52c767388614e2ec6fa26851840bf01d97c5d49e"
+SRCREV = "d4f3ddfbad7a64937f00f13ba964e18d33effbb0"
 
 S = "${WORKDIR}/git"
 
-inherit qmake5 systemd pkgconfig
+inherit meson systemd pkgconfig
 
 PATH:prepend = "${STAGING_DIR_NATIVE}${OE_QMAKE_PATH_QT_BINS}:"
 
