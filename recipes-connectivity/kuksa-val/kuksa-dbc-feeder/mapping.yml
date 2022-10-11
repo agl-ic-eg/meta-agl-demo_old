@@ -7,7 +7,7 @@ PT_VehicleAvgSpeed:
 PT_EngineSpeed:
   minupdatedelay: 100
   targets: 
-    Vehicle.Powertrain.CombustionEngine.Engine.Speed:
+    Vehicle.Powertrain.CombustionEngine.Speed:
       transform:
         math: "floor(x+0.5)"
 

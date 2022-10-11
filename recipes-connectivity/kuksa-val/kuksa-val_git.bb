@@ -3,8 +3,8 @@ DESCRIPTION = "KUKSA.val provides a COVESA VSS data model describing data in a v
 HOMEPAGE = "https://github.com/eclipse/kuksa.val"
 BUGTRACKER = "https://github.com/eclipse/kuksa.val/issues"
 
-LICENSE = "EPL-2.0 & BSL-1.0 & MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d9fc0efef5228704e7f5b37f27192723 \
+LICENSE = "Apache-2.0 & BSL-1.0 & MIT"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=2b42edef8fa55315f34f2370b4715ca9 \
                     file://3rd-party-libs/jsoncons/LICENSE;md5=6ee7f7ed2001e4cde4679fdb8926f820 \
                     file://3rd-party-libs/turtle/LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
                     file://3rd-party-libs/jwt-cpp/LICENSE;md5=8325a5ce4414c65ffdda392e0d96a9ff"
@@ -14,14 +14,17 @@ DEPENDS = "boost openssl mosquitto protobuf-native grpc-native grpc"
 require kuksa-val.inc
 
 SRC_URI += "file://kuksa-val.service \
-            file://0001-Make-Boost-requirements-more-liberal.patch \
-            file://0002-Fix-gRPC-configuration-for-OE-cross-compiling.patch \
-            file://0003-Make-install-locations-configurable.patch \
-            file://0004-Disable-default-fetch-and-build-of-googletest.patch \
-            file://0001-genCerts.sh-add-Subject-Alt-Name-extension-to-server.patch \
+            file://0001-Make-Boost-requirements-more-liberal.patch;striplevel=2 \
+            file://0002-Fix-gRPC-configuration-for-OE-cross-compiling.patch;striplevel=2 \
+            file://0003-Make-install-locations-configurable.patch;striplevel=2 \
+            file://0004-Disable-default-fetch-and-build-of-googletest.patch;striplevel=2 \
             file://Server.key \
             file://Server.pem \
 "
+#            file://0001-genCerts.sh-add-Subject-Alt-Name-extension-to-server.patch;striplevel=? \
+#
+
+S = "${WORKDIR}/git/kuksa-val-server"
 
 inherit cmake pkgconfig systemd useradd
 

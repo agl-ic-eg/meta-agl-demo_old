@@ -1,120 +1,129 @@
-From fe10a3645e77cd8122d3d312d317bedcb88bc683 Mon Sep 17 00:00:00 2001
+From d0730c0d643738ac683d1b5c19b117893e3b2049 Mon Sep 17 00:00:00 2001
 From: Scott Murray <scott.murray@konsulko.com>
-Date: Thu, 12 May 2022 17:39:56 +0200
-Subject: [PATCH] dbc2val: usability improvements
+Date: Tue, 11 Oct 2022 15:28:07 -0400
+Subject: [PATCH 2/2] dbc2val: usability improvements
 
 Changes:
 - Tweaked default configuration file search path to better match
   Linux FHS and kuksa-val-server.  First look for a config.ini in
   /etc/kuksa-dbc-feeder, then /etc/dbc_feeder.ini.
-- Added a command-line option to specify configuration file, this
-  should allow running two instances against different interfaces.
-- Added verbosity command-line option and made several messages
-  verbose mode only to avoid log spamming.
-- Added '-u' option to python invocation to disable output buffering.
-  The intent is to make logging immediate, otherwise errors may not
-  get logged for some time (or at all).
 - Add catching of exceptions around CAN device opening so that the
   script can exit cleanly with an error message if the device is
   not available.
+- Fixed shutdown behavior with some tweaks to actually stop the
+  reader and KUKSA.val client library threads.  This makes the
+  script actually exit on SIGTERM as opposed to hanging.
 
 Upstream-Status: pending
+
 Signed-off-by: Scott Murray <scott.murray@konsulko.com>
 ---
- kuksa_feeders/dbc2val/dbcfeeder.py | 40 ++++++++++++++++++++++--------
- 1 file changed, 29 insertions(+), 11 deletions(-)
+ dbc2val/dbcfeeder.py | 21 +++++++++++++++------
+ dbc2val/dbcreader.py | 12 ++++++++----
+ 2 files changed, 23 insertions(+), 10 deletions(-)
 
-diff --git a/kuksa_feeders/dbc2val/dbcfeeder.py b/kuksa_feeders/dbc2val/dbcfeeder.py
-index 56c316a..d2d70b9 100755
---- a/kuksa_feeders/dbc2val/dbcfeeder.py
-+++ b/kuksa_feeders/dbc2val/dbcfeeder.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/env python
-+#!/usr/bin/env -S python -u
+diff --git a/dbc2val/dbcfeeder.py b/dbc2val/dbcfeeder.py
+index 7daaa2b..33c2212 100755
+--- a/dbc2val/dbcfeeder.py
++++ b/dbc2val/dbcfeeder.py
+@@ -93,6 +93,7 @@ class Feeder:
+         self._connected = False
+         self._registered = False
+         self._can_queue = queue.Queue()
++        self.kuksa = None
  
- ########################################################################
- # Copyright (c) 2020 Robert Bosch GmbH
-@@ -15,15 +15,21 @@ import os, sys, signal
- import configparser
- import queue
- import json
-+import argparse
+     def start(
+         self,
+@@ -134,7 +135,11 @@ class Feeder:
+         else:
+             # use socketCAN
+             log.info("Using socket CAN device '%s'", canport)
+-            self._reader.start_listening(bustype="socketcan", channel=canport)
++            try:
++                self._reader.start_listening(bustype="socketcan", channel=canport)
++            except:
++                log.error("Could not open {}, exiting".format(canport))
++                sys.exit(-1)
+        
+         # databroker related
+         if USE_CASE=="databroker":
+@@ -151,6 +156,8 @@ class Feeder:
+         log.info("Shutting down...")
+         self._shutdown = True
+         # Tell others to stop
++        if USE_CASE=="kuksa" and self.kuksa is not None:
++            self.kuksa.stop()
+         if self._reader is not None:
+             self._reader.stop()
+         if self._player is not None:
+@@ -204,9 +211,10 @@ class Feeder:
+         # kuksa related
+         if USE_CASE=="kuksa":
+             global kuksaconfig
+-            kuksa = KuksaClientThread(kuksaconfig)
+-            kuksa.start()
+-            kuksa.authorize()
++            self.kuksa = KuksaClientThread(kuksaconfig)
++            self.kuksa.start()
++            if "token" in kuksaconfig:
++                self.kuksa.authorize(kuksaconfig["token"])
+         
+         while self._shutdown is False:
+             # databroker related
+@@ -255,7 +263,7 @@ class Feeder:
+                             self._provider.update_datapoint(target, value)
+                         # kuksa related
+                         elif USE_CASE=="kuksa":
+-                            resp=json.loads(kuksa.setValue(target, str(value)))
++                            resp=json.loads(self.kuksa.setValue(target, str(value)))
+                             if "error" in resp:
+                                 if "message" in resp["error"]: 
+                                    log.error("Error setting {}: {}".format(target, resp["error"]["message"]))
+@@ -282,8 +290,9 @@ def parse_config(filename):
+         configfile = filename
+     else:
+         config_candidates = [
+-            "/config/dbc_feeder.ini",
++            "/etc/kuksa-dbc-feeder/config.ini",
+             "/etc/dbc_feeder.ini",
++            "/config/dbc_feeder.ini",
+             "config/dbc_feeder.ini",
+         ]
+         configfile = None
+diff --git a/dbc2val/dbcreader.py b/dbc2val/dbcreader.py
+index 2500832..b537a4d 100644
+--- a/dbc2val/dbcreader.py
++++ b/dbc2val/dbcreader.py
+@@ -54,8 +54,8 @@ class DBCReader:
+             Bitrate in bit/s.
+         """
+         self.bus = can.interface.Bus(*args, **kwargs)
+-        rxThread = threading.Thread(target=self.rxWorker)
+-        rxThread.start()
++        self.rxThread = threading.Thread(target=self.rxWorker)
++        self.rxThread.start()
  
- from dbc2val import dbc2vssmapper, dbcreader, j1939reader, elm2canbridge
+     def get_whitelist(self):
+         log.info("Collecting signals, generating CAN ID whitelist")
+@@ -83,7 +83,10 @@ class DBCReader:
+     def rxWorker(self):
+         log.info("Starting Rx thread")
+         while self.run:
+-            msg = self.bus.recv(timeout=1)
++            try:
++                msg = self.bus.recv(timeout=1)
++            except Exception:
++                break
+             if msg and msg.arbitration_id in self.canidwl:
+                 try:
+                     decode = self.db.decode_message(msg.arbitration_id, msg.data)
+@@ -105,4 +108,5 @@ class DBCReader:
+ 
+     def stop(self):
+         self.run = False
 -
--scriptDir= os.path.dirname(os.path.realpath(__file__))
--sys.path.append(os.path.join(scriptDir, "../../"))
- from kuksa_viss_client import KuksaClientThread
- 
--print("kuksa.val DBC example feeder")
--config_candidates=['/config/dbc_feeder.ini', '/etc/dbc_feeder.ini', os.path.join(scriptDir, 'config/dbc_feeder.ini')]
-+parser = argparse.ArgumentParser("kuksa.val DBC example feeder")
-+parser.add_argument("-c", "--config", dest="userconfig")
-+parser.add_argument("-v", "--verbose", action="store_true")
-+args = parser.parse_args()
-+
-+if args.verbose:
-+    print("kuksa.val DBC example feeder")
-+config_candidates=['/etc/kuksa-dbc-feeder/config.ini', '/etc/dbc_feeder.ini']
-+if args.userconfig is not None:
-+    config_candidates.insert(0, args.userconfig)
- configfile = None
- for candidate in config_candidates:
-     if os.path.isfile(candidate):
-@@ -54,10 +60,12 @@ cancfg = config['can']
- canport = cancfg['port']
- 
- if config["can"].getboolean("j1939", False):
--    print("Use j1939 reader")
-+    if args.verbose:
-+        print("Use j1939 reader")
-     reader = j1939reader.J1939Reader(cancfg,canQueue,mapping)
- else:
--    print("Use dbc reader")
-+    if args.verbose:
-+        print("Use dbc reader")
-     reader = dbcreader.DBCReader(cancfg, canQueue,mapping)
- 
- if canport == 'elmcan':
-@@ -65,10 +73,18 @@ if canport == 'elmcan':
-         print("section {} missing from configuration, exiting".format(canport))
-         sys.exit(-1)
- 
--    print("Using elmcan. Trying to set up elm2can bridge")
-+    if args.verbose:
-+        print("Using elmcan. Trying to set up elm2can bridge")
-     elmbr=elm2canbridge.elm2canbridge(canport, config[canport], reader.canidwl)
- 
--reader.start_listening()
-+try:
-+    reader.start_listening()
-+except:
-+    print("Could not open {}, exiting".format(canport))
-+    kuksa.stop()
-+    reader.stop()
-+    sys.exit(-1)
-+
- running = True
- 
- def terminationSignalreceived(signalNumber, frame):
-@@ -77,6 +93,7 @@ def terminationSignalreceived(signalNumber, frame):
-     kuksa.stop()
-     reader.stop()
-     print("Received termination signal. Shutting down")
-+    sys.exit(0)
- 
- signal.signal(signal.SIGINT, terminationSignalreceived)
- signal.signal(signal.SIGQUIT, terminationSignalreceived)
-@@ -88,7 +105,8 @@ while running:
-         for target in mapping[signal]['targets']:
-             tv=mapping.transform(signal,target,value)
-             if tv is not None: #none indicates the transform decided to not set the value
--                print("Update VSS path {} to {} based on signal {}".format(target, tv, signal))
-+                if args.verbose:
-+                    print("Update VSS path {} to {} based on signal {}".format(target, tv, signal))
-                 resp=json.loads(kuksa.setValue(target, str(tv)))
-                 if "error" in resp:
-                     if "message" in resp["error"]: 
++        self.bus.shutdown()
++        self.rxThread.join()
 -- 
-2.35.1
+2.37.3
 
