@@ -2,31 +2,27 @@ SUMMARY = "DBC feeder for KUKSA.val, the KUKSA Vehicle Abstraction Layer"
 HOMEPAGE = "https://github.com/eclipse/kuksa.val"
 BUGTRACKER = "https://github.com/eclipse/kuksa.val/issues"
 
-LICENSE = "EPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d9fc0efef5228704e7f5b37f27192723"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=175792518e4ac015ab6696d16c4f607e"
 
 DEPENDS = "python3-setuptools-git-versioning-native"
 
-require kuksa-val.inc
+PV = "0.1.0+git${SRCPV}"
 
-SRC_URI += "file://0001-dbc2val-add-installation-mechanism.patch \
-            file://0002-dbc2val-usability-improvements.patch \
-            file://0003-dbc2val-add-duplicate-filtering-option.patch \
-            file://config.ini \
-            file://dbc_feeder.json.token \
-            file://mapping.yml \
-            file://agl-vcar.dbc \
-            file://kuksa-dbc-feeder.service \
+SRC_URI = "git://github.com/eclipse/kuksa.val.feeders.git;protocol=https;branch=main \
+           file://0001-dbc2val-add-installation-mechanism.patch \
+           file://0002-dbc2val-usability-improvements.patch \
+           file://config.ini \
+           file://dbc_feeder.json.token \
+           file://mapping.yml \
+           file://agl-vcar.dbc \
+           file://kuksa-dbc-feeder.service \
 "
+SRCREV = "a857a1d6981b7d62b80ac03e60988a0bded3e255"
+
+S = "${WORKDIR}/git"
 
 inherit setuptools3 systemd
-
-SETUPTOOLS_SETUP_PATH = "${S}/kuksa_feeders"
-
-# This is a bit of a workaround as the sed in distutils.bbclass
-# will remove the -S already present in the script otherwise,
-# breaking it.
-PEP517_INSTALL_PYTHON = "-S python3 -u"
 
 SYSTEMD_SERVICE:${PN} = "${BPN}.service"
 

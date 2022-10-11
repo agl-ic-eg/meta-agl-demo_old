@@ -2,18 +2,22 @@ SUMMARY = "Python client for KUKSA.val, the KUKSA Vehicle Abstraction Layer"
 HOMEPAGE = "https://github.com/eclipse/kuksa.val"
 BUGTRACKER = "https://github.com/eclipse/kuksa.val/issues"
 
-LICENSE = "EPL-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=d9fc0efef5228704e7f5b37f27192723"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=2b42edef8fa55315f34f2370b4715ca9"
 
-DEPENDS = "python3-setuptools-git-versioning-native"
+DEPENDS = " \
+    python3-setuptools-git-versioning-native \
+    python3-grpcio-tools-native \
+    python3-grpcio \
+"
 
 require kuksa-val.inc
 
-SRC_URI += "file://0001-Update-kuksa-viss-client-to-support-Python-3.10.patch \
-            file://0002-kuksa_viss_client-Update-cmd2-completer-usage.patch \
-"
+SRC_URI += "file://0001-kuksa_viss_client-Update-cmd2-completer-usage.patch;striplevel=2"
 
-inherit setuptools3
+S = "${WORKDIR}/git/kuksa_viss_client"
+
+inherit python_setuptools_build_meta
 
 RDEPENDS:${PN} += " \
     python3-cmd2 \
@@ -21,6 +25,9 @@ RDEPENDS:${PN} += " \
     python3-pkg-resources \
     python3-pygments \
     python3-websockets \
+    python3-grpcio \
+    python3-grpcio-tools \
+    python3-jsonpath-ng \
 "
 
 # A script for generating new certificates currently gets shipped inside
