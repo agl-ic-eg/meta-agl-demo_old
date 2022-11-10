@@ -18,7 +18,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/dashboard;protocol=https
            file://dashboard.conf \
            file://dashboard.token \
 "
-SRCREV  = "4efe67714e60e2ab86acf1edee500373f6820954"
+SRCREV  = "0cfd9c9473dcb218d095f9e6b88f41e81765fdff"
 
 S = "${WORKDIR}/git"
 

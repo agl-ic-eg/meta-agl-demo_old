@@ -22,7 +22,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/agl-cluster-demo-dashboa
            file://cluster-dashboard.conf \
            file://cluster-dashboard.token \
 "
-SRCREV  = "c5115f91d0bf432b3dca32c652bd6fc330b6d7d5"
+SRCREV  = "137144c447d8adb618f5acbcbafd65f50264d6eb"
 
 S  = "${WORKDIR}/git"
 
