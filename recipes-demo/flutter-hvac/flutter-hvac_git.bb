@@ -30,7 +30,7 @@ FLUTTER_BUILD_ARGS = "bundle -v"
 #########
 AGL_APP_TEMPLATE = "agl-app-flutter"
 AGL_APP_ID = "flutter_hvac"
-AGL_APP_NAME = "Flutter Hvac"
+AGL_APP_NAME = "HVAC"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/xdg/AGL
