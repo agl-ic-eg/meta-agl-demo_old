@@ -31,16 +31,11 @@ FLUTTER_BUILD_ARGS = "bundle -v"
 #########
 AGL_APP_TEMPLATE = "agl-app-flutter"
 AGL_APP_ID = "dashboard_app"
-AGL_APP_NAME = "Flutter Dashboard"
-
-
+AGL_APP_NAME = "Dashboard"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/xdg/AGL
     install -m 0644 ${WORKDIR}/dashboard_config.yaml ${D}${sysconfdir}/xdg/AGL/
-
-
-    
 }
 
 FILES:${PN} += "${sysconfdir}/xdg/AGL"
