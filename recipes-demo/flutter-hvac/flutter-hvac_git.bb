@@ -15,7 +15,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/flutter-hvac;protocol=ht
     file://HVAC_config.yaml \
     "
 
-SRCREV = "5559cdb261cfd3e69daa2349906f071dc2491c0d"
+SRCREV = "15926323e4b48444d9656507ca9e8b0b2e2e64d0"
 S = "${WORKDIR}/git"
 
 inherit agl-app flutter-app
