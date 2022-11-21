@@ -1,0 +1,10 @@
+{
+        "view" : [ {
+                "window_type" : "BG",
+                "bundle_path" : "/usr/share/flutter/flutter_homescreen",
+                "width" : 1920,
+                "height": 1080,
+                "fullscreen": true
+                }
+        ]
+}
