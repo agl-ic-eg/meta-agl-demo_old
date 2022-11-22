@@ -1,0 +1,11 @@
+[Unit]
+Requires=agl-compositor.service
+After=agl-compositor.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/native-shell-client
+Restart=on-failure
+
+[Install]
+WantedBy=agl-session.target
