@@ -1,0 +1,11 @@
+[Unit]
+Requires=agl-session@agl-driver.service
+After=agl-session@agl-driver.service
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/agl-qemu-runner.sh %i
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
