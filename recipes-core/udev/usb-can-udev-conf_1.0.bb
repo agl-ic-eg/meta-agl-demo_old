@@ -22,4 +22,4 @@ do_install() {
 
 FILES:${PN} += "${systemd_system_unitdir}"
 
-RDEPENDS:${PN} += "systemd"
+RDEPENDS:${PN} += "udev"
