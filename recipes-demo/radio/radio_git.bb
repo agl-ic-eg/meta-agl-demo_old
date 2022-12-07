@@ -21,6 +21,8 @@ S  = "${WORKDIR}/git"
 
 inherit qmake5 pkgconfig agl-app
 
+AGL_APP_NAME = "Radio"
+
 # ALS, CES, FOSDEM available
 AGL_RADIO_PRESETS_LOCALE ?= "CES"
 do_install:append() {
