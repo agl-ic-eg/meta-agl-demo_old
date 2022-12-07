@@ -17,6 +17,5 @@ RDEPENDS:${PN}:append = " \
     connman \
     connman-client \
     connman-tools \
-    cluster-connman-conf \
     iproute2 \
 "
