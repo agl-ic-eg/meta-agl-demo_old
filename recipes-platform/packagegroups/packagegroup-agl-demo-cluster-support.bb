@@ -10,7 +10,6 @@ PACKAGES = "\
 "
 
 RDEPENDS:${PN} += "\
-    packagegroup-agl-demo-platform \
     tbtnavi \
     kuksa-val-agl-demo-cluster \
 "
