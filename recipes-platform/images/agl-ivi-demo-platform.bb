@@ -3,13 +3,11 @@ require agl-image-ivi.bb
 DESCRIPTION = "AGL Demo Platform image currently contains a simple HMI and \
 demos."
 
-FEATURE_PACKAGES_agl-demo-preload = "packagegroup-agl-demo-preload"
-FEATURE_PACKAGES_agl-demo-cluster-support = "packagegroup-agl-demo-cluster-support"
-
-IMAGE_FEATURES += "${@bb.utils.filter("AGL_FEATURES", "agl-demo-preload agl-demo-cluster-support", d)}"
+require agl-demo-features.inc
 
 # add packages for demo platform (include demo apps) here
 IMAGE_INSTALL:append = " \
     packagegroup-agl-demo-platform \
+    ${@bb.utils.contains("AGL_FEATURES", "agl-demo-preload", "", "weston-terminal-conf", d)} \
 "
 

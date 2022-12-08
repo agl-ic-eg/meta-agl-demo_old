@@ -18,7 +18,6 @@ PACKAGES = " \
 #     the steering wheel used in the demo setup.
 #
 RDEPENDS:${PN} = "\
-    packagegroup-agl-demo-platform \
     demo-i2c-udev-conf \
     simple-can-simulator \
 "
