@@ -19,8 +19,8 @@ RDEPENDS:${PN} += "\
 AGL_FLUTTER_RUNTIME ?= "runtimerelease"
 
 AGL_APPS = " \
-    flutter-dashboard-${AGL_FLUTTER_RUNTIME} \ \
-    flutter-hvac-${AGL_FLUTTER_RUNTIME} \ \
+    flutter-dashboard-${AGL_FLUTTER_RUNTIME} \
+    flutter-hvac-${AGL_FLUTTER_RUNTIME} \
     ondemandnavi \
     settings \
     mediaplayer \
