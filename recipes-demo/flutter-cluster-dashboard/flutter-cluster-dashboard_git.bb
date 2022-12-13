@@ -18,7 +18,7 @@ SRC_URI = "git://gerrit.automotivelinux.org/gerrit/apps/flutter-instrument-clust
 "
 
 PV = "1.0+git${SRCPV}"
-SRCREV = "5e0cf02b4e11d67ce8b705479e13e0b9ebbf8ad4"
+SRCREV = "8f02aa89ffe43914c4e0526485500db74e082a00"
 
 S = "${WORKDIR}/git"
 
