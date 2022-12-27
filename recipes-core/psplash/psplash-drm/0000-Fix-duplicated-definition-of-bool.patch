@@ -1,0 +1,32 @@
+From 50f72061f34d4bf928f446023dc460b2b6e7b94a Mon Sep 17 00:00:00 2001
+From: Hiroyuki Ishii <ishii.hiroyuki002@jp.panasonic.com>
+Date: Tue, 27 Dec 2022 14:44:14 +0900
+Subject: [PATCH] Fix duplicated definition of bool
+
+We'd like to use stdbool.h instead of defining bool type
+duplicatedly to avoid build issue in future changes.
+
+Signed-off-by: Hiroyuki Ishii <ishii.hiroyuki002@jp.panasonic.com>
+---
+ psplash.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/psplash.h b/psplash.h
+index 7489e75..ab8e53f 100644
+--- a/psplash.h
++++ b/psplash.h
+@@ -32,10 +32,10 @@
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #include <unistd.h>
++#include <stdbool.h>
+ 
+ typedef uint8_t  uint8;
+ typedef uint16_t uint16;
+-typedef int            bool;
+ 
+ #ifndef FALSE
+ #define FALSE 0
+-- 
+2.25.1
+
