@@ -1,0 +1,40 @@
+From 69c8353ef85040c7d20ad570a6ed5fa699fbfeea Mon Sep 17 00:00:00 2001
+From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+Date: Mon, 25 Apr 2022 10:59:53 +0300
+Subject: [PATCH] psplash-drm.c: Allocate resources only for the first
+ connector
+
+Since splash screen is shown only on the first scanout, there is no need
+to allocate resources for next connectors.
+
+Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+---
+ psplash-drm.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/psplash-drm.c b/psplash-drm.c
+index 2468cf1..5e56286 100644
+--- a/psplash-drm.c
++++ b/psplash-drm.c
+@@ -39,6 +39,8 @@
+ #include <xf86drmMode.h>
+ #include "psplash-drm.h"
+ 
++#define MIN(a,b) ((a) < (b) ? (a) : (b))
++
+ struct modeset_dev;
+ static int modeset_find_crtc(int fd, drmModeRes *res, drmModeConnector *conn,
+ 			     struct modeset_dev *dev);
+@@ -196,8 +198,10 @@ static int modeset_prepare(int fd)
+ 		return -errno;
+ 	}
+ 
+-	/* iterate all connectors */
+-	for (i = 0; i < res->count_connectors; ++i) {
++	/* ~iterate all connectors~ - Use first connector if present. It is
++	   optimization related workaround since psplash supports drawing splash
++	   screen on one scanout anyway. */
++	for (i = 0; i < MIN(res->count_connectors, 1); ++i) {
+ 		/* get information for each connector */
+ 		conn = drmModeGetConnector(fd, res->connectors[i]);
+ 		if (!conn) {
