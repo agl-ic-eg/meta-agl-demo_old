@@ -29,6 +29,15 @@ LIC_FILES_CHKSUM = "file://psplash.h;beginline=1;endline=8;md5=db1ed16abf4be6de3
 PACKAGECONFIG[drm] = "--enable-drm,,libdrm"
 PSPLASH_ARGS += "${@bb.utils.contains('PACKAGECONFIG', 'drm', '--drm', '', d)}"
 # WIP: We have to add psplash-quit service here to support drm transition
+FILESEXTRAPATHS:prepend := "${THISDIR}/psplash-drm-lease:"
+SRC_URI += " \
+	file://0001-Imprement-drm-lease-support.patch \
+	"
+
+PACKAGECONFIG[drm-lease] = "--enable-drm-lease,,drm-lease-manager"
+PSPLASH_DRM_LEASE_ARGS ??= "--drm-lease lease0"
+PSPLASH_ARGS += "${@bb.utils.contains('PACKAGECONFIG', 'drm-lease', '${PSPLASH_DRM_LEASE_ARGS}', '', d)}"
+RDEPENDS:${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'drm-lease', 'drm-lease-manager', '', d)}"
 
 SPLASH_IMAGES = "file://psplash-poky-img.h;outsuffix=default"
 
