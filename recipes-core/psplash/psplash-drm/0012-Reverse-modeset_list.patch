@@ -1,4 +1,4 @@
-From 13c76b151100ff3c2e14e6685063cfd18f4a3fcd Mon Sep 17 00:00:00 2001
+From 2d87d45cdcfd38249529dc0ef5b341fa0f0f3f57 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:52 +0300
 Subject: [PATCH] Reverse modeset_list
@@ -7,6 +7,7 @@ Now, it has the same order as connectors in drmModeGetResources. As
 result splash screen will be drawn on the first connector.
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-drm.c | 11 ++++++++---
  1 file changed, 8 insertions(+), 3 deletions(-)

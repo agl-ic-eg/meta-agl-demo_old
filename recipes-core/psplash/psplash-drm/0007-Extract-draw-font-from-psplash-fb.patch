@@ -1,9 +1,10 @@
-From 366d6a9c37f4b7797f09c9cedd2edda1cf1a474e Mon Sep 17 00:00:00 2001
+From 74d1adda51a38e7ac20ea75f62c81ba0f9c398da Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:47 +0300
 Subject: [PATCH] Extract draw font from psplash-fb
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-draw.c | 109 ++++++++++++++++++++++++++++++++++++++++++++++++-
  psplash-draw.h |  25 ++++++++----

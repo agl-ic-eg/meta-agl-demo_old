@@ -1,4 +1,4 @@
-From a113ff7be325766f3e2c3fc1f60dbcf5e28df21a Mon Sep 17 00:00:00 2001
+From 1797bbd65d9bfbe2b216a0fbb001d7536cc138ac Mon Sep 17 00:00:00 2001
 From: Hiroyuki Ishii <ishii.hiroyuki002@jp.panasonic.com>
 Date: Tue, 27 Dec 2022 16:43:46 +0900
 Subject: [PATCH] Imprement drm-lease support
@@ -9,6 +9,7 @@ Known issue:
 - --angle option does not work correctly with drm-lease enabled
 
 Signed-off-by: Hiroyuki Ishii <ishii.hiroyuki002@jp.panasonic.com>
+
 ---
  Makefile.am         |  5 +++++
  configure.ac        |  9 +++++++++
@@ -184,6 +185,3 @@ index ebf8d7a..4aa650d 100644
  
      fail:
        fprintf(stderr,
--- 
-2.25.1
-

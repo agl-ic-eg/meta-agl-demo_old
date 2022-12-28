@@ -1,4 +1,4 @@
-From 8f1de1471bd1b09c89247b0880d0f851cf401324 Mon Sep 17 00:00:00 2001
+From e1805a12a5b3fdd33a33b19ba3ddc3fed0e1ef43 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:45 +0300
 Subject: [PATCH] Extract plot pixel from psplash-fb
@@ -6,6 +6,7 @@ Subject: [PATCH] Extract plot pixel from psplash-fb
 psplash_fb_plot_pixel is in fact framebuffer independent.
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  Makefile.am    |   3 +-
  psplash-draw.c | 120 +++++++++++++++++++++++++++++++

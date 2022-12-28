@@ -1,4 +1,4 @@
-From 5b88e481447c9d241a1b661b8692f2efc63cc505 Mon Sep 17 00:00:00 2001
+From bf44a6412503dc5ebfa6c0e8348f1bf9aa0a591d Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:54 +0300
 Subject: [PATCH] psplash-drm.c: Implement double buffering
@@ -7,6 +7,7 @@ Based on
 https://github.com/dvdhrm/docs/blob/master/drm-howto/modeset-double-buffered.c
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-drm.c | 176 +++++++++++++++++++++++++++++++++++++++-----------
  1 file changed, 140 insertions(+), 36 deletions(-)

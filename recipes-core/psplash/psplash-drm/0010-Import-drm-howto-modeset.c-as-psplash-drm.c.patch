@@ -1,4 +1,4 @@
-From ae9ea2d640cc31a2b203d77e3c456c65d031946d Mon Sep 17 00:00:00 2001
+From 0f7b25de999dfd962ff94a67360c2ace683af7e1 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:50 +0300
 Subject: [PATCH] Import drm-howto modeset.c as psplash-drm.c
@@ -10,6 +10,7 @@ commit: fc5c63f
 path: drm-howto/modeset.c
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-drm.c | 735 ++++++++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 735 insertions(+)

@@ -1,9 +1,10 @@
-From 95211f270dfde2ecdead07faefcf07fdc3912e60 Mon Sep 17 00:00:00 2001
+From e51fbe465a6a6b63bed15e87afdfa266ed06f3de Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:43 +0300
 Subject: [PATCH] Remove unused save_termios
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-fb.h | 1 -
  psplash.h    | 1 -
@@ -22,7 +23,7 @@ index eafa293..6c4599c 100644
    int            visual;
    int            width, height;
 diff --git a/psplash.h b/psplash.h
-index 3739ca3..8e68b7b 100644
+index e8b6660..02d6f32 100644
 --- a/psplash.h
 +++ b/psplash.h
 @@ -32,7 +32,6 @@
@@ -31,5 +32,5 @@ index 3739ca3..8e68b7b 100644
  #include <sys/types.h>
 -#include <termios.h>
  #include <unistd.h>
+ #include <stdbool.h>
  
- typedef uint8_t  uint8;

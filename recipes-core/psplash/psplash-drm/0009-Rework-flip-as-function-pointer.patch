@@ -1,4 +1,4 @@
-From 1630bb58f9aa4f43674de9d4c2cfb07790a8294f Mon Sep 17 00:00:00 2001
+From 9e91690877a9cef0f8ae92f62a29681a7cdcfb19 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:49 +0300
 Subject: [PATCH] Rework flip as function pointer
@@ -6,6 +6,7 @@ Subject: [PATCH] Rework flip as function pointer
 It allows making parse_command and psplash_main independent of FB.
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-draw.h |  3 +++
  psplash-fb.c   |  8 +++++---

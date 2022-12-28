@@ -1,9 +1,10 @@
-From 3ad01c581ccf43f9cc396f30a454242e3959a13e Mon Sep 17 00:00:00 2001
+From d11a99ac77b206dc46c921110e4817a3ffedfb86 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:48 +0300
 Subject: [PATCH] psplash.c: Make psplash_draw_{msg,progress} independent of FB
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash.c | 64 ++++++++++++++++++++++++++++---------------------------
  1 file changed, 33 insertions(+), 31 deletions(-)

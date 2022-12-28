@@ -1,4 +1,4 @@
-From 78b79d9a98c46db3eef3e1cbca45f7b92a86e41d Mon Sep 17 00:00:00 2001
+From c78acac8d8d16b79d95bef7c8870fa47929a8c29 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:44 +0300
 Subject: [PATCH] Remove 'psplash-fb.h' from 'psplash.h'
@@ -7,6 +7,7 @@ psplash might not be necessary based on framebuffer, it could use DRM
 in future too.
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-fb.c | 2 +-
  psplash-fb.h | 3 +++
@@ -54,7 +55,7 @@ index 62244ba..18c012b 100644
  #include "psplash-colors.h"
  #include "psplash-poky-img.h"
 diff --git a/psplash.h b/psplash.h
-index 8e68b7b..7489e75 100644
+index 02d6f32..ab8e53f 100644
 --- a/psplash.h
 +++ b/psplash.h
 @@ -15,7 +15,6 @@

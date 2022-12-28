@@ -1,9 +1,10 @@
-From bd77aca7e02854598bb741f49b2dfe855665d8b3 Mon Sep 17 00:00:00 2001
+From b20ef5eb3cfd4d49b87c47dcea0d10d52ff1bc69 Mon Sep 17 00:00:00 2001
 From: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
 Date: Mon, 25 Apr 2022 10:59:41 +0300
 Subject: [PATCH] Trim trailing spaces
 
 Signed-off-by: Vasyl Vavrychuk <vasyl.vavrychuk@opensynergy.com>
+
 ---
  psplash-console.c | 34 +++++++++++-----------
  psplash-console.h |  8 ++---
@@ -516,7 +517,7 @@ index ee1af6b..838ac13 100644
  			 BAR_IMG_WIDTH,
  			 BAR_IMG_HEIGHT,
 diff --git a/psplash.h b/psplash.h
-index 1c42ec7..3739ca3 100644
+index 9be44ba..e8b6660 100644
 --- a/psplash.h
 +++ b/psplash.h
 @@ -1,5 +1,5 @@
