@@ -32,6 +32,7 @@ PSPLASH_ARGS += "${@bb.utils.contains('PACKAGECONFIG', 'drm', '--drm', '', d)}"
 FILESEXTRAPATHS:prepend := "${THISDIR}/psplash-drm-lease:"
 SRC_URI += " \
 	file://0001-Imprement-drm-lease-support.patch \
+	file://0002-drm-lease-Fix-incorrect-drawing-with-portrait-orient.patch \
 	"
 
 PACKAGECONFIG[drm-lease] = "--enable-drm-lease,,drm-lease-manager"
